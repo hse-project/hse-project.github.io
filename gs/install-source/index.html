@@ -807,18 +807,30 @@ $ git checkout rX.Y.Z
 </code></pre>
 <p>Build and install for your platform as follows.</p>
 <div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">RHEL 8</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+$ sudo dnf install ./builds/$(uname -n)/$(uname -r)/rpm/release/kmod-mpool-$(uname -r)-X.Y.Z*.rpm
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For release <code>r1.7.1</code> use package path <code>./builds/release/</code>.</p>
 </div>
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Ubuntu 18.04</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+$ sudo apt-get install ./builds/$(uname -n)/$(uname -r)/deb/release/kmod-mpool-$(uname -r)_X.Y.Z*.deb
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Ubuntu requires release <code>r1.8.0</code> or later.</p>
 </div>
 </div>
 <input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">RHEL 7</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+$ sudo yum install ./builds/$(uname -n)/$(uname -r)/rpm/release/kmod-mpool-$(uname -r)-X.Y.Z*.rpm
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For release <code>r1.7.1</code> use package path <code>./builds/release/</code>.</p>
@@ -843,18 +855,33 @@ $ git checkout rX.Y.Z
 </code></pre>
 <p>Build and install for your platform as follows.</p>
 <div class="tabbed-set" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">RHEL 8</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+$ sudo dnf install ./builds/$(uname -n)/rpm/release/mpool-X.Y.Z*.rpm
+$ sudo dnf install ./builds/$(uname -n)/rpm/release/mpool-devel-X.Y.Z*.rpm
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For release <code>r1.7.1</code> use package path <code>./builds/release*/</code>.</p>
 </div>
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Ubuntu 18.04</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+$ sudo apt-get install ./builds/$(uname -n)/deb/release/mpool_X.Y.Z*.deb
+$ sudo apt-get install ./builds/$(uname -n)/deb/release/mpool-devel_X.Y.Z*.deb
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Ubuntu requires release <code>r1.8.0</code> or later.</p>
 </div>
 </div>
 <input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><label for="__tabbed_3_3">RHEL 7</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+$ sudo yum install ./builds/$(uname -n)/rpm/release/mpool-X.Y.Z*.rpm
+$ sudo yum install ./builds/$(uname -n)/rpm/release/mpool-devel-X.Y.Z*.rpm
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For release <code>r1.7.1</code> use package path <code>./builds/release*/</code>.</p>
@@ -873,18 +900,33 @@ $ git checkout rX.Y.Z
 </code></pre>
 <p>Build and install for your platform as follows.</p>
 <div class="tabbed-set" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">RHEL 8</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+$ sudo dnf install ./builds/$(uname -n)/rpm/release/hse-X.Y.Z*.rpm
+$ sudo dnf install ./builds/$(uname -n)/rpm/release/hse-devel-X.Y.Z*.rpm
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For release <code>r1.7.1</code> use package path <code>./builds/release/</code>.</p>
 </div>
 </div>
 <input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Ubuntu 18.04</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+$ sudo apt-get install ./builds/$(uname -n)/deb/release/hse_X.Y.Z*.deb
+$ sudo apt-get install ./builds/$(uname -n)/deb/release/hse-devel_X.Y.Z*.deb
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Ubuntu requires release <code>r1.8.0</code> or later.</p>
 </div>
 </div>
 <input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><label for="__tabbed_4_3">RHEL 7</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+$ sudo yum install ./builds/$(uname -n)/rpm/release/hse-X.Y.Z*.rpm
+$ sudo yum install ./builds/$(uname -n)/rpm/release/hse-devel-X.Y.Z*.rpm
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For release <code>r1.7.1</code> use package path <code>./builds/release/</code>.</p>
@@ -963,7 +1005,7 @@ $ git checkout rX.Y.Z
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null, "translations": {"search.config.lang": "en", "clipboard.copy": "Copy to clipboard", "search.config.pipeline": "trimmer, stopWordFilter", "search.result.one": "1 matching document", "search.result.term.missing": "Missing", "search.result.more.other": "# more on this page", "search.config.separator": "[\\s\\-]+", "search.result.more.one": "1 more on this page", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.other": "# matching documents", "search.result.none": "No matching documents", "clipboard.copied": "Copied to clipboard"}, "features": ["navigation.tabs", "navigation.sections"], "base": "../.."}</script>
+    <script id="__config" type="application/json">{"base": "../..", "translations": {"search.config.lang": "en", "search.result.placeholder": "Type to start searching", "search.result.one": "1 matching document", "search.config.pipeline": "trimmer, stopWordFilter", "search.result.term.missing": "Missing", "search.result.more.other": "# more on this page", "search.result.other": "# matching documents", "clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.result.none": "No matching documents", "search.result.more.one": "1 more on this page", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "features": ["navigation.tabs", "navigation.sections"], "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.4ea5477f.min.js"></script>
