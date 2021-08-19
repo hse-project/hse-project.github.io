@@ -1,0 +1,90 @@
+# HSE project information
+site_name: HSE Project
+site_url: https://github.com/hse-project
+site_description: >-
+  Fast embeddable key-value store designed for SSDs and persistent memory
+
+
+# HSE repo information (source code not docs)
+# Setting these results in hse repo link and stats in doc header
+repo_url: https://github.com/hse-project/hse
+repo_name: hse-project/hse
+edit_uri: ""
+
+
+# Documentation copyright notice
+copyright: Copyright &copy; 2020 - 2021 Micron Technology, Inc.
+
+
+# HSE colors set in docs/stylesheets/extra.css
+extra_css:
+  - stylesheets/extra.css
+
+
+# Theme configuration
+theme:
+  name: material
+  # custom_dir extends the material theme to add an announcement bar
+  # indicating that HSE 1.x is no longer actively maintained
+  custom_dir: overrides
+  language: en
+  favicon: img/favicon.png
+  logo: img/logo.png
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+
+
+# Theme customization
+extra:
+  version:
+    # mike is a natively supported external utility for MkDocs versioning
+    provider: mike
+
+
+# Useful markdown extensions
+markdown_extensions:
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed
+
+
+# Plugins providing additional functionality for this theme
+plugins:
+  - search
+
+
+# Page navigation
+nav:
+  - Home: index.md
+  - Get Started:
+    - System Requirements: gs/sys-requirements.md
+    - Install from Packages: gs/install-packages.md
+    - Install from Source: gs/install-source.md
+    - Configure Storage: gs/config-storage.md
+    - Create a KVDB: gs/create-kvdb.md
+    - Manage a KVDB: gs/manage-kvdb.md
+  - Run Integrated Apps:
+    - MongoDB: apps/mongodb.md
+    - YCSB: apps/ycsb.md
+  - Develop HSE Apps:
+    - Concepts: dev/concepts.md
+    - API Reference: dev/api-reference.md
+    - Best Practices: dev/best-practices.md
+    - Limits: dev/limits.md
+  - Get Help:
+    - Resources: help/resources.md
+    - Benchmarking Tips: help/benchmarking.md
+    - Release Notes: help/relnotes.md
+

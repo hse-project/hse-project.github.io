@@ -1,36 +1,21 @@
-# Contributing to HSE Project Documentation
+# Contributing to the HSE Project Documentation
 
-We are not able to accept community contributions at this time, but
-stay tuned.
+We welcome your contributions to the HSE Project Documentation.
+
+## General Information on Contributing
+
+Please review the general information on contributing to the HSE project found
+in the [`CONTRIBUTING.md`](https://github.com/hse-project/hse/blob/master/CONTRIBUTING.md)
+file in the `hse` repo.  It contains important information on contributing
+to any repo in the HSE project.
 
 
-## General Information
+## Information on Contributing to this Repo
 
-When we start taking contributions, this first section will
-point to general information on contributing to any hse-project repo.
+The instructions in `README.md` specify how to clone the repo and
+view any updates you make to the HSE project documentation.  When submitting
+a PR, it is helpful if you can provide a URL where these updates may be viewed.
 
-
-## Workflow
-
-The following are instructions for contributing to this specific repo.
-Before proceeding, please review the `README.md` file for this repo which
-provides information on the repo branch structure and documentation site
-generation tools.
-
-To update a particular version of the documentation, clone the
-`hse-project.github.io` repo and checkout the branch of interest.
-For example
-
-    $ git clone https://github.com/hse-project/hse-project.github.io.git
-    $ cd hse-project.github.io
-    $ git checkout v1
-
-Make your updates and then preview your changes as follows.
-
-    $ mkdocs build
-    $ mkdocs serve
-
-Point a browser to localhost:8000 to see the changes.  When you are
-satisfied, commit your changes and submit a pull request (PR).
-Once your PR is accepted your changes will be included in the next
-release of the HSE project documentation.
+> Note: HSE 1.x and its project documentation are no longer actively
+> maintained.  Please do not submit a PR that updates the HSE 1.x project
+> documentation.
