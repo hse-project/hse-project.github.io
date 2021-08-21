@@ -42,8 +42,10 @@ is natively integrated with Material for MkDocs.
 All of these tools are Python packages and can be installed, along with all
 dependencies, as follows.
 
-    $ pip install mkdocs-material
-    $ pip install mike
+```shell
+pip install mkdocs-material
+pip install mike
+```
 
 
 ## Version Directories
@@ -59,16 +61,20 @@ directories in this repo.
 
 Build the latest version of the complete documentation as follows.
 
-    $ git clone https://github.com/hse-project/hse-project.github.io.git
-    $ cd hse-project.github.io
-    $ mike deploy -F v1/mkdocs.yml 1.x
-    $ mike deploy -F v2/mkdocs.yml 2.x
-    $ mike set-default -F v2/mkdocs.yml 2.x
+```shell
+git clone https://github.com/hse-project/hse-project.github.io.git
+cd hse-project.github.io
+mike deploy -F v1/mkdocs.yml 1.x
+mike deploy -F v2/mkdocs.yml 2.x
+mike set-default -F v2/mkdocs.yml 2.x
+```
 
 This build process creates a local branch named `gh-pages` with the
 generated static site files.  You can view these as follows.
 
-    $ mike serve -F v2/mkdocs.yml
+```shell
+mike serve -F v2/mkdocs.yml
+```
 
 Point a web browser at the URL output from the above command.
 This is a convenient way to view any edits you make to the

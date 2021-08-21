@@ -121,7 +121,7 @@ The `kvdb_profile` tool is provided to determine an appropriate
 You can run it as follows.
 
 ```shell
-$ kvdb_profile /path/to/capacity/storage/for/the/kvdb
+kvdb_profile /path/to/capacity/storage/for/the/kvdb
 ```
 
 The path specified in `kvdb_profile` should be a directory in the file

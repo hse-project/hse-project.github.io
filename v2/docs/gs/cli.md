@@ -18,8 +18,8 @@ media classes.
 Create a KVDB taking all the defaults.
 
 ```shell
-$ mkdir /var/bulk/kvdb1 && cd /var/bulk/kvdb1
-$ hse kvdb create
+mkdir /var/bulk/kvdb1 && cd /var/bulk/kvdb1
+hse kvdb create
 ```
 
 The KVDB home defaults to the current working directory `/var/bulk/kvdb1`,
@@ -29,8 +29,8 @@ to `/var/bulk/kvdb1/capacity`.
 Next create a KVDB specifying the home directory.
 
 ```shell
-$ mkdir /var/bulk/kvdb2
-$ hse -C /var/bulk/kvdb2 kvdb create
+mkdir /var/bulk/kvdb2
+hse -C /var/bulk/kvdb2 kvdb create
 ```
 
 The specified KVDB home directory is `/var/bulk/kvdb2`, and the required
@@ -41,8 +41,8 @@ Finally, create a KVDB specifying the home directory and
 for both the required capacity and optional staging media class directories.
 
 ```shell
-$ mkdir /var/bulk/kvdb3 && mkdir /var/bulk/capacity3 && mkdir /var/fast/staging3
-$ hse -C /var/bulk/kvdb3 kvdb create storage.capacity.path=/var/bulk/capacity3 storage.staging.path=/var/fast/staging3
+mkdir /var/bulk/kvdb3 && mkdir /var/bulk/capacity3 && mkdir /var/fast/staging3
+hse -C /var/bulk/kvdb3 kvdb create storage.capacity.path=/var/bulk/capacity3 storage.staging.path=/var/fast/staging3
 ```
 
 The specified KVDB home directory is `/var/bulk/kvdb3`, the capacity media class
@@ -55,8 +55,8 @@ is `/var/fast/staging3`.
 Create a KVS in a KVDB taking all the defaults.
 
 ```shell
-$ cd /var/bulk/kvdb1
-$ hse kvs create kvs1
+cd /var/bulk/kvdb1
+hse kvs create kvs1
 ```
 
 The KVDB home defaults to the current working directory `/var/bulk/kvdb1`,
@@ -67,7 +67,7 @@ Next create a KVS specifying the KVDB home directory and KVS key
 prefix length.
 
 ```shell
-$ hse -C /var/bulk/kvdb2 kvs create kvs1 pfx_len=8
+hse -C /var/bulk/kvdb2 kvs create kvs1 pfx_len=8
 ```
 
 The specified KVDB home directory is `/var/bulk/kvdb2`, and the KVS named
@@ -79,7 +79,7 @@ The specified KVDB home directory is `/var/bulk/kvdb2`, and the KVS named
 Get information about a KVDB.
 
 ```shell
-$ hse -C /var/bulk/kvdb1 kvdb info
+hse -C /var/bulk/kvdb1 kvdb info
 ```
 
 This command will print out information about a KVDB, including its home
@@ -104,21 +104,21 @@ the amount of data stored in the KVDB, among many other factors, so a
 timeout can be specified in seconds.
 
 ```shell
-$ cd /var/bulk/kvdb1
-$ hse kvdb compact --timeout 120
+cd /var/bulk/kvdb1
+hse kvdb compact --timeout 120
 ```
 
 If an application has the KVDB open, the compaction may continue past the
 timeout value.  In this case, the status of the compaction can be queried.
 
 ```shell
-$ hse kvdb compact --status
+hse kvdb compact --status
 ```
 
 A compaction operation can also be canceled.
 
 ```shell
-$ hse kvdb compact --cancel
+hse kvdb compact --cancel
 ```
 
 
@@ -127,7 +127,7 @@ $ hse kvdb compact --cancel
 Drop (delete) a KVS in a KVDB.
 
 ```shell
-$ hse -C /var/bulk/kvdb2 kvs drop kvs1
+hse -C /var/bulk/kvdb2 kvs drop kvs1
 ```
 
 The specified KVDB home directory is `/var/bulk/kvdb2`, and the KVS named
@@ -139,8 +139,8 @@ The specified KVDB home directory is `/var/bulk/kvdb2`, and the KVS named
 Drop (delete) a KVDB and all of its KVSs.
 
 ```shell
-$ cd /var/bulk/kvdb3
-$ hse kvdb drop
+cd /var/bulk/kvdb3
+hse kvdb drop
 ```
 
 The KVDB home defaults to the current working directory `/var/bulk/kvdb3`,
@@ -150,6 +150,6 @@ Next drop the remaining KVDBs from these examples specifying their
 home directories.
 
 ```shell
-$ hse -C /var/bulk/kvdb2 kvdb drop
-$ hse -C /var/bulk/kvdb1 kvdb drop
+hse -C /var/bulk/kvdb2 kvdb drop
+hse -C /var/bulk/kvdb1 kvdb drop
 ```
