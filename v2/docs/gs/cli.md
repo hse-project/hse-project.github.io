@@ -76,7 +76,7 @@ The specified KVDB home directory is `/var/bulk/kvdb2`, and the KVS named
 
 ## Get KVDB Information
 
-Get information about KVDB.
+Get information about a KVDB.
 
 ```shell
 $ hse -C /var/bulk/kvdb1 kvdb info
@@ -124,7 +124,7 @@ $ hse kvdb compact --cancel
 
 ## Drop a KVS
 
-Drop (delete) a KVS in KVDB.
+Drop (delete) a KVS in a KVDB.
 
 ```shell
 $ hse -C /var/bulk/kvdb2 kvs drop kvs1
@@ -136,7 +136,7 @@ The specified KVDB home directory is `/var/bulk/kvdb2`, and the KVS named
 
 ## Drop a KVDB
 
-Drop (delete) a KVDB and all of its KVS.
+Drop (delete) a KVDB and all of its KVSs.
 
 ```shell
 $ cd /var/bulk/kvdb3
@@ -146,7 +146,7 @@ $ hse kvdb drop
 The KVDB home defaults to the current working directory `/var/bulk/kvdb3`,
 and that KVDB is dropped.
 
-Next drop the remaining KVDB from these examples specifying their
+Next drop the remaining KVDBs from these examples specifying their
 home directories.
 
 ```shell

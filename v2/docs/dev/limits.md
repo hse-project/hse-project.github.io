@@ -7,7 +7,7 @@ The limits appropriate for a specific HSE application are
 largely dependent on the performance requirements of that application,
 and the hardware it runs on.
 
-Feel free to push these limits in a *test* environment, and
+Feel free to push these limits in testing and
 [let us know](../res/community.md) how far you get and what you observe.
 
 
@@ -16,7 +16,7 @@ Feel free to push these limits in a *test* environment, and
 | Entity | Description | Limit | Enforced |
 | :-- | :-- | --: | --: |
 | KVDB count | Active KVDB per system | 8 | No |
-| KVS count| KVS in a KVDB | 16 | No |
+| KVS count| KVSs in a KVDB | 16 | No |
 | Key count| Total keys in a KVDB (billions) | 200 | No |
 | Capacity | Total storage capacity of a KVDB (TB) | 12 | No |
 | Transaction count | Concurrent transactions in a KVDB | 1,000 per CPU | Yes |

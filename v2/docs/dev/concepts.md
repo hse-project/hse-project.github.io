@@ -49,7 +49,7 @@ related KV pairs when keys are sorted lexicographically
 ### KVS Configuration
 
 In the common case where related sets of KV pairs are accessed together,
-best performance is generally achieved by
+best performance is generally achieved by:
 
 * defining a segmented key with a key prefix such that KV pairs to
 be accessed together are grouped (contiguous) when keys are
@@ -60,14 +60,14 @@ parameter ([`pfx_len`](../gs/params.md#kvs-create-time-parameters))
 equal to the key prefix length of the segmented key.
 
 In the case where there is no relationship between KV pairs,
-best performance is generally achieved by
+best performance is generally achieved by:
 
 * defining an unsegmented key, **and**
 
 * creating a KVS to store these KV pairs with a key prefix length parameter
 ([`pfx_len`](../gs/params.md#kvs-create-time-parameters)) of zero (0).
 
-Keep in mind that a KVDB may contain multiple named KVS.  So in the case
+Keep in mind that a KVDB may contain multiple KVSs.  So in the case
 where there are multiple collections of KV pairs, each collection
 can be stored in a different KVS with a key structure, and corresponding
 KVS `pfx_len` parameter, that is appropriate for that collection.
@@ -85,22 +85,22 @@ Cursors are used to iterate over keys in a KVS in forward or reverse
 lexicographic order.  Cursors support an optional *filter*, which is a byte
 string limiting a cursor's view to only those keys whose initial bytes match
 the filter.
-The primary use for cursors is with KVS storing segmented keys,
+The primary use for cursors is with a KVS storing segmented keys,
 where the length of the specified filter is *equal to or greater than* the
-key prefix length.  Used this way, cursors provide efficient iteration
-over sets of related KV pairs.
+key prefix length for that KVS.  Used this way, cursors provide efficient
+iteration over sets of related KV pairs.
 
 Prefix deletes are used to atomically remove all KV pairs in a KVS
 with keys whose initial bytes match a specified filter.
 The length of the filter must be *equal to* the `pfx_len` parameter
 of the KVS.
-The primary use for prefix deletes is with KVS storing segmented keys.
+The primary use for prefix deletes is with a KVS storing segmented keys.
 This is a powerful capability that enables sets of related KV pairs to
-be deleted in a single operation without cursor iteration.
+be deleted from a KVS in a single operation without cursor iteration.
 
 Transactions are used to execute a sequence of KV operations atomically.
-Transactions support operating on KV pairs in one or more KVS in a KVDB.
-This allows storing multiple collections of KV pairs in different KVS
+Transactions support operating on KV pairs in one or more KVSs in a KVDB.
+This allows storing multiple collections of KV pairs in different KVSs
 to optimize access, without giving up the ability to operate on any of
 those KV pairs within the context of a single transaction.
 
@@ -255,7 +255,7 @@ Finally, we will examine an index-based data model for log storage.
 The prior data models for log storage have the benefit of simplicity
 in that the KVDB has only a single KVS.
 However, they may provide less flexibility than required by the application.
-In this next example, we demonstrate how to use multiple KVS to effectively
+In this next example, we demonstrate how to use multiple KVSs to effectively
 index log records.
 
 For brevity, we define the key structure for each KVS using the tuple
@@ -321,22 +321,26 @@ KVS `logRec`.
 
 ## Snapshots
 
-HSE implements industry-standard
+HSE uses multiversion concurrency control
+([MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control))
+techniques to implement industry-standard
 [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation)
-semantics.
-The implication is that transactions and cursors operate on KVS snapshots.
+semantics for transactions and cursors.
+In this model, transactions and cursors operate on KVS snapshots
+in a KVDB.
 
 Conceptually, a KVS snapshot contains KV pairs from all transactions
-committed, or non-transaction operations completed, at the time the snapshot
-is taken.  A KVS snapshot is ephemeral and ceases to exist when all associated
-operations complete.
+committed, or non-transaction operations completed, at the time the KVS
+snapshot is taken.  A KVS snapshot is ephemeral and ceases to exist when
+all associated transaction and cursor operations complete.
 
 
 ## Transactions
 
-Transactions may be used to execute a sequence of KV operations
-as a unit of work that is atomic, consistent, isolated, and durable (ACID).
-A transaction may operate on KV pairs in one or more KVS in a KVDB.
+Transactions are used to execute a sequence of KV operations
+as a unit of work that is atomic, consistent, isolated, and durable
+([ACID](https://en.wikipedia.org/wiki/ACID)).
+A transaction may operate on KV pairs in one or more KVSs in a KVDB.
 
 When a KVS is opened, the
 [`transactions_enable`](../gs/params.md#kvs-runtime-parameters)
@@ -344,7 +348,7 @@ parameter specifies whether or not that KVS
 supports transactions.  This is not a persistent setting in that
 the KVS may be closed and later reopened in a different mode.
 The following table specifies the operations that may be performed
-on a KVS opened with transactions enabled or disabled, where
+on a KVS opened with transactions enabled or disabled, where:
 
 * **Read** is a query operation, such as get or cursor iteration
 * **Update** is a mutation operation, such as put, delete, or prefix delete
@@ -357,23 +361,18 @@ on a KVS opened with transactions enabled or disabled, where
 | Non-transaction Update | :material-close: | :material-check: |
 
 Conceptually, when a transaction is initiated an instantaneous snapshot is
-taken of all KVS in the specified KVDB for which transactions are enabled.
+taken of all KVSs in the specified KVDB for which transactions are enabled.
 The transaction may then be used to read or update KV pairs in these KVS
 snapshots.
 
-Snapshot isolation is enforced by failing updates that collide with updates
-in concurrent transactions, after which the transaction may be aborted and
-retried.
+Snapshot isolation is enforced by failing update operations in a
+transaction that collide with updates in concurrent transactions, after
+which the transaction may be aborted and retried.
 In rare cases, the collision detection mechanism may produce false positives.
 
 HSE implements asynchronous (non-durable) transaction commits.
-Committed transactions are made durable either via explicit HSE API calls,
-or automatically within the durability
-interval ([`dur_intvl_ms`](../gs/params.md#kvdb-runtime-parameters))
-configured for a KVDB.
-
-HSE implements transactions using multiversion concurrency control (MVCC)
-techniques supporting a high-degree of transaction concurrency.
+Committed transactions are made durable via one of several
+[durability controls](#durability-controls).
 
 
 ## Cursors
@@ -386,9 +385,9 @@ string limiting a cursor's view to only those keys in a KVS snapshot
 whose initial bytes match the filter.
 
 !!! tip
-    Cursors deliver **significantly** greater performance when used
-    with KVS storing segmented keys, **and** where a filter is specified
-    with a length *equal to or greater than* the key prefix length.
+    Cursors deliver **significantly** greater performance when used with a
+    KVS storing segmented keys, **and** where a filter is specified with a
+    length *equal to or greater than* the key prefix length for that KVS.
     To the degree practical, you should structure applications to avoid
     using cursors outside of this use case.  Furthermore, you should always use
     get operations instead of cursor seeks when iteration is not required.
@@ -420,14 +419,14 @@ updated to the latest snapshot of the KVS at any time.
 A non-transaction cursor can be created for a KVS independent of whether
 the KVS was opened with transactions enabled or disabled.
 
-A transaction cursor iterates over the KVS snapshot associated with
+A transaction cursor iterates over a KVS snapshot associated with
 an active transaction, *including* any updates made in that transaction.
 If the transaction commits or aborts before the cursor is destroyed,
 the cursor's view reverts to the KVS snapshot taken at the time the
 transaction first became active.  I.e., updates made in the transaction
 are no longer in the cursor's view.
-By definition a transaction cursor can only be created for a KVS that was
-opened with transactions enabled.  A transaction cursor's view cannot be
+By definition a transaction cursor can only be created for a KVS opened
+with transactions enabled.  A transaction cursor's view cannot be
 explicitly updated.
 
 

@@ -8,7 +8,7 @@ The following are tips for benchmarking HSE applications.
 The system running the HSE application should meet the specified
 [requirements](../gs/sysreqs.md).  In particular:
 
-* Configure HugePages as documented
+* Configure huge pages as documented
 * Balance storage devices across NUMA nodes when applicable
 
 
@@ -27,5 +27,5 @@ KVDB [parameters](../gs/params.md#kvdb-parameters):
 
 KVS [parameters](../gs/params.md#kvs-parameters):
 
-* `value_compression=lz4` for all KVS, *unless* the application performs
+* `value_compression=lz4` for all KVSs, *unless* the application performs
 its own value compression

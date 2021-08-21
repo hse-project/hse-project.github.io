@@ -43,5 +43,6 @@ For most HSE applications we recommend using XFS.
 ## Virtual Memory
 
 HSE performance and quality of service (QoS) can be **significantly**
-improved by configuring HugePages.
+improved by configuring
+[huge pages](https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt).
 We recommend setting `vm.nr_hugepages=256` on your system.

@@ -38,6 +38,5 @@ parameter settings.
     Most applications will use a single KVDB with only the capacity media
     class configured.  In this common case, the KVDB and runtime homes
     can be the same directory, and this directory can contain the capacity
-    media class.  This is the default configuration when creating a
-    KVDB via the [CLI](cli.md).
+    media class.
 
