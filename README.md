@@ -77,18 +77,37 @@ mike serve -F v2/mkdocs.yml
 ```
 
 Point a web browser at the URL output from the above command.
-This is a convenient way to view any edits you make to the
-project documentation.
 
 > Note: To build the released (tagged) version of the project documentation,
 > execute `git checkout v2deploy` before building with `mike` in the
 > steps above.
 
 
+## Editing
+
+You must use `mike` to build and view the documentation with versioning.
+However, the live reload does not work well, if at all.
+
+For editing the project documentation, it is better to use the `mkdocs`
+development server which automatically rebuilds Markdown files as they are
+updated and causes a connected web browser to reload them.
+This provides for a convenient interactive editing session.
+
+```shell
+mkdocs serve -f v2/mkdocs.yml
+```
+
+Point a web browser at the URL output from the above command.
+
+Keep in mind that only the version of the documentation you are editing
+will appear in the browser and that there will not be a version selector.
+
+
 ## Deploying to GitHub
 
 Only users with write permission to the `hse-project.github.io` repo
-can deploy the HSE project documentation.  These users are a subset
-of the HSE project maintainers.  Before deploying the documentation,
-all changes since the last update will be reviewed, editorial PRs will
+can deploy the HSE project documentation.
+Before deploying any documentation updates,
+all changes since the last update will be reviewed by the maintainers,
+editorial PRs will
 be submitted if needed, and the commit to be deployed will be tagged.
