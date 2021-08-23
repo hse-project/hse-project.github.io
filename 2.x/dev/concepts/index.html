@@ -1,0 +1,1476 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fast embeddable key-value store designed for SSDs and persistent memory">
+      
+      
+      
+      
+        <link rel="canonical" href="https://github.com/hse-project/2.x/dev/concepts/">
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+    
+    
+      
+        <title>Concepts - HSE Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#concepts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="HSE Project" class="md-header__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HSE Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Concepts
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../gs/about/" class="md-tabs__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        Developing HSE Apps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../res/community/" class="md-tabs__link">
+        Resources
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../apis/" class="md-tabs__link">
+      API Reference
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HSE Project" class="md-nav__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    HSE Project
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Getting Started
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/storage/" class="md-nav__link">
+        KVDB Storage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/params/" class="md-nav__link">
+        Configuration Parameters
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/cli/" class="md-nav__link">
+        Command Line Interface
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/sysreqs/" class="md-nav__link">
+        System Requirements
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Developing HSE Apps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Developing HSE Apps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developing HSE Apps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Concepts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Concepts
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kvdb-and-kvs" class="md-nav__link">
+    KVDB and KVS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model" class="md-nav__link">
+    Data Model
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-structure" class="md-nav__link">
+    Key Structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kvs-configuration" class="md-nav__link">
+    KVS Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operation-support" class="md-nav__link">
+    Operation Support
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modeling-examples" class="md-nav__link">
+    Modeling Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Modeling Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-log-storage" class="md-nav__link">
+    Simple Log Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-system-epoch-based-log-storage" class="md-nav__link">
+    Per-System Epoch-based Log Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-systems-epoch-based-log-storage" class="md-nav__link">
+    All-Systems Epoch-based Log Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index-based-log-storage" class="md-nav__link">
+    Index-based Log Storage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snapshots" class="md-nav__link">
+    Snapshots
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transactions" class="md-nav__link">
+    Transactions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cursors" class="md-nav__link">
+    Cursors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#durability-controls" class="md-nav__link">
+    Durability Controls
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multithreading" class="md-nav__link">
+    Multithreading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-semantics" class="md-nav__link">
+    Delete Semantics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bp/" class="md-nav__link">
+        Best Practices
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../limits/" class="md-nav__link">
+        Limits
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Resources
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Resources" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Resources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../res/community/" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../res/benchmarking/" class="md-nav__link">
+        Benchmarking Tips
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../res/relnotes/" class="md-nav__link">
+        Releases
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apis/" class="md-nav__link">
+        API Reference
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kvdb-and-kvs" class="md-nav__link">
+    KVDB and KVS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model" class="md-nav__link">
+    Data Model
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-structure" class="md-nav__link">
+    Key Structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kvs-configuration" class="md-nav__link">
+    KVS Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operation-support" class="md-nav__link">
+    Operation Support
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modeling-examples" class="md-nav__link">
+    Modeling Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Modeling Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-log-storage" class="md-nav__link">
+    Simple Log Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-system-epoch-based-log-storage" class="md-nav__link">
+    Per-System Epoch-based Log Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-systems-epoch-based-log-storage" class="md-nav__link">
+    All-Systems Epoch-based Log Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index-based-log-storage" class="md-nav__link">
+    Index-based Log Storage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snapshots" class="md-nav__link">
+    Snapshots
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transactions" class="md-nav__link">
+    Transactions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cursors" class="md-nav__link">
+    Cursors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#durability-controls" class="md-nav__link">
+    Durability Controls
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multithreading" class="md-nav__link">
+    Multithreading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-semantics" class="md-nav__link">
+    Delete Semantics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="concepts">Concepts</h1>
+<p>The following describes HSE concepts that are important to understand for
+developing HSE applications and making effective use of the HSE API.</p>
+<h2 id="kvdb-and-kvs">KVDB and KVS</h2>
+<p>HSE provides functions to create and access a key-value database (KVDB).
+A KVDB comprises one or more named key-value stores (KVS), each of which
+is an independent collection of key-value (KV) pairs.  A KVS is analogous to
+a table in a relational database.</p>
+<p>HSE provides the standard KV operators for managing KV pairs stored in
+a KVS: put, get, and delete.  HSE also provides transactions, cursors,
+prefix deletes, and other advanced features.</p>
+<p>The HSE data model enables each KVS in a KVDB to be optimized for how the
+KV pairs it stores will be accessed.</p>
+<h2 id="data-model">Data Model</h2>
+<p>Understanding the HSE data model is fundamental to achieving maximum
+application performance.  Adhering to the <a href="../bp/">best practices</a>
+of this data model can result in <strong>significantly</strong> greater performance than
+might be achieved otherwise.  While this data model is simple, it has proven
+very effective.</p>
+<h3 id="key-structure">Key Structure</h3>
+<p>To describe the HSE data model, we define the following terms.</p>
+<ul>
+<li><strong>key</strong> &mdash; a byte string used to uniquely identify a value for
+storage, retrieval, and deletion in a KVS</li>
+<li><strong>segmented key</strong> &mdash; a key that is logically divided into
+<code>N</code> segments, <code>N &gt;= 2</code>, arranged to group related KV pairs when keys are
+sorted lexicographically</li>
+<li><strong>unsegmented key</strong> &mdash; a key not logically divided into segments</li>
+</ul>
+<p>For segmented keys, we further define the following.</p>
+<ul>
+<li><strong>key prefix</strong> &mdash; the first <code>K</code> segments, <code>1 &lt;= K &lt; N</code>, that group
+related KV pairs when keys are sorted lexicographically</li>
+<li><strong>key prefix length</strong> &mdash; the length of a key prefix in bytes</li>
+</ul>
+<h3 id="kvs-configuration">KVS Configuration</h3>
+<p>In the common case where related sets of KV pairs are accessed together,
+best performance is generally achieved by:</p>
+<ul>
+<li>
+<p>defining a segmented key with a key prefix such that KV pairs to
+be accessed together are grouped (contiguous) when keys are
+sorted lexicographically, <strong>and</strong></p>
+</li>
+<li>
+<p>creating a KVS to store these KV pairs with a key prefix length
+parameter (<a href="../../gs/params/#kvs-create-time-parameters"><code>pfx_len</code></a>)
+equal to the key prefix length of the segmented key.</p>
+</li>
+</ul>
+<p>In the case where there is no relationship between KV pairs,
+best performance is generally achieved by:</p>
+<ul>
+<li>
+<p>defining an unsegmented key, <strong>and</strong></p>
+</li>
+<li>
+<p>creating a KVS to store these KV pairs with a key prefix length parameter
+(<a href="../../gs/params/#kvs-create-time-parameters"><code>pfx_len</code></a>) of zero (0).</p>
+</li>
+</ul>
+<p>Keep in mind that a KVDB may contain multiple KVSs.  So in the case
+where there are multiple collections of KV pairs, each collection
+can be stored in a different KVS with a key structure, and corresponding
+KVS <code>pfx_len</code> parameter, that is appropriate for that collection.
+This is a powerful capability that enables HSE to optimize storage and
+access for all KV pairs in a KVDB without compromise.</p>
+<h3 id="operation-support">Operation Support</h3>
+<p>HSE provides several advanced operations with features that directly
+support the HSE data model.  These operations are described in detail
+later, but we briefly discuss how they support the data model here.</p>
+<p>Cursors are used to iterate over keys in a KVS in forward or reverse
+lexicographic order.  Cursors support an optional <em>filter</em>, which is a byte
+string limiting a cursor's view to only those keys whose initial bytes match
+the filter.
+The primary use for cursors is with a KVS storing segmented keys,
+where the length of the specified filter is <em>equal to or greater than</em> the
+key prefix length for that KVS.  Used this way, cursors provide efficient
+iteration over sets of related KV pairs.</p>
+<p>Prefix deletes are used to atomically remove all KV pairs in a KVS
+with keys whose initial bytes match a specified filter.
+The length of the filter must be <em>equal to</em> the <code>pfx_len</code> parameter
+of the KVS.
+The primary use for prefix deletes is with a KVS storing segmented keys.
+This is a powerful capability that enables sets of related KV pairs to
+be deleted from a KVS in a single operation without cursor iteration.</p>
+<p>Transactions are used to execute a sequence of KV operations atomically.
+Transactions support operating on KV pairs in one or more KVSs in a KVDB.
+This allows storing multiple collections of KV pairs in different KVSs
+to optimize access, without giving up the ability to operate on any of
+those KV pairs within the context of a single transaction.</p>
+<h3 id="modeling-examples">Modeling Examples</h3>
+<p>Below we present examples of applying the HSE data model to the real-world
+problem of storing and analyzing machine-generated data.
+Specifically, log data captured from datacenter servers.</p>
+<p>System logs are commonly retrieved from datacenter servers on a periodic
+basis and stored for both real-time and historical analysis.
+We examine several ways this data might be modeled, depending on
+how it will be accessed and managed.</p>
+<h4 id="simple-log-storage">Simple Log Storage</h4>
+<p>We start with a simple data model for storing log data in a KVDB.  This
+model uses a single KVS with segmented keys as defined below,
+and values which are individual log records.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Key offset</th>
+<th align="left">Segment Length (bytes)</th>
+<th align="left">Segment Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">8</td>
+<td align="left">sysID</td>
+<td align="left">System identifier</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">8</td>
+<td align="left">ts</td>
+<td align="left">Timestamp</td>
+</tr>
+<tr>
+<td align="left">16</td>
+<td align="left">2</td>
+<td align="left">typeID</td>
+<td align="left">Log type identifier</td>
+</tr>
+</tbody>
+</table>
+<p>In this and later examples, segment names are for convenience of
+presentation (they do not exist in the HSE API), and segment lengths
+are representative.  Also, partial or
+complete keys may be represented as tuples using segment names.
+For example, <code>(sysId)</code>, <code>(sysID, ts)</code>, or <code>(sysID, ts, typeID)</code>.</p>
+<p>We define the key prefix to be <code>(sysID)</code>, yielding a key prefix length
+of 8 bytes.  Hence, we would create a KVS for storing these KV pairs
+with a key prefix length parameter (<code>pfx_len</code>) of 8 bytes.</p>
+<p>With this data model and KVS configuration, a cursor with the filter
+<code>(sysID)</code> can be used to efficiently iterate over the log records
+associated with the system <code>sysID</code>.  Furthermore, the cursor can be
+used to efficiently seek to the first key (in the cursor's view) that
+is lexicographically equal to or greater than a <code>(sysID, ts)</code>, and then
+iterate from there.</p>
+<p>This data model makes it easy and efficient to search the log records
+associated with system <code>sysID</code> over an arbitrary time span.
+However, pruning those log records, for example to retain only those from
+the past 30 days, requires iterating over all older records and deleting them
+individually.</p>
+<p>Next we will look at enhancing this data model to make log record maintenance
+more efficient.</p>
+<h4 id="per-system-epoch-based-log-storage">Per-System Epoch-based Log Storage</h4>
+<p>We extend the simple data model from above to include an <em>epoch identifier</em>
+representing a well-defined time interval.
+For example, an epoch might be four hours in length, with 6 epochs per day,
+42 epochs per week, and so forth.  We assume that a log record's timestamp
+can be mapped to a specific epoch through simple computation.</p>
+<p>We again use a single KVS but with segmented keys as defined below,
+and values which are individual log records.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Key offset</th>
+<th align="left">Segment Length (bytes)</th>
+<th align="left">Segment Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">8</td>
+<td align="left">sysID</td>
+<td align="left">System identifier</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">8</td>
+<td align="left">epochID</td>
+<td align="left">Epoch identifier</td>
+</tr>
+<tr>
+<td align="left">16</td>
+<td align="left">8</td>
+<td align="left">ts</td>
+<td align="left">Timestamp</td>
+</tr>
+<tr>
+<td align="left">24</td>
+<td align="left">2</td>
+<td align="left">typeID</td>
+<td align="left">Log type identifier</td>
+</tr>
+</tbody>
+</table>
+<p>We define the key prefix to be <code>(sysID, epochID)</code>, yielding a key prefix
+length of 16 bytes.  Hence, we would create a KVS for storing these KV pairs
+with a key prefix length parameter (<code>pfx_len</code>) of 16 bytes.</p>
+<p>With this data model and KVS configuration, a cursor with the filter
+<code>(sysID, epochID)</code> can be used to efficiently iterate over the log records
+associated with the system <code>sysID</code> within the epoch <code>epochID</code>.
+Furthermore, the cursor can be used to efficiently seek to the first
+key (in the cursor's view) that is lexicographically equal to or greater
+than <code>(sysID, epochID, ts)</code>, and then iterate from there within the epoch.</p>
+<p>With this revised data model, it is still easy and efficient to search
+the log records associated with system <code>sysID</code> over an arbitrary time span,
+though it is necessary to configure a cursor to iterate over each
+epoch of interest (e.g., to cross epoch boundaries).
+However, we can now prune log records very efficiently by using a single prefix
+delete to remove all KV pairs with a specified key prefix of <code>(sysID, epochID)</code>.</p>
+<p>Next we examine a variation on this per-system epoch-based data model.</p>
+<h4 id="all-systems-epoch-based-log-storage">All-Systems Epoch-based Log Storage</h4>
+<p>The previous data model makes it easy and efficient to iterate over the
+log records associated with a given <code>sysID</code> for a specified <code>epochID</code>.
+However, to view records from multiple systems for a specified <code>epochID</code>
+requires a cursor iteration per <code>sysID</code> of interest.</p>
+<p>We can instead group the log records for all systems within an epoch
+by using a KVS with segmented keys as defined below,
+and values which are individual log records.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Key offset</th>
+<th align="left">Segment Length (bytes)</th>
+<th align="left">Segment Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">8</td>
+<td align="left">epochID</td>
+<td align="left">Epoch identifier</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">8</td>
+<td align="left">ts</td>
+<td align="left">Timestamp</td>
+</tr>
+<tr>
+<td align="left">16</td>
+<td align="left">8</td>
+<td align="left">sysID</td>
+<td align="left">System identifier</td>
+</tr>
+<tr>
+<td align="left">24</td>
+<td align="left">2</td>
+<td align="left">typeID</td>
+<td align="left">Log type identifier</td>
+</tr>
+</tbody>
+</table>
+<p>We define the key prefix to be <code>(epochID)</code>, yielding a key prefix
+length of 8 bytes.  Hence we would create a KVS for storing these KV pairs
+with a key prefix length parameter (<code>pfx_len</code>) of 8 bytes.</p>
+<p>With this data model and KVS configuration, a cursor with the filter
+<code>(epochID)</code> can be used to efficiently iterate over the log records for
+all systems within the epoch <code>epochID</code> in timestamp order.
+Furthermore, the cursor can be used to efficiently seek to the first
+key (in the cursor's view) that is lexicographically equal to or greater
+than <code>(epochID, ts)</code>, and then iterate from there within the epoch.</p>
+<p>It should be clear that there is some loss of efficiency, versus the
+prior data model, to obtain all the log records associated with a specified
+<code>sysID</code> over an arbitrary time span, because records associated with systems
+other than <code>sysID</code> will be in the cursor's view and must be skipped.
+However, this is still a reasonably efficient query because it meets the
+criteria that the length of the cursor filter be <em>equal to or greater than</em> the
+key prefix length to achieve maximum performance.</p>
+<p>With this revised data model, pruning log records remains efficient because
+we can still use a single prefix delete to remove all KV pairs with a
+specified key prefix of <code>(epochID)</code>.  In this case, the records for all
+systems in the epoch are pruned together.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This particular data model provides the opportunity to point out another
+<a href="../bp/">best practice</a> that can result in <strong>significantly</strong>
+greater performance.
+For a KVS storing segmented keys, it is important that the key
+prefix specified in put operations takes on a modest number of
+different values over a consecutive sequence of puts.  For this example,
+that means choosing an epoch that is relatively short versus what
+one might select with the prior data model.</p>
+</div>
+<p>Finally, we will examine an index-based data model for log storage.</p>
+<h4 id="index-based-log-storage">Index-based Log Storage</h4>
+<p>The prior data models for log storage have the benefit of simplicity
+in that the KVDB has only a single KVS.
+However, they may provide less flexibility than required by the application.
+In this next example, we demonstrate how to use multiple KVSs to effectively
+index log records.</p>
+<p>For brevity, we define the key structure for each KVS using the tuple
+syntax, segment names, and segment lengths adopted in prior examples.</p>
+<table>
+<thead>
+<tr>
+<th align="left">KVS Name</th>
+<th align="left">Key Type</th>
+<th align="left">Key</th>
+<th align="left">Key Prefix</th>
+<th align="left">KVS pfx_len</th>
+<th align="left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">logRec</td>
+<td align="left">segmented</td>
+<td align="left">(epochID, ts, sysID, typeID)</td>
+<td align="left">(epochID)</td>
+<td align="left">8</td>
+<td align="left">Log record content</td>
+</tr>
+<tr>
+<td align="left">sysIdx</td>
+<td align="left">segmented</td>
+<td align="left">(sysID, epochID, ts, typeID)</td>
+<td align="left">(sysID, epochID)</td>
+<td align="left">16</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>The KVS <code>logRec</code> stores the content of all log records, with each log record
+uniquely identified by the segmented key <code>(epochID, ts, sysID, typeID)</code> with
+key prefix <code>(epochID)</code>.
+Hence we would create KVS <code>logRec</code> with a key prefix length parameter
+(<code>pfx_len</code>) of 8 bytes.</p>
+<p>The KVS <code>sysIdx</code> is an index for the log records stored in KVS <code>logRec</code>,
+with a key pefix of <code>(sysID, epochID)</code>.
+Hence we would create KVS <code>sysIdx</code> with a key prefix length parameter
+(<code>pfx_len</code>) of 16 bytes.</p>
+<p>Using KVS <code>logRec</code>, a cursor with the filter <code>(epochID)</code> can be used to
+efficiently iterate over the log records for all systems within the
+epoch <code>epochID</code> in timestamp order.
+Furthermore, the cursor can be used to efficiently seek to the first
+key (in the cursor's view) that is lexicographically equal to or greater
+than <code>(epochID, ts)</code>, and then iterate from there within the epoch.</p>
+<p>Using KVS <code>sysIdx</code>, a cursor with the filter <code>(sysID, epochID)</code> can be used to
+efficiently iterate over the log records associated with the system <code>sysID</code>
+within the epoch <code>epochID</code>.
+Furthermore, the cursor can be used to efficiently seek to the first
+key (in the cursor's view) that is lexicographically equal to or greater
+than <code>(sysID, epochID, ts)</code>, and then iterate from there within the epoch.</p>
+<p>Note that KVS <code>sysIdx</code> does not contain any log record contents, and in fact
+stores no values at all (i.e., all value lengths are zero).
+To obtain the contents of a specific log record, there is the added step of
+a get operation in KVS <code>logRec</code> with key <code>(epochID, ts, sysID, typeID)</code>.</p>
+<p>The above schema accomplishes the following.</p>
+<ul>
+<li>Efficient iteration over the log records from all systems in a specified
+epoch using a cursor with KVS <code>logRec</code>.</li>
+<li>Efficient iteration over the log records from a specific system in a
+specified epoch using a cursor with KVS <code>sysIdx</code>.</li>
+<li>No duplication of log record content.</li>
+</ul>
+<p>A transaction can be used to atomically put (insert) KV pairs for a given log
+record in KVS <code>logRec</code> and KVS <code>sysIdx</code>. This guarantees integrity
+of the <code>sysIdx</code> index.</p>
+<p>Pruning log records is a bit more complex than the prior data models,
+bit still relatively straight-forward.  To delete all log records for a
+given <code>epochID</code>, where the epoch is assumed to have passed, you would</p>
+<ul>
+<li>use a cursor with filter <code>(epochID)</code> to iterate over KVS <code>logRec</code> to
+build a list of all <code>sysID</code> in the epoch, and then</li>
+<li>in a single transaction, prefix delete each key prefix <code>(sysID, epochID)</code>
+from KVS <code>sysIdx</code>, and prefix delete the key prefix <code>(epochID)</code> from
+KVS <code>logRec</code>.</li>
+</ul>
+<h2 id="snapshots">Snapshots</h2>
+<p>HSE uses multiversion concurrency control
+(<a href="https://en.wikipedia.org/wiki/Multiversion_concurrency_control">MVCC</a>)
+techniques to implement industry-standard
+<a href="https://en.wikipedia.org/wiki/Snapshot_isolation">snapshot isolation</a>
+semantics for transactions and cursors.
+In this model, transactions and cursors operate on KVS snapshots
+in a KVDB.</p>
+<p>Conceptually, a KVS snapshot contains KV pairs from all transactions
+committed, or non-transaction operations completed, at the time the KVS
+snapshot is taken.  A KVS snapshot is ephemeral and ceases to exist when
+all associated transaction and cursor operations complete.</p>
+<h2 id="transactions">Transactions</h2>
+<p>Transactions are used to execute a sequence of KV operations
+as a unit of work that is atomic, consistent, isolated, and durable
+(<a href="https://en.wikipedia.org/wiki/ACID">ACID</a>).
+A transaction may operate on KV pairs in one or more KVSs in a KVDB.</p>
+<p>When a KVS is opened, the
+<a href="../../gs/params/#kvs-runtime-parameters"><code>transactions_enable</code></a>
+parameter specifies whether or not that KVS
+supports transactions.  This is not a persistent setting in that
+the KVS may be closed and later reopened in a different mode.
+The following table specifies the operations that may be performed
+on a KVS opened with transactions enabled or disabled, where:</p>
+<ul>
+<li><strong>Read</strong> is a query operation, such as get or cursor iteration</li>
+<li><strong>Update</strong> is a mutation operation, such as put, delete, or prefix delete</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="center">KVS Transactions Enabled</th>
+<th align="center">KVS Transactions Disabled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Transaction Read</td>
+<td align="center"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/></svg></span></td>
+<td align="center"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg></span></td>
+</tr>
+<tr>
+<td align="left">Transaction Update</td>
+<td align="center"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/></svg></span></td>
+<td align="center"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg></span></td>
+</tr>
+<tr>
+<td align="left">Non-transaction Read</td>
+<td align="center"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/></svg></span></td>
+<td align="center"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/></svg></span></td>
+</tr>
+<tr>
+<td align="left">Non-transaction Update</td>
+<td align="center"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg></span></td>
+<td align="center"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/></svg></span></td>
+</tr>
+</tbody>
+</table>
+<p>Conceptually, when a transaction is initiated an instantaneous snapshot is
+taken of all KVSs in the specified KVDB for which transactions are enabled.
+The transaction may then be used to read or update KV pairs in these KVS
+snapshots.</p>
+<p>Snapshot isolation is enforced by failing update operations in a
+transaction that collide with updates in concurrent transactions, after
+which the transaction may be aborted and retried.
+In rare cases, the collision detection mechanism may produce false positives.</p>
+<p>HSE implements asynchronous (non-durable) transaction commits.
+Committed transactions are made durable via one of several
+<a href="#durability-controls">durability controls</a>.</p>
+<h2 id="cursors">Cursors</h2>
+<p>Cursors are used to iterate over keys in a KVS snapshot.  A cursor
+can iterate over keys in forward or reverse lexicographic order.</p>
+<p>Cursors support an optional <em>filter</em>, which is a byte
+string limiting a cursor's view to only those keys in a KVS snapshot
+whose initial bytes match the filter.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Cursors deliver <strong>significantly</strong> greater performance when used with a
+KVS storing segmented keys, <strong>and</strong> where a filter is specified with a
+length <em>equal to or greater than</em> the key prefix length for that KVS.
+To the degree practical, you should structure applications to avoid
+using cursors outside of this use case.  Furthermore, you should always use
+get operations instead of cursor seeks when iteration is not required.</p>
+</div>
+<p>A cursor can be used to seek to the first key in the cursor's view that
+is lexicographically <em>equal to or greater than</em> a specified key.
+The interaction of cursor filters and seek is best described by example.</p>
+<p>Consider a KVS storing the following keys, which are listed in lexicographic
+order: "ab001", "af001", "af002", "ap001".</p>
+<p>If a cursor is created for the KVS with a filter of "af", then the
+cursor's view is limited to the keys: "af001", "af002".</p>
+<p>If that cursor is then used to seek to the key "ab", it will be positioned
+at the first key in its view equal to or greater than "ab", which is "af001".
+Iterating (reading) with the cursor will return the key "af001", then "af002",
+and then the <code>EOF</code> condition indicating there are no more keys in view.</p>
+<p>If instead the cursor is used to seek to the key "ap", it will be
+positioned past the last key in its view, such that an
+attempt to iterate (read) with the cursor will indicate an <code>EOF</code> condition.</p>
+<p>There are two types of cursors: non-transaction and transaction.</p>
+<p>A non-transaction cursor iterates over a KVS snapshot that is taken at the
+time the cursor is created. However, the cursor's view may be explicitly
+updated to the latest snapshot of the KVS at any time.
+A non-transaction cursor can be created for a KVS independent of whether
+the KVS was opened with transactions enabled or disabled.</p>
+<p>A transaction cursor iterates over a KVS snapshot associated with
+an active transaction, <em>including</em> any updates made in that transaction.
+If the transaction commits or aborts before the cursor is destroyed,
+the cursor's view reverts to the KVS snapshot taken at the time the
+transaction first became active.  I.e., updates made in the transaction
+are no longer in the cursor's view.
+By definition a transaction cursor can only be created for a KVS opened
+with transactions enabled.  A transaction cursor's view cannot be
+explicitly updated.</p>
+<h2 id="durability-controls">Durability Controls</h2>
+<p>HSE provides the <code>hse_kvdb_sync()</code> API call to flush cached KVDB updates
+to stable storage, either synchronously or asynchronously.
+All cached updates are flushed, whether from non-transaction operations
+or committed transactions.
+In the normal case where journaling is enabled
+(<a href="../../gs/params/#kvdb-runtime-parameters"><code>dur_enable</code></a>), cached updates are
+written to the journal on stable storage.  Otherwise, cached updates are
+written directly to a KVDB <a href="../../gs/storage/#media-classes">media class</a>
+on stable storage.</p>
+<p>HSE also supports automatically flushing cached KVDB updates to the
+journal on stable storage.  The frequency for automatically flushing
+cached updates is controlled by the durability interval
+(<a href="../../gs/params/#kvdb-runtime-parameters"><code>dur_intvl_ms</code></a>) configured
+for a KVDB.</p>
+<h2 id="multithreading">Multithreading</h2>
+<p>HSE supports highly-concurrent multithreaded applications, and most functions
+in the HSE API are thread-safe.  However, there are a few exceptions, as
+documented in the <a href="../apis/">API reference</a>.</p>
+<h2 id="delete-semantics">Delete Semantics</h2>
+<p>Delete operations logically remove KV pairs from a KVS.
+However, HSE implements physical removal as a background operation, and hence
+capacity is not freed immediately.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../gs/sysreqs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: System Requirements" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              System Requirements
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../bp/" class="md-footer__link md-footer__link--next" aria-label="Next: Best Practices" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Best Practices
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 - 2021 Micron Technology, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      
+    
+  </body>
+</html>
