@@ -1,0 +1,1177 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fast embeddable key-value store designed for SSDs and persistent memory">
+      
+      
+      
+      
+        <link rel="canonical" href="https://github.com/hse-project/1.x/apps/ycsb/">
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+    
+    
+      
+        <title>YCSB - HSE Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ycsb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner md-announce">
+          <div class="md-banner__inner md-announce__inner md-grid md-typeset">
+            
+  <strong>Notice: HSE 1.x is no longer actively maintained</strong>
+
+          </div>
+        </aside>
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="HSE Project" class="md-header__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HSE Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              YCSB
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../gs/sys-requirements/" class="md-tabs__link">
+        Get Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../mongodb/" class="md-tabs__link md-tabs__link--active">
+        Run Integrated Apps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../dev/concepts/" class="md-tabs__link">
+        Develop HSE Apps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../help/resources/" class="md-tabs__link">
+        Get Help
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HSE Project" class="md-nav__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    HSE Project
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Get Started
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Get Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Get Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/sys-requirements/" class="md-nav__link">
+        System Requirements
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/install-packages/" class="md-nav__link">
+        Install from Packages
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/install-source/" class="md-nav__link">
+        Install from Source
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/config-storage/" class="md-nav__link">
+        Configure Storage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/create-kvdb/" class="md-nav__link">
+        Create a KVDB
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/manage-kvdb/" class="md-nav__link">
+        Manage a KVDB
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Run Integrated Apps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Run Integrated Apps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Run Integrated Apps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/" class="md-nav__link">
+        MongoDB
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          YCSB
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        YCSB
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-hse-and-create-a-kvdb" class="md-nav__link">
+    Install HSE and Create a KVDB
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-ycsb-dependencies" class="md-nav__link">
+    Install YCSB Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-ycsb-with-hse-from-packages" class="md-nav__link">
+    Install YCSB with HSE from Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-ycsb-with-hse-from-source" class="md-nav__link">
+    Install YCSB with HSE from Source
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-ycsb-options" class="md-nav__link">
+    New YCSB Options
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-ycsb-with-hse" class="md-nav__link">
+    Run YCSB with HSE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ycsb-performance-results" class="md-nav__link">
+    YCSB Performance Results
+  </a>
+  
+    <nav class="md-nav" aria-label="YCSB Performance Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-phase" class="md-nav__link">
+    Load Phase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-phase" class="md-nav__link">
+    Run Phase
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Develop HSE Apps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Develop HSE Apps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Develop HSE Apps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/concepts/" class="md-nav__link">
+        Concepts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/api-reference/" class="md-nav__link">
+        API Reference
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/best-practices/" class="md-nav__link">
+        Best Practices
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/limits/" class="md-nav__link">
+        Limits
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Get Help
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Get Help" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Get Help
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/resources/" class="md-nav__link">
+        Resources
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/benchmarking/" class="md-nav__link">
+        Benchmarking Tips
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/relnotes/" class="md-nav__link">
+        Release Notes
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-hse-and-create-a-kvdb" class="md-nav__link">
+    Install HSE and Create a KVDB
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-ycsb-dependencies" class="md-nav__link">
+    Install YCSB Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-ycsb-with-hse-from-packages" class="md-nav__link">
+    Install YCSB with HSE from Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-ycsb-with-hse-from-source" class="md-nav__link">
+    Install YCSB with HSE from Source
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-ycsb-options" class="md-nav__link">
+    New YCSB Options
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-ycsb-with-hse" class="md-nav__link">
+    Run YCSB with HSE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ycsb-performance-results" class="md-nav__link">
+    YCSB Performance Results
+  </a>
+  
+    <nav class="md-nav" aria-label="YCSB Performance Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-phase" class="md-nav__link">
+    Load Phase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-phase" class="md-nav__link">
+    Run Phase
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="ycsb">YCSB</h1>
+<p>YCSB (Yahoo!&reg; Cloud Serving Benchmark) is an industry-standard
+benchmark for databases and storage engines supporting key-value
+workloads.  The YCSB implementation is open source, and includes an
+extensible framework for integrating different data stores.</p>
+<p>We integrated HSE with YCSB to make it easy to compare its performance
+and scalability to that of  other storage engines for YCSB workloads.
+The <code>hse-ycsb</code> <a href="https://github.com/hse-project/hse-ycsb">repo</a> is a fork of
+YCSB that adds support for HSE.</p>
+<p>In the sections that follow, the reader is assumed to be familiar with
+configuring and running the YCSB
+benchmark.  The information provided here is specific to using YCSB with HSE.</p>
+<h2 id="install-hse-and-create-a-kvdb">Install HSE and Create a KVDB</h2>
+<p>Review the getting started section of this documentation.
+Then, following those instructions and examples, start by</p>
+<ul>
+<li>Installing HSE and mpool from packages or source</li>
+<li>Configuring an mpool for HSE storage with appropriate permissions</li>
+<li>Creating an HSE KVDB in that mpool to store the YCSB data</li>
+</ul>
+<p>In the examples below, we assume the name of the mpool is <code>ycsbData</code>,
+which is also the name of the KVDB.</p>
+<h2 id="install-ycsb-dependencies">Install YCSB Dependencies</h2>
+<p>Install dependencies for your platform.</p>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">RHEL 8</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ sudo dnf install maven rpm-build
+</code></pre></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Ubuntu 18.04</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ sudo apt-get install maven
+</code></pre></div>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">RHEL 7</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ sudo yum install rh-maven36 java-1.8.0-openjdk java-1.8.0-openjdk-devel rpm-build
+</code></pre></div>
+</div>
+</div>
+<h2 id="install-ycsb-with-hse-from-packages">Install YCSB with HSE from Packages</h2>
+<p>YCSB with HSE can be installed from release packages.</p>
+<p>Download and install the latest <code>hse-ycsb</code>
+<a href="https://github.com/hse-project/hse-ycsb/releases">package</a> for your platform.
+Package names start with <code>hse-ycsb*A.B.C.D.E-X.Y.Z</code>, where</p>
+<ul>
+<li><code>A.B.C</code> is the YCSB version (e.g., <code>0.17.0</code>)</li>
+<li><code>D.E</code> is our YCSB integration version</li>
+<li><code>X.Y.Z</code> is the minimum HSE release version required</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>An example of a specific prefix is hse-ycsb-0.17.0.2.1-1.8.0.</p>
+</div>
+<p>Install the package for your platform as follows.</p>
+<div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">RHEL 8</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ sudo dnf install ./hse-ycsb-A.B.C.D.E-X.Y.Z*.rpm
+</code></pre></div>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Ubuntu 18.04</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ sudo apt-get install ./hse-ycsb_A.B.C.D.E-X.Y.Z*.deb
+</code></pre></div>
+</div>
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">RHEL 7</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ sudo yum install ./hse-ycsb-A.B.C.D.E-X.Y.Z*.rpm
+</code></pre></div>
+</div>
+</div>
+<h2 id="install-ycsb-with-hse-from-source">Install YCSB with HSE from Source</h2>
+<p>YCSB with HSE can also be built and installed from source.</p>
+<p>Clone the latest release tag from the <code>hse-ycsb</code>
+<a href="https://github.com/hse-project/hse-ycsb/releases">repo</a>.
+Releases are named <code>rA.B.C.D.E-hse-X.Y.Z</code> where</p>
+<ul>
+<li><code>A.B.C</code> is the YCSB version (e.g., <code>0.17.0</code>)</li>
+<li><code>D.E</code> is our YCSB integration version</li>
+<li><code>X.Y.Z</code> is the minimum HSE release version required</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>An example of a specific release tag is r0.17.0.2.1-hse-1.8.0.</p>
+</div>
+<p>For example</p>
+<pre><code>$ git clone https://github.com/hse-project/hse-ycsb.git
+$ cd hse-ycsb
+$ git checkout rA.B.C.D.E-hse-X.Y.Z
+</code></pre>
+<p>Build and install YCSB for your platform as follows.</p>
+<div class="tabbed-set" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">RHEL 8</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ make package
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For <code>r0.17.0.2.0-hse-1.7.1</code> instead use <code>make rpm</code></p>
+</div>
+<p>Install the resulting package as described above for the RHEL 8 release
+package.  You can locate the package built by executing
+<div class="highlight"><pre><span></span><code>$ find /tmp/$(id -un)/ -name hse-ycsb*.rpm
+</code></pre></div></p>
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Ubuntu 18.04</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code>$ make package
+</code></pre></div>
+Install the resulting package as described above for the Ubuntu 18.04 release
+package.  You can locate the package built by executing
+<div class="highlight"><pre><span></span><code>$ find /tmp/$(id -un)/ -name hse-ycsb*.deb
+</code></pre></div></p>
+</div>
+<input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><label for="__tabbed_3_3">RHEL 7</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code>$ scl enable rh-maven36 &quot;make rpm&quot;
+</code></pre></div>
+Install the resulting package as described above for the RHEL 7 release
+package.  You can locate the package built by executing
+<div class="highlight"><pre><span></span><code>$ find /tmp/$(id -un)/ -name hse-ycsb*.rpm
+</code></pre></div></p>
+</div>
+</div>
+<h2 id="new-ycsb-options">New YCSB Options</h2>
+<p>The build of YCSB with HSE adds the following options.</p>
+<ul>
+<li><code>hse.mpool_name</code> is the name of the mpool (KVDB) storing the YCSB data</li>
+<li><code>hse.params</code> is a string of comma-separated HSE parameters; e.g.,
+<code>"kvdb.dur_intvl_ms=1000,kvdb.log_lvl=6"</code></li>
+<li><code>hse.config_path</code> is the path to an HSE configuration file</li>
+</ul>
+<p>HSE also installs configuration files
+in <code>/opt/hse/config</code> for use with YCSB.
+There are separate configuration files for each of load and run phases.
+Furthermore, YCSB Workload E has its own pair of HSE configuration files.</p>
+<h2 id="run-ycsb-with-hse">Run YCSB with HSE</h2>
+<p>The following executes YCSB Workload A with HSE</p>
+<pre><code>$ cd /opt/hse-ycsb/
+$ sudo alternatives --set python /usr/bin/python2
+$ ./bin/ycsb load hse -threads 96 -P workloads/workloada -p recordcount=200000 -p hse.mpool_name=ycsbData -p hse.config_path=/opt/hse/config/native_ycsb_abcdf_load.yml
+$ ./bin/ycsb run hse -threads 96 -P workloads/workloada -p recordcount=200000 -p operationcount=200000 -p hse.mpool_name=ycsbData -p hse.config_path=/opt/hse/config/native_ycsb_abcdf_run.yml
+</code></pre>
+<p>The owner (UID) and group owner (GID) of the mpool that <code>ycsb</code> will use
+to store data should match the user account running <code>ycsb</code>.</p>
+<p>See the <a href="../../help/relnotes/#ycsb-release-notes">release notes</a> for any
+limitations or known issues for a particular release of YCSB with HSE.</p>
+<h2 id="ycsb-performance-results">YCSB Performance Results</h2>
+<p>Below are results from running YCSB with HSE.
+For comparison, we include results from running YCSB with
+<a href="https://rocksdb.org/">RocksDB</a>, a popular and widely-deployed key-value
+store.</p>
+<p>Server configuration:</p>
+<ul>
+<li>2-socket Intel&reg; Xeon&reg; CPU E5-2690 v4</li>
+<li>256GB DRAM</li>
+<li>4x Micron&reg; 9300 NVMe SSDs 3.2TB in an LVM striped logical volume</li>
+<li>RHEL 8.1</li>
+<li>HSE 1.7.0</li>
+<li>RocksDB 6.6.4</li>
+</ul>
+<p>YCSB benchmark configuration:</p>
+<ul>
+<li>2TB dataset consisting of 2-billion 1,000-byte records</li>
+<li>96 client threads</li>
+<li>2 billion operations per workload</li>
+<li>YCSB 0.17.0</li>
+</ul>
+<p>For HSE, we specified the configuration files
+<code>/opt/hse/config/native_ycsb_abcdf_load.yml</code> and
+<code>/opt/hse/config/native_ycsb_abcdf_run.yml</code> for the load and run phases
+of YCSB, respectively.  These are installed with HSE.</p>
+<p>The following table summarizes the YCSB workloads presented here.
+The application examples come from the YCSB documentation.</p>
+<table>
+<thead>
+<tr>
+<th align="left">YCSB Workload</th>
+<th align="left">Operations</th>
+<th align="left">Application Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">A</td>
+<td align="left">50% Read; 50% Update</td>
+<td align="left">Session store recording user-session activity</td>
+</tr>
+<tr>
+<td align="left">B</td>
+<td align="left">95% Read; 5% Update</td>
+<td align="left">Photo tagging</td>
+</tr>
+<tr>
+<td align="left">C</td>
+<td align="left">100% Read</td>
+<td align="left">User profile cache</td>
+</tr>
+<tr>
+<td align="left">D</td>
+<td align="left">95% Read; 5% Insert</td>
+<td align="left">User status updates</td>
+</tr>
+</tbody>
+</table>
+<h3 id="load-phase">Load Phase</h3>
+<p>YCSB starts by populating the dataset (database) to the size specified.
+This is a 100% Insert workload.  Load phase statistics are presented
+in the following table.
+For this workload, HSE delivered more than 8x the throughput
+compared to RocksDB &mdash; reducing total duration by 88%.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Load Metric</th>
+<th align="right">HSE</th>
+<th align="right">RocksDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Duration (minutes)</td>
+<td align="right">34</td>
+<td align="right">271</td>
+</tr>
+<tr>
+<td align="left">Inserts / second</td>
+<td align="right">986,009</td>
+<td align="right">122,899</td>
+</tr>
+<tr>
+<td align="left">Insert 99.9% latency (ms)</td>
+<td align="right">1.6</td>
+<td align="right">19.5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="run-phase">Run Phase</h3>
+<p>Run phase throughputs for HSE and RocksDB are shown in the following chart.
+For these YCSB workloads, HSE delivered up to nearly 6x more throughput
+than RocksDB.</p>
+<p><img alt="Placeholder" src="../../img/HSE-RocksDB-YCSB-Tput.png" /></p>
+<p>In delivering high throughput, HSE also demonstrated good 99.9% tail latency,
+as shown below.
+For these YCSB workloads, HSE reduced read tail latency up to 42%, and
+write (insert or update) tail latency by as much as 91%.</p>
+<p><img alt="Placeholder" src="../../img/HSE-RocksDB-YCSB-999.png" /></p>
+<p>Finally, we measured the amount of data written to and read from
+the drives in the course of executing each workload.  Reducing writes
+is important for SSDs because it translates to increased
+endurance.  Reducing both writes and reads is important for
+networked storage to reduce load on the fabric.</p>
+<p>The following chart shows the total bytes of data written to or
+read from the drives during workload execution.
+For these YCSB workloads, HSE reduced bytes read up to 64%, and
+bytes written by as much as 85%.</p>
+<p><img alt="Placeholder" src="../../img/HSE-RocksDB-YCSB-IO.png" /></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../mongodb/" class="md-footer__link md-footer__link--prev" aria-label="Previous: MongoDB" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              MongoDB
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../dev/concepts/" class="md-footer__link md-footer__link--next" aria-label="Next: Concepts" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Concepts
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 - 2021 Micron Technology, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      
+    
+  </body>
+</html>

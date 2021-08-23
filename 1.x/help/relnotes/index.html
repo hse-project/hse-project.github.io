@@ -1,0 +1,1241 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fast embeddable key-value store designed for SSDs and persistent memory">
+      
+      
+      
+      
+        <link rel="canonical" href="https://github.com/hse-project/1.x/help/relnotes/">
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+    
+    
+      
+        <title>Release Notes - HSE Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#release-notes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner md-announce">
+          <div class="md-banner__inner md-announce__inner md-grid md-typeset">
+            
+  <strong>Notice: HSE 1.x is no longer actively maintained</strong>
+
+          </div>
+        </aside>
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="HSE Project" class="md-header__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HSE Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Release Notes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../gs/sys-requirements/" class="md-tabs__link">
+        Get Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../apps/mongodb/" class="md-tabs__link">
+        Run Integrated Apps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../dev/concepts/" class="md-tabs__link">
+        Develop HSE Apps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../resources/" class="md-tabs__link md-tabs__link--active">
+        Get Help
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HSE Project" class="md-nav__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    HSE Project
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Get Started
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Get Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Get Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/sys-requirements/" class="md-nav__link">
+        System Requirements
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/install-packages/" class="md-nav__link">
+        Install from Packages
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/install-source/" class="md-nav__link">
+        Install from Source
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/config-storage/" class="md-nav__link">
+        Configure Storage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/create-kvdb/" class="md-nav__link">
+        Create a KVDB
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gs/manage-kvdb/" class="md-nav__link">
+        Manage a KVDB
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Run Integrated Apps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Run Integrated Apps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Run Integrated Apps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/mongodb/" class="md-nav__link">
+        MongoDB
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/ycsb/" class="md-nav__link">
+        YCSB
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Develop HSE Apps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Develop HSE Apps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Develop HSE Apps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/concepts/" class="md-nav__link">
+        Concepts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/api-reference/" class="md-nav__link">
+        API Reference
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/best-practices/" class="md-nav__link">
+        Best Practices
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/limits/" class="md-nav__link">
+        Limits
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        Get Help
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Get Help" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Get Help
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/" class="md-nav__link">
+        Resources
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../benchmarking/" class="md-nav__link">
+        Benchmarking Tips
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Release Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Release Notes
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hse-stack-release-notes" class="md-nav__link">
+    HSE Stack Release Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="HSE Stack Release Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hse-s1901" class="md-nav__link">
+    HSE-S.1.9.0.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hse-s1801" class="md-nav__link">
+    HSE-S.1.8.0.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hse-s1711" class="md-nav__link">
+    HSE-S.1.7.1.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ycsb-release-notes" class="md-nav__link">
+    YCSB Release Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="YCSB Release Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ycsb-r017021-hse-180" class="md-nav__link">
+    YCSB r0.17.0.2.1-hse-1.8.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ycsb-r017020-hse-171" class="md-nav__link">
+    YCSB r0.17.0.2.0-hse-1.7.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mongodb-release-notes" class="md-nav__link">
+    MongoDB Release Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="MongoDB Release Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mongodb-r341730-hse-190" class="md-nav__link">
+    MongoDB r3.4.17.3.0-hse-1.9.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb-r341721-hse-180" class="md-nav__link">
+    MongoDB r3.4.17.2.1-hse-1.8.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb-r341720-hse-171" class="md-nav__link">
+    MongoDB r3.4.17.2.0-hse-1.7.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hse-stack-release-notes" class="md-nav__link">
+    HSE Stack Release Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="HSE Stack Release Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hse-s1901" class="md-nav__link">
+    HSE-S.1.9.0.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hse-s1801" class="md-nav__link">
+    HSE-S.1.8.0.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hse-s1711" class="md-nav__link">
+    HSE-S.1.7.1.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ycsb-release-notes" class="md-nav__link">
+    YCSB Release Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="YCSB Release Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ycsb-r017021-hse-180" class="md-nav__link">
+    YCSB r0.17.0.2.1-hse-1.8.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ycsb-r017020-hse-171" class="md-nav__link">
+    YCSB r0.17.0.2.0-hse-1.7.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mongodb-release-notes" class="md-nav__link">
+    MongoDB Release Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="MongoDB Release Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mongodb-r341730-hse-190" class="md-nav__link">
+    MongoDB r3.4.17.3.0-hse-1.9.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb-r341721-hse-180" class="md-nav__link">
+    MongoDB r3.4.17.2.1-hse-1.8.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb-r341720-hse-171" class="md-nav__link">
+    MongoDB r3.4.17.2.0-hse-1.7.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="release-notes">Release Notes</h1>
+<p>These release notes are divided into the following sections:</p>
+<ul>
+<li><a href="#hse-stack-release-notes">HSE Stack Release Notes</a></li>
+<li><a href="#ycsb-release-notes">YCSB Release Notes</a></li>
+<li><a href="#mongodb-release-notes">MongoDB Release Notes</a></li>
+</ul>
+<h2 id="hse-stack-release-notes">HSE Stack Release Notes</h2>
+<p>You must install a supported combination of HSE and mpool
+releases from the <code>hse</code>, <code>mpool</code>, and <code>mpool-kmod</code> repos.
+The table below specifies the supported combinations, referred
+to as HSE stacks.</p>
+<p>HSE stack numbering follows the scheme <code>HSE-S.X.Y.Z.M</code>, where</p>
+<ul>
+<li><code>X.Y.Z</code> is the <code>hse</code> release number</li>
+<li><code>M</code> is the combination of <code>mpool</code> and <code>mpool-kmod</code> releases to use
+with <code>X.Y.Z</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">HSE Stack</th>
+<th align="right">hse version</th>
+<th align="right">mpool version</th>
+<th align="right">mpool-kmod version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">HSE-S.1.7.1.1</td>
+<td align="right">r1.7.1</td>
+<td align="right">r1.7.1</td>
+<td align="right">r1.7.1</td>
+</tr>
+<tr>
+<td align="left">HSE-S.1.8.0.1</td>
+<td align="right">r1.8.0</td>
+<td align="right">r1.8.0</td>
+<td align="right">r1.8.0</td>
+</tr>
+<tr>
+<td align="left">HSE-S.1.9.0.1</td>
+<td align="right">r1.9.0</td>
+<td align="right">r1.9.0</td>
+<td align="right">r1.9.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hse-s1901">HSE-S.1.9.0.1</h3>
+<p>Includes the following features and enhancements.</p>
+<ul>
+<li>QoS enhancements resulting in more consistent performance in the presence
+of quickly changing workloads, client thread counts, and KV pair sizes</li>
+<li>Increased value compression performance</li>
+<li>Experimental KVS parameter <code>kvs.vcompmin</code> specifying the minimum length
+value to compress, which defaults to eight (8) bytes</li>
+</ul>
+<p>Prior to installing HSE-S.1.9.0.1, ensure that all KVDBs on the system have
+shutdown cleanly.  If you are not certain that a KVDB was shutdown cleanly,
+you can run the following command to get the KVDB into a clean state.</p>
+<pre><code>$ hse kvdb compact -s &lt;kvdb&gt;
+</code></pre>
+<p>If HSE is upgraded to 1.9.0 with a KVDB in a dirty state
+then the KVDB may fail to open.  In this case, you will need to downgrade
+HSE to the prior version and run the command above.</p>
+<p>Do not skip major releases when upgrading HSE.
+For example, you should upgrade to HSE-S.1.9.0.1 from HSE-S.1.8.0.1.</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Known Issues</label><div class="tabbed-content">
+<ul>
+<li>Prefix deletes do not detect conflicts with other mutations sharing the
+target prefix.  As a result, snapshot isolation may be violated.</li>
+<li>HSE API function <code>hse_kvdb_compact_status()</code> is renamed to
+<code>hse_kvdb_compact_status_get()</code> to disambiguate it from
+<code>struct hse_kvdb_compact_status</code>.  There is no change in semantics.
+While we strive to keep the HSE API stable and backward compatible across
+releases, this minor change is needed to accommodate future language
+bindings.</li>
+<li>Ubuntu 18.04 may exhibit performance that is 5-30% below that of RHEL 8,
+depending on workload.</li>
+</ul>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Issues Fixed</label><div class="tabbed-content">
+<ul>
+<li>All issues identified in the release notes for <code>HSE-S.1.8.0.1</code> related
+to recovery, spurious ENOSPC errors, and the KVDB becoming full.</li>
+<li>HSE API function <code>hse_kvs_cursor_update()</code> ignored the opspec flag
+<code>HSE_KVDB_KOP_FLAG_REVERSE</code>, which must match that specified in the
+corresponding <code>hse_kvs_cursor_create()</code>.  The caller will now correctly
+receive an <code>EINVAL</code> error if these flag values do not match (e.g., if the
+caller attempts to change the cursor direction).</li>
+<li>Various issues found in internal testing.</li>
+</ul>
+</div>
+</div>
+<h3 id="hse-s1801">HSE-S.1.8.0.1</h3>
+<p>Includes the following features and enhancements.</p>
+<ul>
+<li>Media class <a href="../../gs/create-kvdb/#kvs-parameters">tiering policies</a> at
+the KVS level</li>
+<li>Value <a href="../../gs/create-kvdb/#kvs-parameters">compression settings</a> at
+the KVS level</li>
+<li>Configurable <a href="../../gs/create-kvdb/#kvdb-parameters">ingest throttling</a> at
+startup based on mpool profiling</li>
+<li>Documented best practices for <a href="../benchmarking/">benchmarking</a></li>
+<li>Support for Ubuntu 18.04.4</li>
+<li>CPack-based package names</li>
+</ul>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Known Issues</label><div class="tabbed-content">
+<ul>
+<li>Ubuntu 18.04 may exhibit performance that is 5-30% below that of RHEL 8,
+depending on workload.</li>
+<li>Recovery from an unclean shutdown (e.g., a crash) may leak mpool capacity.</li>
+<li>Client applications may experience ENOSPC errors when a large number of
+threads (hundreds) are mutating large values (hundreds of KB).  Shutdown the
+app and restart to clear the error.</li>
+<li>If the mpool storing a KVDB becomes full, cached updates may be lost.
+Should this occur, halt the client application, increase the mpool capacity,
+and then restart the client application.</li>
+</ul>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Issues Fixed</label><div class="tabbed-content">
+<ul>
+<li>Snapshot isolation semantics may be violated under certain conditions.</li>
+<li>Various issues found in internal testing.</li>
+</ul>
+</div>
+</div>
+<h3 id="hse-s1711">HSE-S.1.7.1.1</h3>
+<p>Reissue of initial release to revise package and kernel module naming.</p>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Known Issues</label><div class="tabbed-content">
+<ul>
+<li>None</li>
+</ul>
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Issues Fixed</label><div class="tabbed-content">
+<ul>
+<li>Build of tarball automatically generated by GitHub</li>
+<li>Failure to load mpool kernel module on SELinux</li>
+</ul>
+</div>
+</div>
+<h2 id="ycsb-release-notes">YCSB Release Notes</h2>
+<p>Releases of YCSB with HSE use the numbering scheme <code>rA.B.C.D.E-hse-X.Y.Z</code>, where</p>
+<ul>
+<li><code>A.B.C</code> is the YCSB version (e.g., <code>0.17.0</code>)</li>
+<li><code>D.E</code> is our YCSB integration version</li>
+<li><code>X.Y.Z</code> is the minimum HSE release version required</li>
+</ul>
+<h3 id="ycsb-r017021-hse-180">YCSB r0.17.0.2.1-hse-1.8.0</h3>
+<p>Adds support for Ubuntu 18.04.4.</p>
+<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Known Issues</label><div class="tabbed-content">
+<ul>
+<li>None</li>
+</ul>
+</div>
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Issues Fixed</label><div class="tabbed-content">
+<ul>
+<li>Various issues found in internal testing.</li>
+</ul>
+</div>
+</div>
+<h3 id="ycsb-r017020-hse-171">YCSB r0.17.0.2.0-hse-1.7.1</h3>
+<p>Reissue of initial release of YCSB with HSE to revise package naming.</p>
+<div class="tabbed-set" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">Known Issues</label><div class="tabbed-content">
+<ul>
+<li>None</li>
+</ul>
+</div>
+<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">Issues Fixed</label><div class="tabbed-content">
+<ul>
+<li>Build of tarball automatically generated by GitHub</li>
+</ul>
+</div>
+</div>
+<h2 id="mongodb-release-notes">MongoDB Release Notes</h2>
+<p>Releases of MongoDB with HSE use the numbering scheme <code>rA.B.C.D.E-hse-X.Y.Z</code>,
+where</p>
+<ul>
+<li><code>A.B.C</code> is the MongoDB version (e.g., <code>3.4.17</code>)</li>
+<li><code>D.E</code> is our MongoDB integration version</li>
+<li><code>X.Y.Z</code> is the minimum HSE release version required</li>
+</ul>
+<h3 id="mongodb-r341730-hse-190">MongoDB r3.4.17.3.0-hse-1.9.0</h3>
+<p>Includes the following features and enhancements.</p>
+<ul>
+<li>Bug fixes only</li>
+</ul>
+<p>This version of MongoDB with HSE does not support the following:</p>
+<ul>
+<li><code>compact</code> administration command</li>
+<li><code>fsync</code> administration command with the lock option, or the
+corresponding <code>fsyncUnlock</code> command</li>
+<li>Read concern "majority"</li>
+<li>SSL on RHEL 8 or Ubuntu 18.04</li>
+</ul>
+<div class="tabbed-set" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">Known Issues</label><div class="tabbed-content">
+<ul>
+<li>None</li>
+</ul>
+</div>
+<input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">Issues Fixed</label><div class="tabbed-content">
+<ul>
+<li>Various issues found in internal testing.</li>
+</ul>
+</div>
+</div>
+<h3 id="mongodb-r341721-hse-180">MongoDB r3.4.17.2.1-hse-1.8.0</h3>
+<p>Includes the following features and enhancements.</p>
+<ul>
+<li>Support for Ubuntu 18.04.4</li>
+<li>Building from source creates packages</li>
+</ul>
+<p>This version of MongoDB with HSE does not support the following:</p>
+<ul>
+<li><code>compact</code> administration command</li>
+<li><code>fsync</code> administration command with the lock option, or the
+corresponding <code>fsyncUnlock</code> command</li>
+<li>Read concern "majority"</li>
+<li>SSL on RHEL 8 or Ubuntu 18.04</li>
+</ul>
+<div class="tabbed-set" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">Known Issues</label><div class="tabbed-content">
+<ul>
+<li>Cannot be used with HSE 1.9.0 or later due to improper use of an HSE API
+argument which is detected starting with HSE 1.9.0.</li>
+</ul>
+</div>
+<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">Issues Fixed</label><div class="tabbed-content">
+<ul>
+<li>Under certain conditions an object may fail to be replicated, or the
+incorrect object version may be replicated.</li>
+<li>Various issues found in internal testing.</li>
+</ul>
+</div>
+</div>
+<h3 id="mongodb-r341720-hse-171">MongoDB r3.4.17.2.0-hse-1.7.1</h3>
+<p>Reissue of initial release of MongoDB with HSE to revise package naming.
+This version of MongoDB with HSE does not support the following:</p>
+<ul>
+<li><code>compact</code> administration command</li>
+<li><code>fsync</code> administration command with the lock option, or the
+corresponding <code>fsyncUnlock</code> command</li>
+<li>Read concern "majority"</li>
+<li>SSL on RHEL 8</li>
+</ul>
+<div class="tabbed-set" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">Known Issues</label><div class="tabbed-content">
+<ul>
+<li>None</li>
+</ul>
+</div>
+<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">Issues Fixed</label><div class="tabbed-content">
+<ul>
+<li>Build of tarball automatically generated by GitHub</li>
+</ul>
+</div>
+</div>
+<p>The following build commands are referenced from the
+<a href="../../apps/mongodb/">MongoDB</a> section of this documentation.
+Please refer to those instructions.  Running these commands
+results in the same set of binaries in the build directory as are normally
+generated when compiling the unmodified source code base.
+No packages are generated.</p>
+<div class="tabbed-set" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">RHEL 8</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ scons CC=/opt/rh/gcc-toolset-9/root/bin/gcc CXX=/opt/rh/gcc-toolset-9/root/bin/g++ OBJCOPY=/opt/rh/gcc-toolset-9/root/bin/objcopy -j$(nproc) --disable-warnings-as-errors --dbg=off --opt=on all MONGO_VERSION=3.4.17
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Do not specify <code>--ssl</code> when building for RHEL 8.</p>
+</div>
+</div>
+<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">RHEL 7</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ scl enable rh-mongodb32 &#39;scons CC=/opt/rh/devtoolset-9/root/bin/gcc CXX=/opt/rh/devtoolset-9/root/bin/g++ OBJCOPY=/opt/rh/devtoolset-9/root/bin/objcopy -j$(nproc) --ssl --disable-warnings-as-errors --dbg=off --opt=on all MONGO_VERSION=3.4.17&#39;
+</code></pre></div>
+</div>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../benchmarking/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Benchmarking Tips" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Benchmarking Tips
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 - 2021 Micron Technology, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      
+    
+  </body>
+</html>

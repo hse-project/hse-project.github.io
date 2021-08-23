@@ -1,0 +1,1193 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fast embeddable key-value store designed for SSDs and persistent memory">
+      
+      
+      
+      
+        <link rel="canonical" href="https://github.com/hse-project/1.x/gs/create-kvdb/">
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+    
+    
+      
+        <title>Create a KVDB - HSE Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#create-a-kvdb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner md-announce">
+          <div class="md-banner__inner md-announce__inner md-grid md-typeset">
+            
+  <strong>Notice: HSE 1.x is no longer actively maintained</strong>
+
+          </div>
+        </aside>
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="HSE Project" class="md-header__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HSE Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Create a KVDB
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../sys-requirements/" class="md-tabs__link md-tabs__link--active">
+        Get Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../apps/mongodb/" class="md-tabs__link">
+        Run Integrated Apps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../dev/concepts/" class="md-tabs__link">
+        Develop HSE Apps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../help/resources/" class="md-tabs__link">
+        Get Help
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HSE Project" class="md-nav__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    HSE Project
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Get Started
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Get Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Get Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sys-requirements/" class="md-nav__link">
+        System Requirements
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-packages/" class="md-nav__link">
+        Install from Packages
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-source/" class="md-nav__link">
+        Install from Source
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config-storage/" class="md-nav__link">
+        Configure Storage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Create a KVDB
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Create a KVDB
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-parameters" class="md-nav__link">
+    Configuration Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kvdb-parameters" class="md-nav__link">
+    KVDB Parameters
+  </a>
+  
+    <nav class="md-nav" aria-label="KVDB Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#durability-interval-dur_intvl_ms" class="md-nav__link">
+    Durability Interval (dur_intvl_ms)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-throttle-throttle_init_policy" class="md-nav__link">
+    Initial Throttle (throttle_init_policy)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kvs-parameters" class="md-nav__link">
+    KVS Parameters
+  </a>
+  
+    <nav class="md-nav" aria-label="KVS Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-prefix-length-pfx_len" class="md-nav__link">
+    Key Prefix Length (pfx_len)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#media-class-usage-mclass_policy" class="md-nav__link">
+    Media Class Usage (mclass_policy)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    Configuration Files
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manage-kvdb/" class="md-nav__link">
+        Manage a KVDB
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Run Integrated Apps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Run Integrated Apps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Run Integrated Apps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/mongodb/" class="md-nav__link">
+        MongoDB
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/ycsb/" class="md-nav__link">
+        YCSB
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Develop HSE Apps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Develop HSE Apps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Develop HSE Apps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/concepts/" class="md-nav__link">
+        Concepts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/api-reference/" class="md-nav__link">
+        API Reference
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/best-practices/" class="md-nav__link">
+        Best Practices
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/limits/" class="md-nav__link">
+        Limits
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Get Help
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Get Help" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Get Help
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/resources/" class="md-nav__link">
+        Resources
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/benchmarking/" class="md-nav__link">
+        Benchmarking Tips
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/relnotes/" class="md-nav__link">
+        Release Notes
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-parameters" class="md-nav__link">
+    Configuration Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kvdb-parameters" class="md-nav__link">
+    KVDB Parameters
+  </a>
+  
+    <nav class="md-nav" aria-label="KVDB Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#durability-interval-dur_intvl_ms" class="md-nav__link">
+    Durability Interval (dur_intvl_ms)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-throttle-throttle_init_policy" class="md-nav__link">
+    Initial Throttle (throttle_init_policy)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kvs-parameters" class="md-nav__link">
+    KVS Parameters
+  </a>
+  
+    <nav class="md-nav" aria-label="KVS Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-prefix-length-pfx_len" class="md-nav__link">
+    Key Prefix Length (pfx_len)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#media-class-usage-mclass_policy" class="md-nav__link">
+    Media Class Usage (mclass_policy)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    Configuration Files
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="create-a-kvdb">Create a KVDB</h1>
+<p>After <a href="../config-storage/">configuring an mpool</a> for HSE storage, you
+can create (store) a KVDB in the mpool using the <code>hse</code> CLI.</p>
+<p>Continuing with the prior
+<a href="../config-storage/#storage-configuration-example">example</a>,
+we create a KVDB in the mpool <code>mydb</code>.</p>
+<pre><code>$ hse kvdb create mydb
+$ hse kvdb list
+kvdbs:
+- name: mydb
+  label: raw
+</code></pre>
+<p>The name and label of the KVDB are simply the name and label of the mpool
+that stores it.  In a later example, we will update the label to
+something more descriptive.</p>
+<p>At this point, the KVDB is ready to use with one of the applications that
+has already been integrated with HSE, or with your own application.</p>
+<p>The remainder of this section defines HSE configuration parameters,
+and provides further <code>hse</code> CLI usage examples.
+For applications we have integrated with HSE, detailed configuration
+information is provided in their individual sections of this documentation.</p>
+<h2 id="configuration-parameters">Configuration Parameters</h2>
+<p>HSE configuration parameters can be specified in several ways.</p>
+<ul>
+<li>Directly in <code>hse</code> CLI commands as <code>&lt;param&gt;=&lt;value&gt;</code> pairs</li>
+<li>From a configuration file passed to the <code>hse</code> CLI with the <code>-c</code> option</li>
+<li>In HSE API calls using functions for specifying parameters directly
+or reading them from a configuration file</li>
+</ul>
+<p>The most common (and preferred) method is for an application to use
+HSE API calls to read parameter values from a configuration file, and then
+to augment or override those values as appropriate for that application.</p>
+<p>HSE parameters apply to either a KVDB, or to a key-value store (KVS) within
+a KVDB.  A KVS in a KVDB is analogous to a table in a relational database
+in that each KVS stores an independent collection of key-value (KV) pairs.
+These and other <a href="../../dev/concepts/">HSE concepts</a> are described in
+the section on developing HSE applications.</p>
+<p>When using the <code>hse</code> CLI, only persistent parameters need to be specified.
+Specifying non-persistent parameters has no effect.</p>
+<p>The KVDB and KVS parameter tables below specify the HSE version at which
+a parameter was introduced.  If the version column is blank, the
+parameter has been available since the initial release.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The configuration parameters listed below are part of the stable HSE API.
+Configuration files installed for applications that have been
+integrated with HSE may use experimental parameters.</p>
+</div>
+<h2 id="kvdb-parameters">KVDB Parameters</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Parameter</th>
+<th align="left">Description</th>
+<th align="right">Default</th>
+<th align="right">Persistent</th>
+<th align="right">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>dur_intvl_ms</code></td>
+<td align="left">Max time data is cached before flushing to media (ms)</td>
+<td align="right">500</td>
+<td align="right">No</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="left"><code>log_lvl</code></td>
+<td align="left">Syslog severity level (0=emergency; 7=debug)</td>
+<td align="right">7</td>
+<td align="right">No</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="left"><code>read_only</code></td>
+<td align="left">Read-only mode enabled (0=disabled; 1=enabled)</td>
+<td align="right">0</td>
+<td align="right">No</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="left"><code>throttle_init_policy</code></td>
+<td align="left">Ingest throttle at startup (light; medium; default)</td>
+<td align="right">default</td>
+<td align="right">No</td>
+<td align="right">1.8.0</td>
+</tr>
+</tbody>
+</table>
+<p>Below are additional details on setting several of these KVDB parameters.</p>
+<h3 id="durability-interval-dur_intvl_ms">Durability Interval (dur_intvl_ms)</h3>
+<p>The durability interval for a KVDB is the frequency at which cached
+updates from committed transactions and stand-alone KV operations
+are flushed to stable storage.  This interval is specified by the
+<code>dur_intvl_ms</code> parameter in units of milliseconds.</p>
+<p>The concepts section provides additional discussion on
+HSE <a href="../../dev/concepts/#durability-controls">durability controls</a>.</p>
+<h3 id="initial-throttle-throttle_init_policy">Initial Throttle (throttle_init_policy)</h3>
+<p>On startup, a KVDB throttles the rate at which it processes puts
+and deletes of KV pairs, referred to as the ingest rate.
+KVDB increases the ingest rate until it reaches the maximum
+sustainable value for the underlying mpool storage.
+This ramp-up process can take on the order of <strong>50 to 200 seconds</strong>.</p>
+<p>For benchmarks, this initial throttling can <em>greatly</em> distort results.
+In production environments, this initial throttling may impact the time
+before a service is fully operational.</p>
+<p>The <code>throttle_init_policy</code> parameter can be used to achieve the maximum
+ingest rate in far less time.  It specifies a relative initial throttling
+value of <code>light</code>, <code>medium</code>, or <code>default</code> (maximum) throttling.</p>
+<p>Setting the <code>throttle_init_policy</code> parameter improperly for the underlying
+mpool storage can cause the durability interval (<code>dur_intvl_ms</code>) to be violated,
+or internal indexing structures to become unbalanced until KVDB determines
+the maximum sustainable ingest rate for the mpool.</p>
+<p>The <code>mpool_profile</code> tool is provided to determine an appropriate
+<code>throttle_init_policy</code> setting for an mpool as follows</p>
+<pre><code>$ /opt/hse/bin/mpool_profile -v mydb
+</code></pre>
+<p>Use the output of <code>mpool_profile</code> to specify the <code>throttle_init_policy</code> value
+for a KVDB.  If the mpool configuration changes, for example a staging media
+class is added, rerun <code>mpool_profile</code> as the <code>throttle_init_policy</code> value
+may change.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>mpool_profile may run for <strong>several minutes</strong> before producing output.</p>
+</div>
+<h2 id="kvs-parameters">KVS Parameters</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Parameter</th>
+<th align="left">Description</th>
+<th align="right">Default</th>
+<th align="right">Persistent</th>
+<th align="right">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>pfx_len</code></td>
+<td align="left">Key prefix length (bytes)</td>
+<td align="right">0</td>
+<td align="right">Yes</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="left"><code>value_compression</code></td>
+<td align="left">Value compression method (lz4; none)</td>
+<td align="right">none</td>
+<td align="right">No</td>
+<td align="right">1.8.0</td>
+</tr>
+<tr>
+<td align="left"><code>mclass_policy</code></td>
+<td align="left">Media class usage policy (see discussion for values)</td>
+<td align="right">capacity_only</td>
+<td align="right">No</td>
+<td align="right">1.8.0</td>
+</tr>
+</tbody>
+</table>
+<p>Below are additional details on setting several of these KVS parameters.</p>
+<h3 id="key-prefix-length-pfx_len">Key Prefix Length (pfx_len)</h3>
+<p>The HSE <a href="../../dev/concepts/#data-model">data model</a> requires that a
+KVS store either</p>
+<ul>
+<li>multi-segment keys, with the KVS <code>pfx_len</code> parameter set to the key prefix
+length, or</li>
+<li>unsegmented keys, with the KVS <code>pfx_len</code> parameter set to zero (0).</li>
+</ul>
+<p>Applications must adhere to this data model, and its associated
+<a href="../../dev/best-practices/">best practices</a>, to achieve maximum performance
+with HSE.</p>
+<h3 id="media-class-usage-mclass_policy">Media Class Usage (mclass_policy)</h3>
+<p>The mpool storage for a KVDB can be configured with both the required
+capacity media class and an optional staging media class.  For example,
+an mpool might be created with a capacity media class on a volume backed
+by value-oriented SATA QLC SSDs, and a staging media class on a volume
+backed by high-end NVMe TLC SSDs.
+See the <a href="https://github.com/hse-project/mpool/wiki">mpool Wiki</a>
+for complete information on configuring and managing mpool storage.</p>
+<p>The media class usage policy for a KVS defines how the KVS is stored when
+a staging media class is present.
+The KVS, or more precisely the KV data in that KVS, can be either <em>pinned</em> to
+a particular media class, or <em>tiered</em> from the staging media class to the
+capacity media class as it ages, as specified by its <code>mclass_policy</code>
+parameter.</p>
+<table>
+<thead>
+<tr>
+<th align="left">mclass_policy Value</th>
+<th align="left">Description</th>
+<th align="right">Staging Storage for Tiering</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>capacity_only</code></td>
+<td align="left">KVS pinned to capacity media class</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="left"><code>staging_only</code></td>
+<td align="left">KVS pinned to staging media class</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="left"><code>staging_min_capacity</code></td>
+<td align="left">KVS keys and values tiered</td>
+<td align="right">Up to 100GB</td>
+</tr>
+<tr>
+<td align="left"><code>staging_max_capacity</code></td>
+<td align="left">KVS keys pinned to staging media class with values tiered</td>
+<td align="right">Up to 100GB + key data + 20% of value data</td>
+</tr>
+</tbody>
+</table>
+<p>Of the two tiering options, <code>staging_max_capacity</code> will in general yield the
+highest throughput, lowest latency, and least write-amplification in the
+capacity media class.  The amount of staging storage consumed when
+tiering depends on many factors, but the estimates above provide
+reasonable guidelines for planning.</p>
+<p>Regardless of the media class usage policies selected for the KVS in a KVDB,
+always apply the <a href="../config-storage/#best-practices">best practices</a> for
+configuring mpool storage.  Also be aware that when the staging
+media class is present, a KVDB will consume up to approximately 50GB of
+space in it <strong>independent</strong> of the media class usage policies selected for
+its KVS.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no staging media class is present, and an <code>mclass_policy</code> value other
+than <code>capacity_only</code> is specified, a warning is logged and <code>capacity_only</code>
+is applied.</p>
+</div>
+<h2 id="configuration-files">Configuration Files</h2>
+<p>The parameters for a KVDB, and any KVS within that KVDB, can be specified
+in a configuration file using <a href="https://yaml.org">YAML</a> format.
+The syntax is mostly easily defined by example.</p>
+<pre><code>api_version: 1
+kvdb:
+    dur_intvl_ms: 200
+    log_lvl: 6
+    throttle_init_policy: light
+kvs:
+    pfx_len: 8
+    value_compression: lz4
+    mclass_policy: capacity_only
+kvs.kvs1:
+    pfx_len: 0
+    mclass_policy: staging_max_capacity
+</code></pre>
+<p>This file specifies a <code>dur_intvl_ms</code> of 200, a <code>log_lvl</code> of 6, and
+a <code>throttle_init_policy</code> of <code>light</code> for the KVDB.
+Every KVS created in the KVDB will have a <code>pfx_len</code> of 8 bytes,
+a <code>value_compression</code> of <code>lz4</code>, and an <code>mclass_policy</code> of <code>capacity_only</code>.
+The single exception is the KVS named <code>kvs1</code>, which will have a
+<code>pfx_len</code> of 0 bytes, and an <code>mclass_policy</code> of <code>staging_max_capacity</code>.</p>
+<p>Unspecified parameters get their default values.  Values for parameters which
+are persistent, and which have already been applied, are ignored.
+The only required key is <code>api_version</code> specifying the schema, which
+is currently 1.</p>
+<p>When a configuration file is passed to the <code>hse</code> CLI, any parameters
+specified directly on the command line will override those in the
+configuration file.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../config-storage/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configure Storage" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Configure Storage
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../manage-kvdb/" class="md-footer__link md-footer__link--next" aria-label="Next: Manage a KVDB" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Manage a KVDB
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 - 2021 Micron Technology, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      
+    
+  </body>
+</html>
