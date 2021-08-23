@@ -1,0 +1,85 @@
+# HSE project information
+site_name: HSE Project
+site_url: https://github.com/hse-project
+site_description: >-
+  Fast embeddable key-value store designed for SSDs and persistent memory
+
+
+# HSE repo information (source code not docs)
+# Setting these results in hse repo link and stats in doc header
+repo_url: https://github.com/hse-project/hse
+repo_name: hse-project/hse
+edit_uri: ""
+
+
+# Documentation copyright notice
+copyright: Copyright &copy; 2020 - 2021 Micron Technology, Inc.
+
+
+# HSE colors set in docs/stylesheets/extra.css
+extra_css:
+  - stylesheets/extra.css
+
+
+# Theme configuration
+theme:
+  name: material
+  language: en
+  favicon: img/favicon.png
+  logo: img/logo.png
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+
+
+# Theme customization
+extra:
+  version:
+    # mike is a natively supported external utility for MkDocs versioning
+    provider: mike
+
+
+# Useful markdown extensions
+markdown_extensions:
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+
+# Plugins providing additional functionality for this theme
+plugins:
+  - search
+
+
+# Page navigation
+nav:
+  - Home: index.md
+  - Getting Started:
+    - About: gs/about.md
+    - KVDB Storage: gs/storage.md
+    - Configuration Parameters: gs/params.md
+    - Command Line Interface: gs/cli.md
+    - System Requirements: gs/sysreqs.md
+  - Developing HSE Apps:
+    - Concepts: dev/concepts.md
+    - API Reference: dev/apis.md
+    - Best Practices: dev/bp.md
+    - Limits: dev/limits.md
+  - Resources:
+    - Community: res/community.md
+    - Benchmarking Tips: res/benchmarking.md
+    - Releases: res/relnotes.md

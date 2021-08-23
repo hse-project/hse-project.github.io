@@ -5,18 +5,29 @@ via GitHub Pages.  We use a single documentation set (site) for all
 repos under [hse-project](https://github.com/hse-project) to make it easy
 to navigate and search for information.
 
-This documentation is complemented by information provided in standard
-per-repo top-level files including:
 
-* README.md &mdash; Overview of the repo contents, information on how to
+## Per-repo Documentation
+
+The HSE project documentation is complemented by information provided in
+standard per-repo files including:
+
+* `README.md`: Overview of the repo contents, information on how to
 build and install it, and references to other relevant information.
-* CONTRIBUTING.md &mdash; Information on how to contribute to the repo
-contents.
-* LICENSE &mdash; The full license text for the repo.
+* `CONTRIBUTING.md`: Information on how to contribute to the repo contents.
+* `LICENSE`: The full license text for the repo.
+* `LICENSE.3rdparty.md`: License information for 3rd-party source
+included in the repo or built as a sub-repo and statically linked.
 
-> For HSE 1.x releases, and for forked repos such as hse-mongo, information
-> on building and installing is in this documentation rather than
-> the corresponding README.md.
+Forked repos, such as `hse-mongo` and `hse-ycsb`, contain information on
+building and contributing in `README.md` and `CONTRIBUTING.md` in the
+`hse` directories within those repos.  To make these files easy to locate
+when cloning a forked repo, there are symlinks to them named `README_HSE.md`
+and `CONTRIBUTING_HSE.md` in the repo root directory.
+
+> For HSE 1.x releases, information on building and installing for all
+> repos is in the HSE project documentation rather than per-repo
+> `README.md` or `README_HSE.md` files.
+> HSE 1.x and its project documentation are no longer actively maintained.
 
 
 ## Site Generation Tools
@@ -31,47 +42,72 @@ is natively integrated with Material for MkDocs.
 All of these tools are Python packages and can be installed, along with all
 dependencies, as follows.
 
-    $ pip install mkdocs-material
-    $ pip install mike
+```shell
+pip install mkdocs-material
+pip install mike
+```
 
 
-## Repo Branches
+## Version Directories
 
-This repo comprises the following independent (orphan) branches:
+Different versions of the HSE project documentation are stored in separate
+directories in this repo.
 
-* main  &mdash; Contains only the standard top-level repo
-files (README.md, etc.).
-* vN &mdash; Contains the HSE N.x documentation source and standard
-top-level repo files copied from main.  For example, branch v1 contains
-the HSE 1.x documentation source.
-* gh-pages &mdash; Contains the *generated* static site files served
-via GitHub Pages from the URL https://hse-project.github.io.
+* `v2` contains the HSE 2.x project documentation
+* `v1` contains the HSE 1.x project documentation
 
 
-## Building and Deploying
+## Building and Viewing
 
-> The details below are for building and deploying the HSE project
-> documentation when there is only a single version, specifically for HSE 1.x.
-> These instructions will be updated when versioning support is required
-> starting with the release of HSE 2.x.
+Build the latest version of the complete documentation as follows.
 
-Build the latest version of the v1 documentation as follows.
+```shell
+git clone https://github.com/hse-project/hse-project.github.io.git
+cd hse-project.github.io
+mike deploy -F v1/mkdocs.yml 1.x
+mike deploy -F v2/mkdocs.yml 2.x
+mike set-default -F v2/mkdocs.yml 2.x
+```
 
-    $ git clone https://github.com/hse-project/hse-project.github.io.git
-    $ cd hse-project.github.io
-    $ git checkout v1
-    $ mkdocs build
+This build process creates a local branch named `gh-pages` with the
+generated static site files.  You can view these as follows.
 
-Deploy the documentation to the gh-pages branch as follows.
+```shell
+mike serve -F v2/mkdocs.yml
+```
 
-    $ mkdocs gh-deploy --clean --force
+Point a web browser at the URL output from the above command.
 
-After a few minutes the latest version of the documentation will be
-available from the URL https://hse-project.github.io.
+> Note: To build the released (tagged) version of the project documentation,
+> execute `git checkout v2deploy` before building with `mike` in the
+> steps above.
 
-> WARNING: Only users with write permission to the hse-project.github.io
-> repo can deploy the HSE project documentation.  These users are a subset
-> of the hse-project maintainers.  Before deploying the documentation,
-> all changes since the last update must be reviewed, an editorial PR must
-> be submitted if needed, and the commit to be deployed must be tagged.
 
+## Editing
+
+You must use `mike` to build and view the documentation with versioning.
+However, the live reload does not work well, if at all.
+
+For editing the project documentation, it is better to use the `mkdocs`
+development server which automatically rebuilds Markdown files as they are
+updated and causes a connected web browser to reload them.
+This provides for a convenient interactive editing session.
+
+```shell
+mkdocs serve -f v2/mkdocs.yml
+```
+
+Point a web browser at the URL output from the above command.
+
+Keep in mind that only the version of the documentation you are editing
+will appear in the browser and that there will not be a version selector.
+
+
+## Deploying to GitHub
+
+Only users with write permission to the `hse-project.github.io` repo
+can deploy the HSE project documentation.
+Before deploying any documentation updates,
+all changes since the last update will be reviewed by the maintainers,
+editorial PRs will
+be submitted if needed, and the commit to be deployed will be tagged.
