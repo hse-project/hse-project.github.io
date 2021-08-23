@@ -76,10 +76,10 @@ nav:
     - System Requirements: gs/sysreqs.md
   - Developing HSE Apps:
     - Concepts: dev/concepts.md
-    - API Reference: dev/apis.md
     - Best Practices: dev/bp.md
     - Limits: dev/limits.md
   - Resources:
     - Community: res/community.md
     - Benchmarking Tips: res/benchmarking.md
     - Releases: res/relnotes.md
+  - API Reference: dev/apis.md
