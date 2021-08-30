@@ -8,7 +8,7 @@ The following are tips for benchmarking HSE applications.
 The system running the HSE application should meet the specified
 [requirements](../gs/sysreqs.md).  In particular:
 
-* Configure huge pages as documented
+* Configure huge pages and other virtual memory tuning parameters as documented
 * Balance storage devices across NUMA nodes when applicable
 
 
