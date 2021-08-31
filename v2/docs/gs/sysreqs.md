@@ -46,8 +46,8 @@ HSE performance and quality of service (QoS) can be **significantly**
 improved by configuring
 [huge pages](https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt)
 and other virtual memory
-[tuning parameters](https://www.kernel.org/doc/Documentation/sysctl/vm.txt)
-as follows.
+[tuning parameters](https://www.kernel.org/doc/Documentation/sysctl/vm.txt).
+For most HSE applications we recommend the following settings.
 
 ```shell
 sudo sysctl -w vm.nr_hugepages=256
