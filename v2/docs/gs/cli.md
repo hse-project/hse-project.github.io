@@ -117,7 +117,10 @@ hse -C /var/bulk/kvdb2 storage add storage.staging.path=/var/fast/staging2
 
 The staging media class directory `/var/fast/staging2` is configured for
 the specified KVDB home directory `/var/bulk/kvdb2`.
-No application can have the KVDB open or the operation will fail.
+
+This command can only be used to add a staging media class to a KVDB.
+The command will fail if either the KVDB already has a staging media class
+or if an application has the KVDB open.
 
 The next time an application opens the KVDB, the newly added
 staging media class will be used for KVS storage as determined by the
