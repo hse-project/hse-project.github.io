@@ -74,16 +74,28 @@ The specified KVDB home directory is `/var/bulk/kvdb2`, and the KVS named
 `kvs1` is created there with a key prefix length of 8 bytes.
 
 
-## Get KVDB Information
+## Get KVDB Info
 
-Get information about a KVDB.
+Get general information about a KVDB.
 
 ```shell
 hse -C /var/bulk/kvdb1 kvdb info
 ```
 
-This command will print out information about a KVDB, including its home
-directory, KVS list, and storage space metrics.
+This command displays general information for the specified KVDB
+home directory `/var/bulk/kvdb1`, including its KVS list.
+
+
+## Get KVDB Storage Info
+
+Get information about the media classes configured for a KVDB.
+
+```shell
+hse -C /var/bulk/kvdb1 storage info
+```
+
+This command displays media class information for the specified KVDB
+home directory `/var/bulk/kvdb1`, including storage space metrics.
 
 These storage space metrics include:
 
@@ -92,6 +104,25 @@ These storage space metrics include:
 * Space **allocated** for the KVDB
 * Space **used** by the KVDB, which is always less than or equal to the
 allocated space
+
+
+## Add a KVDB Media Class
+
+Add a staging media class to an existing KVDB.
+
+```shell
+mkdir /var/fast/staging2
+hse -C /var/bulk/kvdb2 storage add storage.staging.path=/var/fast/staging2
+```
+
+The staging media class directory `/var/fast/staging2` is configured for
+the specified KVDB home directory `/var/bulk/kvdb2`.
+No application can have the KVDB open or the operation will fail.
+
+The next time an application opens the KVDB, the newly added
+staging media class will be used for KVS storage as determined by the
+[`mclass_policy`](params.md#kvs-runtime-parameters)
+parameter for each KVS.
 
 
 ## Compact a KVDB
@@ -108,6 +139,8 @@ cd /var/bulk/kvdb1
 hse kvdb compact --timeout 120
 ```
 
+The KVDB home defaults to the current working directory `/var/bulk/kvdb1`,
+and compaction is started with a timeout of 120 seconds.
 If an application has the KVDB open, the compaction may continue past the
 timeout value.  In this case, the status of the compaction can be queried.
 
