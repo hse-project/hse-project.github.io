@@ -44,5 +44,14 @@ For most HSE applications we recommend using XFS.
 
 HSE performance and quality of service (QoS) can be **significantly**
 improved by configuring
-[huge pages](https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt).
-We recommend setting `vm.nr_hugepages=256` on your system.
+[huge pages](https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt)
+and other virtual memory
+[tuning parameters](https://www.kernel.org/doc/Documentation/sysctl/vm.txt).
+For most HSE applications we recommend the following settings.
+
+```shell
+sudo sysctl -w vm.nr_hugepages=256
+sudo sysctl -w vm.swappiness=1
+sudo sysctl -w vm.dirty_background_ratio=5
+sudo sysctl -w vm.dirty_ratio=15
+```
