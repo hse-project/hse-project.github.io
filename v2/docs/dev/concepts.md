@@ -56,7 +56,7 @@ be accessed together are grouped (contiguous) when keys are
 sorted lexicographically, **and**
 
 * creating a KVS to store these KV pairs with a key prefix length
-parameter ([`pfx_len`](../gs/params.md#kvs-create-time-parameters))
+parameter ([`prefix.length`](../gs/params.md#kvs-create-time-parameters))
 equal to the key prefix length of the segmented key.
 
 In the case where there is no relationship between KV pairs,
@@ -65,12 +65,12 @@ best performance is generally achieved by:
 * defining an unsegmented key, **and**
 
 * creating a KVS to store these KV pairs with a key prefix length parameter
-([`pfx_len`](../gs/params.md#kvs-create-time-parameters)) of zero (0).
+([`prefix.length`](../gs/params.md#kvs-create-time-parameters)) of zero (0).
 
 Keep in mind that a KVDB may contain multiple KVSs.  So in the case
 where there are multiple collections of KV pairs, each collection
 can be stored in a different KVS with a key structure, and corresponding
-KVS `pfx_len` parameter, that is appropriate for that collection.
+KVS `prefix.length` parameter, that is appropriate for that collection.
 This is a powerful capability that enables HSE to optimize storage and
 access for all KV pairs in a KVDB without compromise.
 
@@ -92,7 +92,7 @@ iteration over sets of related KV pairs.
 
 Prefix deletes are used to atomically remove all KV pairs in a KVS
 with keys whose initial bytes match a specified filter.
-The length of the filter must be *equal to* the `pfx_len` parameter
+The length of the filter must be *equal to* the `prefix.length` parameter
 of the KVS.
 The primary use for prefix deletes is with a KVS storing segmented keys.
 This is a powerful capability that enables sets of related KV pairs to
@@ -137,7 +137,7 @@ For example, `(sysId)`, `(sysID, ts)`, or `(sysID, ts, typeID)`.
 
 We define the key prefix to be `(sysID)`, yielding a key prefix length
 of 8 bytes.  Hence, we would create a KVS for storing these KV pairs
-with a key prefix length parameter (`pfx_len`) of 8 bytes.
+with a key prefix length parameter (`prefix.length`) of 8 bytes.
 
 With this data model and KVS configuration, a cursor with the filter
 `(sysID)` can be used to efficiently iterate over the log records
@@ -176,7 +176,7 @@ and values which are individual log records.
 
 We define the key prefix to be `(sysID, epochID)`, yielding a key prefix
 length of 16 bytes.  Hence, we would create a KVS for storing these KV pairs
-with a key prefix length parameter (`pfx_len`) of 16 bytes.
+with a key prefix length parameter (`prefix.length`) of 16 bytes.
 
 With this data model and KVS configuration, a cursor with the filter
 `(sysID, epochID)` can be used to efficiently iterate over the log records
@@ -215,7 +215,7 @@ and values which are individual log records.
 
 We define the key prefix to be `(epochID)`, yielding a key prefix
 length of 8 bytes.  Hence we would create a KVS for storing these KV pairs
-with a key prefix length parameter (`pfx_len`) of 8 bytes.
+with a key prefix length parameter (`prefix.length`) of 8 bytes.
 
 With this data model and KVS configuration, a cursor with the filter
 `(epochID)` can be used to efficiently iterate over the log records for
@@ -261,7 +261,7 @@ index log records.
 For brevity, we define the key structure for each KVS using the tuple
 syntax, segment names, and segment lengths adopted in prior examples.
 
-| KVS Name | Key Type | Key | Key Prefix | KVS pfx_len | Value |
+| KVS Name | Key Type | Key | Key Prefix | KVS prefix.length | Value |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | logRec | segmented | (epochID, ts, sysID, typeID) | (epochID) | 8 | Log record content |
 | sysIdx | segmented | (sysID, epochID, ts, typeID) | (sysID, epochID) | 16 | |
@@ -270,12 +270,12 @@ The KVS `logRec` stores the content of all log records, with each log record
 uniquely identified by the segmented key `(epochID, ts, sysID, typeID)` with
 key prefix `(epochID)`.
 Hence we would create KVS `logRec` with a key prefix length parameter
-(`pfx_len`) of 8 bytes.
+(`prefix.length`) of 8 bytes.
 
 The KVS `sysIdx` is an index for the log records stored in KVS `logRec`,
 with a key pefix of `(sysID, epochID)`.
 Hence we would create KVS `sysIdx` with a key prefix length parameter
-(`pfx_len`) of 16 bytes.
+(`prefix.length`) of 16 bytes.
 
 Using KVS `logRec`, a cursor with the filter `(epochID)` can be used to
 efficiently iterate over the log records for all systems within the
@@ -343,7 +343,7 @@ as a unit of work that is atomic, consistent, isolated, and durable
 A transaction may operate on KV pairs in one or more KVSs in a KVDB.
 
 When a KVS is opened, the
-[`transactions_enable`](../gs/params.md#kvs-runtime-parameters)
+[`transactions.enabled`](../gs/params.md#kvs-runtime-parameters)
 parameter specifies whether or not that KVS
 supports transactions.  This is not a persistent setting in that
 the KVS may be closed and later reopened in a different mode.
@@ -437,7 +437,8 @@ to stable storage, either synchronously or asynchronously.
 All cached updates are flushed, whether from non-transaction operations
 or committed transactions.
 In the normal case where journaling is enabled
-([`dur_enable`](../gs/params.md#kvdb-runtime-parameters)), cached updates are
+([`durability.enabled`](../gs/params.md#kvdb-runtime-parameters)),
+cached updates are
 written to the journal on stable storage.  Otherwise, cached updates are
 written directly to a KVDB [media class](../gs/storage.md#media-classes)
 on stable storage.
@@ -445,7 +446,7 @@ on stable storage.
 HSE also supports automatically flushing cached KVDB updates to the
 journal on stable storage.  The frequency for automatically flushing
 cached updates is controlled by the durability interval
-([`dur_intvl_ms`](../gs/params.md#kvdb-runtime-parameters)) configured
+([`durability.interval`](../gs/params.md#kvdb-runtime-parameters)) configured
 for a KVDB.
 
 

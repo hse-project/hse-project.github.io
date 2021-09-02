@@ -23,7 +23,7 @@ The following global parameters are part of the stable API.
 | Parameter | Default | Description |
 | :-- | :-- | :-- |
 | `logging.enabled` | `true` | Logging mode (false==disabled, true==enabled) |
-| `logging.structured` | `true` | Logging style (false==basic, true==structured) |
+| `logging.structured` | `false` | Logging style (false==basic, true==structured) |
 | `logging.destination` | `syslog` | Log destination (stdout, stderr, file, syslog) |
 | `logging.path` | `<runtime home>/hse.log` | Log file when logging.destination==file |
 | `logging.level` | `7` | Logging severity level (0==emergency; 7==debug) |
@@ -58,17 +58,17 @@ or in the optional [`kvdb.conf`](#kvdbconf-json-file) JSON file in the
 which is also specified in `hse_kvdb_open()`.
 
 For `hse_kvdb_open()` API calls, specify KVDB runtime parameters in the form
-`<param>=<value>`.  For example, `dur_intvl_ms=1000`.
+`<param>=<value>`.  For example, `durability.interval=1000`.
 
 The following KVDB runtime parameters are part of the stable API.
 
 | Parameter | Default | Description |
 | :-- | :-- | :-- |
 | `read_only` | `false` | Access mode (false==read/write, true==read-only) |
-| `dur_enable` | `true` | Journaling mode (false==disabled, true==enabled) |
-| `dur_intvl_ms` | `500` | Max time data is cached (milliseconds) when dur_enable==true |
-| `dur_mclass` | `capacity` | Media class for journal (capacity, staging) |
-| `throttle_init_policy` | `default` | Ingest throttle at startup (light, medium, default) |
+| `durability.enabled` | `true` | Journaling mode (false==disabled, true==enabled) |
+| `durability.interval` | `500` | Max time data is cached (in milliseconds) when durability.enabled==true |
+| `durability.mclass` | `capacity` | Media class for journal (capacity, staging) |
+| `throttling.init_policy` | `default` | Ingest throttle at startup (light, medium, default) |
 
 
 #### Durability Settings
@@ -76,17 +76,18 @@ The following KVDB runtime parameters are part of the stable API.
 The KVDB durability parameters control how HSE journals updates for that
 KVDB to provide for recovery in the event of a failure.
 
-The parameter `dur_enable` determines whether or not journaling is enabled.
+The parameter `durability.enabled` determines whether or not journaling
+is enabled.
 In general, you should always set this to `true`.  As a rare exception,
 applications that implement their own form of durability may want to
 disable HSE journaling to increase performance.
 
-The parameter `dur_intvl_ms` specifies the frequency (in milliseconds) for
-automatically flushing cached updates to the journal on stable storage.
+The parameter `durability.interval` specifies the frequency (in milliseconds)
+for automatically flushing cached updates to the journal on stable storage.
 Increasing this value may improve performance but also increases the amount
 of data that may be lost in the event of a failure.
 
-The parameter `dur_mclass` specifies the media class for storing journal
+The parameter `durability.mclass` specifies the media class for storing journal
 files.  In general, best performance is achieved by storing the journal files
 on the fastest media class configured for a KVDB.
 
@@ -106,18 +107,18 @@ For benchmarks, this initial throttling can *greatly* distort results.
 In general operation, this initial throttling may impact the time
 before a service is fully operational.
 
-The `throttle_init_policy` parameter can be used to achieve the maximum
+The `throttling.init_policy` parameter can be used to achieve the maximum
 ingest rate in far less time.  It specifies a relative initial throttling
 value of `light` (minimum), `medium`, or `default` (maximum) throttling.
 
-Setting the `throttle_init_policy` parameter improperly for the underlying
-storage can cause the durability interval (`dur_intvl_ms`) to be violated
+Setting the `throttling.init_policy` parameter improperly for the underlying
+storage can cause the durability interval (`durability.interval`) to be violated
 or internal indexing structures to become unbalanced for a period of time.
-For example, this may occur if `throttle_init_policy` is set to `light`
+For example, this may occur if `throttling.init_policy` is set to `light`
 with relatively slow KVDB storage.
 
 The `kvdb_profile` tool is provided to determine an appropriate
-`throttle_init_policy` setting for your KVDB storage.
+`throttling.init_policy` setting for your KVDB storage.
 You can run it as follows.
 
 ```shell
@@ -126,7 +127,7 @@ kvdb_profile /path/to/capacity/storage/for/the/kvdb
 
 The path specified in `kvdb_profile` should be a directory in the file
 system hosting the capacity media class for the KVDB of interest.
-Use the output of `kvdb_profile` to specify the `throttle_init_policy` value
+Use the output of `kvdb_profile` to specify the `throttling.init_policy` value
 for that KVDB.
 
 
@@ -139,13 +140,13 @@ KVS parameters apply when a KVS is created or opened.
 KVS create-time parameters may be specified in the `hse_kvdb_kvs_create()` API
 call or when using the CLI to create a KVS.  In either case, specify
 KVS create-time parameters in the form `<param>=<value>`.
-For example, `pfx_len=8`.
+For example, `prefix.length=8`.
 
 The following KVS create-time parameters are part of the stable API.
 
 | Parameter | Default | Description |
 | :-- | :-- | :-- |
-| `pfx_len` | `0` | Key prefix length (bytes) |
+| `prefix.length` | `0` | Key prefix length (bytes) |
 
 
 !!! tip
@@ -161,21 +162,21 @@ or in the optional [`kvdb.conf`](#kvdbconf-json-file) JSON file in the
 which is also specified in `hse_kvdb_open()`.
 
 For `hse_kvdb_kvs_open()` API calls, specify KVS runtime parameters in the
-form `<param>=<value>`.  For example, `value_compression=lz4`.
+form `<param>=<value>`.  For example, `compression.value.algorithm=lz4`.
 
 The following KVS runtime parameters are part of the stable API.
 
 | Parameter | Default | Description |
 | :-- | :-- | :-- |
-| `transactions_enable` | `false` | Transaction mode (false==disabled, true==enabled) |
-| `mclass_policy` | `capacity_only` | See discussion below for values |
-| `value_compression` | `none` | Value compression method (none, lz4) |
-| `vcompmin` | `12` | Value length above which compression is attempted (bytes) |
+| `transactions.enabled` | `false` | Transaction mode (false==disabled, true==enabled) |
+| `mclass.policy` | `capacity_only` | See discussion below for values |
+| `compression.value.algorithm` | `none` | Value compression method (none, lz4) |
+| `compression.value.min_length` | `12` | Value length above which compression is attempted (bytes) |
 
 
 #### Transaction Mode
 
-When a KVS is opened, the `transactions_enable` value determines whether
+When a KVS is opened, the `transactions.enabled` value determines whether
 or not transactions are enabled for the KVS.  This mode may be changed by
 closing and reopening the KVS.
 
@@ -189,7 +190,7 @@ that KVS is stored and managed in a KVDB configured with a staging media class.
 
 Key-value data in a KVS can either be *pinned* to a particular media class,
 or *tiered* from the staging media class to the capacity media class as it
-ages, as determined by the `mclass_policy` value for the KVS:
+ages, as determined by the `mclass.policy` value for the KVS:
 
 * `capacity_only` pins all key-value data to the capacity media class
 * `staging_only` pins all key-value data to the staging media class
@@ -203,7 +204,7 @@ capacity media class.  The trade-off is more storage required in the
 staging media class.
 
 !!! info
-    If no staging media class is present, and an `mclass_policy` value other
+    If no staging media class is present, and an `mclass.policy` value other
     than `capacity_only` is specified, a warning is logged and `capacity_only`
     is applied.
 
@@ -243,16 +244,28 @@ legal values, and defaults.
 ```
 {
   "read_only": boolean,
-  "dur_enable": boolean,
-  "dur_intvl_ms": integer,
-  "dur_mclass": "capacity | staging",
-  "throttle_init_policy": "light | medium | default",
+  "durability": {
+    "enabled": boolean,
+    "interval": integer,
+    "mclass": "capacity | staging"
+  },
+  "throttling": {
+    "init_policy": "light | medium | default"
+  },
   "kvs": {
     "<kvs name>": {
-      "transactions_enable": boolean,
-      "mclass_policy": "see KVS runtime parameter discussion for value strings",
-      "value_compression": "lz4 | none",
-      "vcompmin" : integer
+      "transactions": {
+        "enabled": boolean
+      },
+      "mclass": {
+        "policy": "see KVS runtime parameter discussion for value strings"
+      },
+      "compression": {
+        "value": {
+          "algorithm": "lz4 | none",
+          "min_length": integer
+        }
+      }
     }
   }
 }

@@ -20,12 +20,12 @@ following parameters.
 
 KVDB [parameters](../gs/params.md#kvdb-parameters):
 
-* `throttle_init_policy` with a value determined by `kvdb_profile`
-* `dur_intvl_ms` with a value appropriate for the application
-* `dur_mclass=staging` if a
+* `throttling.init_policy` with a value determined by `kvdb_profile`
+* `durability.interval` with a value appropriate for the application
+* `durability.mclass=staging` if a
 [staging media class](../gs/storage.md#media-classes) is configured for the KVDB
 
 KVS [parameters](../gs/params.md#kvs-parameters):
 
-* `value_compression=lz4` for all KVSs, *unless* the application performs
-its own value compression
+* `compression.value.algorithm=lz4` for all KVSs, *unless* the application
+performs its own value compression or values are known to not compress

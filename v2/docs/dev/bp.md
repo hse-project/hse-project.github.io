@@ -11,7 +11,7 @@ Use a segmented key in the common case where related sets of KV pairs in a
 KVS are accessed together.  Choose a key prefix that groups related KV pairs
 when keys are sorted lexicographically, and always create the KVS
 storing these KV pairs with a
-[`pfx_len`](../gs/params.md#kvs-create-time-parameters)
+[`prefix.length`](../gs/params.md#kvs-create-time-parameters)
 equal to the key prefix length.
 
 Choose a key prefix for segmented keys that will take on a modest
@@ -27,7 +27,7 @@ cannot be supported with a single segmented key prefix.
 
 Use an unsegmented key in the case where there is no relationship between
 KV pairs in a KVS, and always create the KVS storing these KV pairs with a
-[`pfx_len`](../gs/params.md#kvs-create-time-parameters) of zero (0).
+[`prefix.length`](../gs/params.md#kvs-create-time-parameters) of zero (0).
 
 
 ## Cursors and Gets
@@ -47,7 +47,7 @@ exist to support some specialized use cases.
 
 Use transactions when required for application correctness.
 Otherwise, for best performance open a KVS with transactions *disabled*
-(per [`transactions_enable`](../gs/params.md#kvs-runtime-parameters))
+([`transactions.enabled=false`](../gs/params.md#kvs-runtime-parameters))
 and use non-transaction operations.
 
 
