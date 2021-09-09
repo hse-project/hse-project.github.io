@@ -61,13 +61,13 @@ hse kvs create kvs1
 
 The KVDB home defaults to the current working directory `/var/bulk/kvdb1`,
 and the KVS named `kvs1` is created there with the default key prefix
-length ([`pfx_len`](params.md#kvs-create-time-parameters)) of zero (0).
+length ([`prefix.length`](params.md#kvs-create-time-parameters)) of zero (0).
 
 Next create a KVS specifying the KVDB home directory and KVS key
 prefix length.
 
 ```shell
-hse -C /var/bulk/kvdb2 kvs create kvs1 pfx_len=8
+hse -C /var/bulk/kvdb2 kvs create kvs1 prefix.length=8
 ```
 
 The specified KVDB home directory is `/var/bulk/kvdb2`, and the KVS named
@@ -124,7 +124,7 @@ or if an application has the KVDB open.
 
 The next time an application opens the KVDB, the newly added
 staging media class will be used for KVS storage as determined by the
-[`mclass_policy`](params.md#kvs-runtime-parameters)
+[`mclass.policy`](params.md#kvs-runtime-parameters)
 parameter for each KVS.
 
 
