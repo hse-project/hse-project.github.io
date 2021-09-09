@@ -82,4 +82,16 @@ nav:
     - Community: res/community.md
     - Benchmarking Tips: res/benchmarking.md
     - Releases: res/relnotes.md
-  - API Reference: dev/apis.md
+  - API Reference:
+    - Overview: api/index.md
+    - HSE Return Codes: api/Modules/group__ERROR__HANDLING.md
+    - Type Declarations, Shared Structures and Macros:  api/Modules/group__TYPES.md
+    - Initialization Routines: api/Modules/group__INIT.md
+    - Primary Lifecycle Functions: api/Modules/group__LIFECYCLE.md
+    - Create, Read, Update and Delete (CRUD) Functions: api/Modules/group__CRUD.md
+    - Transaction Functions: api/Modules/group__TXN.md
+    - Cursor Functions: api/Modules/group__CURSOR.md
+    - Data State Management Functions: api/Modules/group__DSTATE.md
+    - Limits: api/Modules/group__LIMITS.md
+    - Examples: api/Pages/examples.md
+    - Files: api/Files/index.md

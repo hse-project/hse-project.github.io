@@ -1,0 +1,20 @@
+{
+  "baseUrl": "/2.x/api/",
+  "foldersToGenerate": [
+    "modules",
+    "classes",
+    "files",
+    "pages"
+  ],
+  "indexInFolders": true,
+  "indexClassesName": "index",
+  "folderClassesName": "Structs",
+  "indexFilesName": "index",
+  "indexGroupsName": "index",
+  "indexRelatedPagesName": "index",
+  "indexClassesTitle": "Data Structures",
+  "indexRelatedPagesTitle": "Examples",
+  "linkSuffix": "/",
+  "mainPageInRoot": false,
+  "mainPageName": "index"
+}
