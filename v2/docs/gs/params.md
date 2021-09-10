@@ -55,7 +55,7 @@ or in the optional [`kvdb.conf`](#kvdbconf-json-file) JSON file in the
 which is also specified in `hse_kvdb_open()`.
 
 For `hse_kvdb_open()` API calls, specify KVDB runtime parameters in the form
-`<param>=<value>`.  For example, `durability.interval=1000`.
+`<param>=<value>`.  For example, `durability.interval_ms=1000`.
 
 The following KVDB runtime parameters are part of the stable API.
 
@@ -63,7 +63,7 @@ The following KVDB runtime parameters are part of the stable API.
 | :-- | :-- | :-- |
 | `read_only` | `false` | Access mode (false==read/write, true==read-only) |
 | `durability.enabled` | `true` | Journaling mode (false==disabled, true==enabled) |
-| `durability.interval` | `500` | Max time data is cached (in milliseconds) when durability.enabled==true |
+| `durability.interval_ms` | `100` | Max time data is cached (in milliseconds) when durability.enabled==true |
 | `durability.mclass` | `capacity` | Media class for journal (capacity, staging) |
 | `throttling.init_policy` | `default` | Ingest throttle at startup (light, medium, default) |
 
@@ -79,7 +79,7 @@ In general, you should always set this to `true`.  As a rare exception,
 applications that implement their own form of durability may want to
 disable HSE journaling to increase performance.
 
-The parameter `durability.interval` specifies the frequency (in milliseconds)
+The parameter `durability.interval_ms` specifies the frequency (in milliseconds)
 for automatically flushing cached updates to the journal on stable storage.
 Increasing this value may improve performance but also increases the amount
 of data that may be lost in the event of a failure.
@@ -109,7 +109,7 @@ ingest rate in far less time.  It specifies a relative initial throttling
 value of `light` (minimum), `medium`, or `default` (maximum) throttling.
 
 Setting the `throttling.init_policy` parameter improperly for the underlying
-storage can cause the durability interval (`durability.interval`) to be violated
+storage can cause the durability interval (`durability.interval_ms`) to be violated
 or internal indexing structures to become unbalanced for a period of time.
 For example, this may occur if `throttling.init_policy` is set to `light`
 with relatively slow KVDB storage.

@@ -446,7 +446,7 @@ on stable storage.
 HSE also supports automatically flushing cached KVDB updates to the
 journal on stable storage.  The frequency for automatically flushing
 cached updates is controlled by the durability interval
-([`durability.interval`](../gs/params.md#kvdb-runtime-parameters)) configured
+([`durability.interval_ms`](../gs/params.md#kvdb-runtime-parameters)) configured
 for a KVDB.
 
 
