@@ -10,26 +10,23 @@ initializes the HSE library or opens a KVDB or KVS.
 
 Global parameters are runtime parameters that apply at the application level.
 These parameters may be specified in the `hse_init()` API call or in the
-optional [`hse.conf`](#hseconf-json-file) JSON file
-in the [runtime home](storage.md#kvdb-and-runtime-homes) directory,
-which is also specified in `hse_init()`.
+optional [`hse.conf`](#hseconf-json-file) JSON file, which is also specified in
+`hse_init()`.
 
 For `hse_init()` API calls, specify global parameters in the form
 `<param>=<value>`.  For example, `socket.enabled=false`.
 
 The following global parameters are part of the stable API.
 
-
 | Parameter | Default | Description |
 | :-- | :-- | :-- |
 | `logging.enabled` | `true` | Logging mode (false==disabled, true==enabled) |
 | `logging.structured` | `false` | Logging style (false==basic, true==structured) |
 | `logging.destination` | `syslog` | Log destination (stdout, stderr, file, syslog) |
-| `logging.path` | `<runtime home>/hse.log` | Log file when logging.destination==file |
+| `logging.path` | `$PWD/hse.log` | Log file when logging.destination==file |
 | `logging.level` | `7` | Logging severity level (0==emergency; 7==debug) |
 | `socket.enabled` | `true` | REST interface mode (false==disabled, true==enabled) |
 | `socket.path` | `/tmp/hse-<pid>.sock` | UNIX domain socket file when socket.enabled==true |
-
 
 ## KVDB Parameters
 
@@ -47,7 +44,7 @@ The following KVDB create-time parameters are part of the stable API.
 | Parameter | Default | Description |
 | :-- | :-- | :-- |
 | `storage.capacity.path` | `<KVDB home>/capacity` | Capacity media class directory |
-| `storage.staging.path` | <none> | Staging media class directory |
+| `storage.staging.path` | `null` | Staging media class directory |
 
 
 ### KVDB Runtime Parameters
@@ -130,7 +127,6 @@ system hosting the capacity media class for the KVDB of interest.
 Use the output of `kvdb_profile` to specify the `throttling.init_policy` value
 for that KVDB.
 
-
 ## KVS Parameters
 
 KVS parameters apply when a KVS is created or opened.
@@ -148,16 +144,14 @@ The following KVS create-time parameters are part of the stable API.
 | :-- | :-- | :-- |
 | `prefix.length` | `0` | Key prefix length (bytes) |
 
-
 !!! tip
     The KVS name `default` is reserved and may not be used in
     `hse_kvdb_kvs_create()` API calls or with the CLI.
 
-
 ### KVS Runtime Parameters
 
 KVS runtime parameters may be specified in the `hse_kvdb_kvs_open()` API call
-or in the optional [`kvdb.conf`](#kvdbconf-json-file) JSON file in the
+or in the optional [`kvdb.conf`](#kvdbconf-json-file) configuration file in the
 [KVDB home](storage.md#kvdb-and-runtime-homes) directory,
 which is also specified in `hse_kvdb_open()`.
 
@@ -274,7 +268,6 @@ legal values, and defaults.
 The KVS name `default` is reserved and its parameters apply to all the KVS
 in a KVDB.  Parameters specified for a named KVS override those specified via
 `default`.
-
 
 ## Precedence of Parameters
 
