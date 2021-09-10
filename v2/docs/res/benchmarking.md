@@ -21,7 +21,7 @@ following parameters.
 KVDB [parameters](../gs/params.md#kvdb-parameters):
 
 * `throttling.init_policy` with a value determined by `kvdb_profile`
-* `durability.interval` with a value appropriate for the application
+* `durability.interval_ms` with a value appropriate for the application
 * `durability.mclass=staging` if a
 [staging media class](../gs/storage.md#media-classes) is configured for the KVDB
 
