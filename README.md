@@ -40,11 +40,12 @@ For versioning we use [Mike](https://github.com/jimporter/mike) which
 is natively integrated with Material for MkDocs.
 
 All of these tools are Python packages and can be installed, along with all
-dependencies, as follows.
+dependencies, as follows. This also installs any dependency required to build
+hse to capture api doxygen files.
 
 ```shell
-pip install mkdocs-material
-pip install mike
+poetry install
+poetry shell
 ```
 
 
@@ -57,6 +58,16 @@ directories in this repo.
 * `v1` contains the HSE 1.x project documentation
 
 
+## Building HSE API doxygen documents
+
+Building the Api documentaion from the header files of hse is enabled using doxygen.
+Doxygen xml is converted using [doxybook2](https://github.com/matusnovak/doxybook2),
+into markdown files. Generate the Api docs as follows.
+
+```shell
+./generate-api.sh
+```
+
 ## Building and Viewing
 
 Build the latest version of the complete documentation as follows.
@@ -64,6 +75,9 @@ Build the latest version of the complete documentation as follows.
 ```shell
 git clone https://github.com/hse-project/hse-project.github.io.git
 cd hse-project.github.io
+poetry install
+poetry shell
+./generate-api.sh
 mike deploy -F v1/mkdocs.yml 1.x
 mike deploy -F v2/mkdocs.yml 2.x
 mike set-default -F v2/mkdocs.yml 2.x
