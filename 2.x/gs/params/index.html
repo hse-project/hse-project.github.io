@@ -14,7 +14,7 @@
         <link rel="canonical" href="https://github.com/hse-project/2.x/gs/params/">
       
       <link rel="icon" href="../../img/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -258,11 +258,15 @@
   
 
 
-  <li class="md-tabs__item">
-    <a href="../../dev/apis/" class="md-tabs__link">
-      API Reference
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/" class="md-tabs__link">
+        API Reference
+      </a>
+    </li>
+  
 
       
     </ul>
@@ -722,10 +726,169 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../dev/apis/" class="md-nav__link">
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
         API Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        Overview
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__ERROR__HANDLING/" class="md-nav__link">
+        HSE Return Codes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__TYPES/" class="md-nav__link">
+        Type Declarations, Shared Structures and Macros
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__INIT/" class="md-nav__link">
+        Initialization Routines
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__LIFECYCLE/" class="md-nav__link">
+        Primary Lifecycle Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__CRUD/" class="md-nav__link">
+        Create, Read, Update and Delete (CRUD) Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__TXN/" class="md-nav__link">
+        Transaction Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__CURSOR/" class="md-nav__link">
+        Cursor Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__DSTATE/" class="md-nav__link">
+        Data State Management Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__LIMITS/" class="md-nav__link">
+        Limits
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Pages/examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Files/" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -912,9 +1075,8 @@ initializes the HSE library or opens a KVDB or KVS.</p>
 <h2 id="global-parameters">Global Parameters</h2>
 <p>Global parameters are runtime parameters that apply at the application level.
 These parameters may be specified in the <code>hse_init()</code> API call or in the
-optional <a href="#hseconf-json-file"><code>hse.conf</code></a> JSON file
-in the <a href="../storage/#kvdb-and-runtime-homes">runtime home</a> directory,
-which is also specified in <code>hse_init()</code>.</p>
+optional <a href="#hseconf-json-file"><code>hse.conf</code></a> JSON file, which is also specified in
+<code>hse_init()</code>.</p>
 <p>For <code>hse_init()</code> API calls, specify global parameters in the form
 <code>&lt;param&gt;=&lt;value&gt;</code>.  For example, <code>socket.enabled=false</code>.</p>
 <p>The following global parameters are part of the stable API.</p>
@@ -934,7 +1096,7 @@ which is also specified in <code>hse_init()</code>.</p>
 </tr>
 <tr>
 <td align="left"><code>logging.structured</code></td>
-<td align="left"><code>true</code></td>
+<td align="left"><code>false</code></td>
 <td align="left">Logging style (false==basic, true==structured)</td>
 </tr>
 <tr>
@@ -944,7 +1106,7 @@ which is also specified in <code>hse_init()</code>.</p>
 </tr>
 <tr>
 <td align="left"><code>logging.path</code></td>
-<td align="left"><code>&lt;runtime home&gt;/hse.log</code></td>
+<td align="left"><code>$PWD/hse.log</code></td>
 <td align="left">Log file when logging.destination==file</td>
 </tr>
 <tr>
@@ -988,7 +1150,7 @@ For example, <code>storage.capacity.path=/path/to/capacity/dir</code>.</p>
 </tr>
 <tr>
 <td align="left"><code>storage.staging.path</code></td>
-<td align="left"><none></td>
+<td align="left"><code>null</code></td>
 <td align="left">Staging media class directory</td>
 </tr>
 </tbody>
@@ -999,7 +1161,7 @@ or in the optional <a href="#kvdbconf-json-file"><code>kvdb.conf</code></a> JSON
 <a href="../storage/#kvdb-and-runtime-homes">KVDB home</a> directory,
 which is also specified in <code>hse_kvdb_open()</code>.</p>
 <p>For <code>hse_kvdb_open()</code> API calls, specify KVDB runtime parameters in the form
-<code>&lt;param&gt;=&lt;value&gt;</code>.  For example, <code>dur_intvl_ms=1000</code>.</p>
+<code>&lt;param&gt;=&lt;value&gt;</code>.  For example, <code>durability.interval_ms=1000</code>.</p>
 <p>The following KVDB runtime parameters are part of the stable API.</p>
 <table>
 <thead>
@@ -1016,22 +1178,22 @@ which is also specified in <code>hse_kvdb_open()</code>.</p>
 <td align="left">Access mode (false==read/write, true==read-only)</td>
 </tr>
 <tr>
-<td align="left"><code>dur_enable</code></td>
+<td align="left"><code>durability.enabled</code></td>
 <td align="left"><code>true</code></td>
 <td align="left">Journaling mode (false==disabled, true==enabled)</td>
 </tr>
 <tr>
-<td align="left"><code>dur_intvl_ms</code></td>
-<td align="left"><code>500</code></td>
-<td align="left">Max time data is cached (milliseconds) when dur_enable==true</td>
+<td align="left"><code>durability.interval_ms</code></td>
+<td align="left"><code>100</code></td>
+<td align="left">Max time data is cached (in milliseconds) when durability.enabled==true</td>
 </tr>
 <tr>
-<td align="left"><code>dur_mclass</code></td>
+<td align="left"><code>durability.mclass</code></td>
 <td align="left"><code>capacity</code></td>
 <td align="left">Media class for journal (capacity, staging)</td>
 </tr>
 <tr>
-<td align="left"><code>throttle_init_policy</code></td>
+<td align="left"><code>throttling.init_policy</code></td>
 <td align="left"><code>default</code></td>
 <td align="left">Ingest throttle at startup (light, medium, default)</td>
 </tr>
@@ -1040,15 +1202,16 @@ which is also specified in <code>hse_kvdb_open()</code>.</p>
 <h4 id="durability-settings">Durability Settings</h4>
 <p>The KVDB durability parameters control how HSE journals updates for that
 KVDB to provide for recovery in the event of a failure.</p>
-<p>The parameter <code>dur_enable</code> determines whether or not journaling is enabled.
+<p>The parameter <code>durability.enabled</code> determines whether or not journaling
+is enabled.
 In general, you should always set this to <code>true</code>.  As a rare exception,
 applications that implement their own form of durability may want to
 disable HSE journaling to increase performance.</p>
-<p>The parameter <code>dur_intvl_ms</code> specifies the frequency (in milliseconds) for
-automatically flushing cached updates to the journal on stable storage.
+<p>The parameter <code>durability.interval_ms</code> specifies the frequency (in milliseconds)
+for automatically flushing cached updates to the journal on stable storage.
 Increasing this value may improve performance but also increases the amount
 of data that may be lost in the event of a failure.</p>
-<p>The parameter <code>dur_mclass</code> specifies the media class for storing journal
+<p>The parameter <code>durability.mclass</code> specifies the media class for storing journal
 files.  In general, best performance is achieved by storing the journal files
 on the fastest media class configured for a KVDB.</p>
 <p>See the discussion on HSE
@@ -1062,22 +1225,22 @@ storage.  This ramp-up process can take up to <strong>200 seconds</strong>.</p>
 <p>For benchmarks, this initial throttling can <em>greatly</em> distort results.
 In general operation, this initial throttling may impact the time
 before a service is fully operational.</p>
-<p>The <code>throttle_init_policy</code> parameter can be used to achieve the maximum
+<p>The <code>throttling.init_policy</code> parameter can be used to achieve the maximum
 ingest rate in far less time.  It specifies a relative initial throttling
 value of <code>light</code> (minimum), <code>medium</code>, or <code>default</code> (maximum) throttling.</p>
-<p>Setting the <code>throttle_init_policy</code> parameter improperly for the underlying
-storage can cause the durability interval (<code>dur_intvl_ms</code>) to be violated
+<p>Setting the <code>throttling.init_policy</code> parameter improperly for the underlying
+storage can cause the durability interval (<code>durability.interval_ms</code>) to be violated
 or internal indexing structures to become unbalanced for a period of time.
-For example, this may occur if <code>throttle_init_policy</code> is set to <code>light</code>
+For example, this may occur if <code>throttling.init_policy</code> is set to <code>light</code>
 with relatively slow KVDB storage.</p>
 <p>The <code>kvdb_profile</code> tool is provided to determine an appropriate
-<code>throttle_init_policy</code> setting for your KVDB storage.
+<code>throttling.init_policy</code> setting for your KVDB storage.
 You can run it as follows.</p>
 <div class="highlight"><pre><span></span><code>kvdb_profile /path/to/capacity/storage/for/the/kvdb
 </code></pre></div>
 <p>The path specified in <code>kvdb_profile</code> should be a directory in the file
 system hosting the capacity media class for the KVDB of interest.
-Use the output of <code>kvdb_profile</code> to specify the <code>throttle_init_policy</code> value
+Use the output of <code>kvdb_profile</code> to specify the <code>throttling.init_policy</code> value
 for that KVDB.</p>
 <h2 id="kvs-parameters">KVS Parameters</h2>
 <p>KVS parameters apply when a KVS is created or opened.</p>
@@ -1085,7 +1248,7 @@ for that KVDB.</p>
 <p>KVS create-time parameters may be specified in the <code>hse_kvdb_kvs_create()</code> API
 call or when using the CLI to create a KVS.  In either case, specify
 KVS create-time parameters in the form <code>&lt;param&gt;=&lt;value&gt;</code>.
-For example, <code>pfx_len=8</code>.</p>
+For example, <code>prefix.length=8</code>.</p>
 <p>The following KVS create-time parameters are part of the stable API.</p>
 <table>
 <thead>
@@ -1097,7 +1260,7 @@ For example, <code>pfx_len=8</code>.</p>
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>pfx_len</code></td>
+<td align="left"><code>prefix.length</code></td>
 <td align="left"><code>0</code></td>
 <td align="left">Key prefix length (bytes)</td>
 </tr>
@@ -1110,11 +1273,11 @@ For example, <code>pfx_len=8</code>.</p>
 </div>
 <h3 id="kvs-runtime-parameters">KVS Runtime Parameters</h3>
 <p>KVS runtime parameters may be specified in the <code>hse_kvdb_kvs_open()</code> API call
-or in the optional <a href="#kvdbconf-json-file"><code>kvdb.conf</code></a> JSON file in the
+or in the optional <a href="#kvdbconf-json-file"><code>kvdb.conf</code></a> configuration file in the
 <a href="../storage/#kvdb-and-runtime-homes">KVDB home</a> directory,
 which is also specified in <code>hse_kvdb_open()</code>.</p>
 <p>For <code>hse_kvdb_kvs_open()</code> API calls, specify KVS runtime parameters in the
-form <code>&lt;param&gt;=&lt;value&gt;</code>.  For example, <code>value_compression=lz4</code>.</p>
+form <code>&lt;param&gt;=&lt;value&gt;</code>.  For example, <code>compression.value.algorithm=lz4</code>.</p>
 <p>The following KVS runtime parameters are part of the stable API.</p>
 <table>
 <thead>
@@ -1126,29 +1289,29 @@ form <code>&lt;param&gt;=&lt;value&gt;</code>.  For example, <code>value_compres
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>transactions_enable</code></td>
+<td align="left"><code>transactions.enabled</code></td>
 <td align="left"><code>false</code></td>
 <td align="left">Transaction mode (false==disabled, true==enabled)</td>
 </tr>
 <tr>
-<td align="left"><code>mclass_policy</code></td>
+<td align="left"><code>mclass.policy</code></td>
 <td align="left"><code>capacity_only</code></td>
 <td align="left">See discussion below for values</td>
 </tr>
 <tr>
-<td align="left"><code>value_compression</code></td>
+<td align="left"><code>compression.value.algorithm</code></td>
 <td align="left"><code>none</code></td>
 <td align="left">Value compression method (none, lz4)</td>
 </tr>
 <tr>
-<td align="left"><code>vcompmin</code></td>
+<td align="left"><code>compression.value.min_length</code></td>
 <td align="left"><code>12</code></td>
 <td align="left">Value length above which compression is attempted (bytes)</td>
 </tr>
 </tbody>
 </table>
 <h4 id="transaction-mode">Transaction Mode</h4>
-<p>When a KVS is opened, the <code>transactions_enable</code> value determines whether
+<p>When a KVS is opened, the <code>transactions.enabled</code> value determines whether
 or not transactions are enabled for the KVS.  This mode may be changed by
 closing and reopening the KVS.</p>
 <p>See the discussion on HSE <a href="../../dev/concepts/#transactions">transactions</a>
@@ -1158,7 +1321,7 @@ for additional details.</p>
 that KVS is stored and managed in a KVDB configured with a staging media class.</p>
 <p>Key-value data in a KVS can either be <em>pinned</em> to a particular media class,
 or <em>tiered</em> from the staging media class to the capacity media class as it
-ages, as determined by the <code>mclass_policy</code> value for the KVS:</p>
+ages, as determined by the <code>mclass.policy</code> value for the KVS:</p>
 <ul>
 <li><code>capacity_only</code> pins all key-value data to the capacity media class</li>
 <li><code>staging_only</code> pins all key-value data to the staging media class</li>
@@ -1172,7 +1335,7 @@ capacity media class.  The trade-off is more storage required in the
 staging media class.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>If no staging media class is present, and an <code>mclass_policy</code> value other
+<p>If no staging media class is present, and an <code>mclass.policy</code> value other
 than <code>capacity_only</code> is specified, a warning is logged and <code>capacity_only</code>
 is applied.</p>
 </div>
@@ -1202,16 +1365,28 @@ legal values, and defaults.</p>
 legal values, and defaults.</p>
 <div class="highlight"><pre><span></span><code>{
   &quot;read_only&quot;: boolean,
-  &quot;dur_enable&quot;: boolean,
-  &quot;dur_intvl_ms&quot;: integer,
-  &quot;dur_mclass&quot;: &quot;capacity | staging&quot;,
-  &quot;throttle_init_policy&quot;: &quot;light | medium | default&quot;,
+  &quot;durability&quot;: {
+    &quot;enabled&quot;: boolean,
+    &quot;interval&quot;: integer,
+    &quot;mclass&quot;: &quot;capacity | staging&quot;
+  },
+  &quot;throttling&quot;: {
+    &quot;init_policy&quot;: &quot;light | medium | default&quot;
+  },
   &quot;kvs&quot;: {
     &quot;&lt;kvs name&gt;&quot;: {
-      &quot;transactions_enable&quot;: boolean,
-      &quot;mclass_policy&quot;: &quot;see KVS runtime parameter discussion for value strings&quot;,
-      &quot;value_compression&quot;: &quot;lz4 | none&quot;,
-      &quot;vcompmin&quot; : integer
+      &quot;transactions&quot;: {
+        &quot;enabled&quot;: boolean
+      },
+      &quot;mclass&quot;: {
+        &quot;policy&quot;: &quot;see KVS runtime parameter discussion for value strings&quot;
+      },
+      &quot;compression&quot;: {
+        &quot;value&quot;: {
+          &quot;algorithm&quot;: &quot;lz4 | none&quot;,
+          &quot;min_length&quot;: integer
+        }
+      }
     }
   }
 }
@@ -1303,10 +1478,10 @@ to be modified without recompiling an HSE application.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>

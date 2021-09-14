@@ -14,7 +14,7 @@
         <link rel="canonical" href="https://github.com/hse-project/2.x/gs/cli/">
       
       <link rel="icon" href="../../img/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -258,11 +258,15 @@
   
 
 
-  <li class="md-tabs__item">
-    <a href="../../dev/apis/" class="md-tabs__link">
-      API Reference
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/" class="md-tabs__link">
+        API Reference
+      </a>
+    </li>
+  
 
       
     </ul>
@@ -437,8 +441,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-kvdb-information" class="md-nav__link">
-    Get KVDB Information
+  <a href="#get-kvdb-info" class="md-nav__link">
+    Get KVDB Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-kvdb-storage-info" class="md-nav__link">
+    Get KVDB Storage Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-a-kvdb-media-class" class="md-nav__link">
+    Add a KVDB Media Class
   </a>
   
 </li>
@@ -629,10 +647,169 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../dev/apis/" class="md-nav__link">
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
         API Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        Overview
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__ERROR__HANDLING/" class="md-nav__link">
+        HSE Return Codes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__TYPES/" class="md-nav__link">
+        Type Declarations, Shared Structures and Macros
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__INIT/" class="md-nav__link">
+        Initialization Routines
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__LIFECYCLE/" class="md-nav__link">
+        Primary Lifecycle Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__CRUD/" class="md-nav__link">
+        Create, Read, Update and Delete (CRUD) Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__TXN/" class="md-nav__link">
+        Transaction Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__CURSOR/" class="md-nav__link">
+        Cursor Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__DSTATE/" class="md-nav__link">
+        Data State Management Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__LIMITS/" class="md-nav__link">
+        Limits
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Pages/examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Files/" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -677,8 +854,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-kvdb-information" class="md-nav__link">
-    Get KVDB Information
+  <a href="#get-kvdb-info" class="md-nav__link">
+    Get KVDB Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-kvdb-storage-info" class="md-nav__link">
+    Get KVDB Storage Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-a-kvdb-media-class" class="md-nav__link">
+    Add a KVDB Media Class
   </a>
   
 </li>
@@ -730,47 +921,44 @@ tasks.  The CLI is itself an HSE application.</p>
 media classes.</p>
 <h2 id="create-a-kvdb">Create a KVDB</h2>
 <p>Create a KVDB taking all the defaults.</p>
-<div class="highlight"><pre><span></span><code>mkdir /var/bulk/kvdb1 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /var/bulk/kvdb1
-hse kvdb create
+<div class="highlight"><pre><span></span><code>mkdir /var/bulk/kvdb1
+hse kvdb create /var/bulk/kvdb1
 </code></pre></div>
-<p>The KVDB home defaults to the current working directory <code>/var/bulk/kvdb1</code>,
-and the required capacity media class directory defaults
-to <code>/var/bulk/kvdb1/capacity</code>.</p>
-<p>Next create a KVDB specifying the home directory.</p>
-<div class="highlight"><pre><span></span><code>mkdir /var/bulk/kvdb2
-hse -C /var/bulk/kvdb2 kvdb create
-</code></pre></div>
-<p>The specified KVDB home directory is <code>/var/bulk/kvdb2</code>, and the required
-capacity media class directory defaults to <code>/var/bulk/kvdb2/capacity</code>.</p>
-<p>Finally, create a KVDB specifying the home directory and
-<a href="../params/#kvdb-parameters">KVDB parameters</a>
+<p>The KVDB home directory is <code>/var/bulk/kvdb1</code>, and the required
+capacity media class directory defaults to <code>/var/bulk/kvdb1/capacity</code>.</p>
+<p>Next, create a KVDB specifying
+<a href="../params/#kvdb-parameters">parameters</a>
 for both the required capacity and optional staging media class directories.</p>
-<div class="highlight"><pre><span></span><code>mkdir /var/bulk/kvdb3 <span class="o">&amp;&amp;</span> mkdir /var/bulk/capacity3 <span class="o">&amp;&amp;</span> mkdir /var/fast/staging3
-hse -C /var/bulk/kvdb3 kvdb create storage.capacity.path<span class="o">=</span>/var/bulk/capacity3 storage.staging.path<span class="o">=</span>/var/fast/staging3
+<div class="highlight"><pre><span></span><code>mkdir /var/bulk/kvdb2 <span class="o">&amp;&amp;</span> mkdir /var/bulk/capacity2 <span class="o">&amp;&amp;</span> mkdir /var/fast/staging2
+hse kvdb create /var/bulk/kvdb2 storage.capacity.path<span class="o">=</span>/var/bulk/capacity2 storage.staging.path<span class="o">=</span>/var/fast/staging2
 </code></pre></div>
-<p>The specified KVDB home directory is <code>/var/bulk/kvdb3</code>, the capacity media class
-directory is <code>/var/bulk/capacity3</code>, and the staging media class directory
-is <code>/var/fast/staging3</code>.</p>
+<p>The KVDB home directory is <code>/var/bulk/kvdb2</code>, the capacity media class
+directory is <code>/var/bulk/capacity2</code>, and the staging media class directory
+is <code>/var/fast/staging2</code>.</p>
 <h2 id="create-a-kvs">Create a KVS</h2>
 <p>Create a KVS in a KVDB taking all the defaults.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> /var/bulk/kvdb1
-hse kvs create kvs1
+<div class="highlight"><pre><span></span><code>hse kvs create /var/bulk/kvdb1 kvs1
 </code></pre></div>
-<p>The KVDB home defaults to the current working directory <code>/var/bulk/kvdb1</code>,
-and the KVS named <code>kvs1</code> is created there with the default key prefix
-length (<a href="../params/#kvs-create-time-parameters"><code>pfx_len</code></a>) of zero (0).</p>
-<p>Next create a KVS specifying the KVDB home directory and KVS key
-prefix length.</p>
-<div class="highlight"><pre><span></span><code>hse -C /var/bulk/kvdb2 kvs create kvs1 <span class="nv">pfx_len</span><span class="o">=</span><span class="m">8</span>
+<p>The KVS named <code>kvs1</code> is created in KVDB home directory <code>/var/bulk/kvdb1</code>.
+KVS <code>kvs1</code> is created with the default key prefix
+length (<a href="../params/#kvs-create-time-parameters"><code>prefix.length</code></a>) of zero (0).</p>
+<p>Next, create a KVS specifying the key prefix length.</p>
+<div class="highlight"><pre><span></span><code>hse kvs create /var/bulk/kvdb2 kvs1 prefix.length<span class="o">=</span><span class="m">8</span>
 </code></pre></div>
-<p>The specified KVDB home directory is <code>/var/bulk/kvdb2</code>, and the KVS named
-<code>kvs1</code> is created there with a key prefix length of 8 bytes.</p>
-<h2 id="get-kvdb-information">Get KVDB Information</h2>
-<p>Get information about a KVDB.</p>
-<div class="highlight"><pre><span></span><code>hse -C /var/bulk/kvdb1 kvdb info
+<p>The KVS named <code>kvs1</code> is created in KVDB home directory <code>/var/bulk/kvdb2</code>.
+KVS <code>kvs1</code> is created with the specified key prefix length of 8 bytes.</p>
+<h2 id="get-kvdb-info">Get KVDB Info</h2>
+<p>Get general information about a KVDB.</p>
+<div class="highlight"><pre><span></span><code>hse kvdb info /var/bulk/kvdb1
 </code></pre></div>
-<p>This command will print out information about a KVDB, including its home
-directory, KVS list, and storage space metrics.</p>
+<p>This command displays general information for the KVDB
+home directory <code>/var/bulk/kvdb1</code>, including its KVS list.</p>
+<h2 id="get-kvdb-storage-info">Get KVDB Storage Info</h2>
+<p>Get information about the media classes configured for a KVDB.</p>
+<div class="highlight"><pre><span></span><code>hse storage info /var/bulk/kvdb1
+</code></pre></div>
+<p>This command displays media class information for the KVDB
+home directory <code>/var/bulk/kvdb1</code>, including storage space metrics.</p>
 <p>These storage space metrics include:</p>
 <ul>
 <li><strong>Total</strong> space in the file systems hosting the KVDB media classes</li>
@@ -779,6 +967,20 @@ directory, KVS list, and storage space metrics.</p>
 <li>Space <strong>used</strong> by the KVDB, which is always less than or equal to the
 allocated space</li>
 </ul>
+<h2 id="add-a-kvdb-media-class">Add a KVDB Media Class</h2>
+<p>Add a staging media class to an existing KVDB.</p>
+<div class="highlight"><pre><span></span><code>mkdir /var/fast/staging1
+hse storage add /var/bulk/kvdb1 storage.staging.path<span class="o">=</span>/var/fast/staging1
+</code></pre></div>
+<p>The staging media class directory <code>/var/fast/staging1</code> is configured for
+the KVDB home directory <code>/var/bulk/kvdb1</code>.</p>
+<p>This command can only be used to add a staging media class to a KVDB.
+The command will fail if either the KVDB already has a staging media class
+or if an application has the KVDB open.</p>
+<p>The next time an application opens the KVDB, the newly added
+staging media class will be used for KVS storage as determined by the
+<a href="../params/#kvs-runtime-parameters"><code>mclass.policy</code></a>
+parameter for each KVS.</p>
 <h2 id="compact-a-kvdb">Compact a KVDB</h2>
 <p>HSE implements the physical removal of logically deleted data via a background
 operation called compaction.  Though generally not required, compaction can
@@ -786,34 +988,30 @@ be initiated manually.
 Be aware that compaction can take <strong>several minutes</strong> or longer depending on
 the amount of data stored in the KVDB, among many other factors, so a
 timeout can be specified in seconds.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> /var/bulk/kvdb1
-hse kvdb compact --timeout <span class="m">120</span>
+<div class="highlight"><pre><span></span><code>hse kvdb compact --timeout <span class="m">120</span> /var/bulk/kvdb1
 </code></pre></div>
-<p>If an application has the KVDB open, the compaction may continue past the
+<p>The KVDB home directory is <code>/var/bulk/kvdb1</code>,
+and compaction is started with a timeout of 120 seconds.
+If an application has the KVDB open, the compaction may continue past the
 timeout value.  In this case, the status of the compaction can be queried.</p>
-<div class="highlight"><pre><span></span><code>hse kvdb compact --status
+<div class="highlight"><pre><span></span><code>hse kvdb compact --status /var/bulk/kvdb1
 </code></pre></div>
 <p>A compaction operation can also be canceled.</p>
-<div class="highlight"><pre><span></span><code>hse kvdb compact --cancel
+<div class="highlight"><pre><span></span><code>hse kvdb compact --cancel /var/bulk/kvdb1
 </code></pre></div>
 <h2 id="drop-a-kvs">Drop a KVS</h2>
 <p>Drop (delete) a KVS in a KVDB.</p>
-<div class="highlight"><pre><span></span><code>hse -C /var/bulk/kvdb2 kvs drop kvs1
+<div class="highlight"><pre><span></span><code>hse kvs drop /var/bulk/kvdb2 kvs1
 </code></pre></div>
-<p>The specified KVDB home directory is <code>/var/bulk/kvdb2</code>, and the KVS named
-<code>kvs1</code> is dropped from there.</p>
+<p>The KVS named <code>kvs1</code> is dropped from the KVDB home directory
+<code>/var/bulk/kvdb2</code>.</p>
 <h2 id="drop-a-kvdb">Drop a KVDB</h2>
 <p>Drop (delete) a KVDB and all of its KVSs.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> /var/bulk/kvdb3
-hse kvdb drop
+<div class="highlight"><pre><span></span><code>hse kvdb drop /var/bulk/kvdb1
+hse kvdb drop /var/bulk/kvdb2
 </code></pre></div>
-<p>The KVDB home defaults to the current working directory <code>/var/bulk/kvdb3</code>,
-and that KVDB is dropped.</p>
-<p>Next drop the remaining KVDBs from these examples specifying their
-home directories.</p>
-<div class="highlight"><pre><span></span><code>hse -C /var/bulk/kvdb2 kvdb drop
-hse -C /var/bulk/kvdb1 kvdb drop
-</code></pre></div>
+<p>The KVDBs with home directories <code>/var/bulk/kvdb1</code> and <code>/var/bulk/kvdb2</code>
+are dropped.</p>
                 
               
               
@@ -888,10 +1086,10 @@ hse -C /var/bulk/kvdb1 kvdb drop
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>

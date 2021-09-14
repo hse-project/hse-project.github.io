@@ -14,7 +14,7 @@
         <link rel="canonical" href="https://github.com/hse-project/2.x/res/benchmarking/">
       
       <link rel="icon" href="../../img/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -258,11 +258,15 @@
   
 
 
-  <li class="md-tabs__item">
-    <a href="../../dev/apis/" class="md-tabs__link">
-      API Reference
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/" class="md-tabs__link">
+        API Reference
+      </a>
+    </li>
+  
 
       
     </ul>
@@ -601,10 +605,169 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../dev/apis/" class="md-nav__link">
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
         API Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        Overview
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__ERROR__HANDLING/" class="md-nav__link">
+        HSE Return Codes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__TYPES/" class="md-nav__link">
+        Type Declarations, Shared Structures and Macros
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__INIT/" class="md-nav__link">
+        Initialization Routines
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__LIFECYCLE/" class="md-nav__link">
+        Primary Lifecycle Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__CRUD/" class="md-nav__link">
+        Create, Read, Update and Delete (CRUD) Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__TXN/" class="md-nav__link">
+        Transaction Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__CURSOR/" class="md-nav__link">
+        Cursor Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__DSTATE/" class="md-nav__link">
+        Data State Management Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__LIMITS/" class="md-nav__link">
+        Limits
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Pages/examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Files/" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -667,7 +830,7 @@
 <p>The system running the HSE application should meet the specified
 <a href="../../gs/sysreqs/">requirements</a>.  In particular:</p>
 <ul>
-<li>Configure huge pages as documented</li>
+<li>Configure huge pages and other virtual memory tuning parameters as documented</li>
 <li>Balance storage devices across NUMA nodes when applicable</li>
 </ul>
 <h2 id="configuration-parameters">Configuration Parameters</h2>
@@ -676,15 +839,15 @@ file, provide appropriate values for at least the
 following parameters.</p>
 <p>KVDB <a href="../../gs/params/#kvdb-parameters">parameters</a>:</p>
 <ul>
-<li><code>throttle_init_policy</code> with a value determined by <code>kvdb_profile</code></li>
-<li><code>dur_intvl_ms</code> with a value appropriate for the application</li>
-<li><code>dur_mclass=staging</code> if a
+<li><code>throttling.init_policy</code> with a value determined by <code>kvdb_profile</code></li>
+<li><code>durability.interval_ms</code> with a value appropriate for the application</li>
+<li><code>durability.mclass=staging</code> if a
 <a href="../../gs/storage/#media-classes">staging media class</a> is configured for the KVDB</li>
 </ul>
 <p>KVS <a href="../../gs/params/#kvs-parameters">parameters</a>:</p>
 <ul>
-<li><code>value_compression=lz4</code> for all KVSs, <em>unless</em> the application performs
-its own value compression</li>
+<li><code>compression.value.algorithm=lz4</code> for all KVSs, <em>unless</em> the application
+performs its own value compression or values are known to not compress</li>
 </ul>
                 
               
@@ -760,10 +923,10 @@ its own value compression</li>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>

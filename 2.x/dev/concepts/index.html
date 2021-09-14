@@ -14,7 +14,7 @@
         <link rel="canonical" href="https://github.com/hse-project/2.x/dev/concepts/">
       
       <link rel="icon" href="../../img/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -258,11 +258,15 @@
   
 
 
-  <li class="md-tabs__item">
-    <a href="../apis/" class="md-tabs__link">
-      API Reference
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/" class="md-tabs__link">
+        API Reference
+      </a>
+    </li>
+  
 
       
     </ul>
@@ -711,10 +715,169 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../apis/" class="md-nav__link">
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
         API Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        Overview
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__ERROR__HANDLING/" class="md-nav__link">
+        HSE Return Codes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__TYPES/" class="md-nav__link">
+        Type Declarations, Shared Structures and Macros
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__INIT/" class="md-nav__link">
+        Initialization Routines
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__LIFECYCLE/" class="md-nav__link">
+        Primary Lifecycle Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__CRUD/" class="md-nav__link">
+        Create, Read, Update and Delete (CRUD) Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__TXN/" class="md-nav__link">
+        Transaction Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__CURSOR/" class="md-nav__link">
+        Cursor Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__DSTATE/" class="md-nav__link">
+        Data State Management Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Modules/group__LIMITS/" class="md-nav__link">
+        Limits
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Pages/examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/Files/" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -927,7 +1090,7 @@ sorted lexicographically, <strong>and</strong></p>
 </li>
 <li>
 <p>creating a KVS to store these KV pairs with a key prefix length
-parameter (<a href="../../gs/params/#kvs-create-time-parameters"><code>pfx_len</code></a>)
+parameter (<a href="../../gs/params/#kvs-create-time-parameters"><code>prefix.length</code></a>)
 equal to the key prefix length of the segmented key.</p>
 </li>
 </ul>
@@ -939,13 +1102,13 @@ best performance is generally achieved by:</p>
 </li>
 <li>
 <p>creating a KVS to store these KV pairs with a key prefix length parameter
-(<a href="../../gs/params/#kvs-create-time-parameters"><code>pfx_len</code></a>) of zero (0).</p>
+(<a href="../../gs/params/#kvs-create-time-parameters"><code>prefix.length</code></a>) of zero (0).</p>
 </li>
 </ul>
 <p>Keep in mind that a KVDB may contain multiple KVSs.  So in the case
 where there are multiple collections of KV pairs, each collection
 can be stored in a different KVS with a key structure, and corresponding
-KVS <code>pfx_len</code> parameter, that is appropriate for that collection.
+KVS <code>prefix.length</code> parameter, that is appropriate for that collection.
 This is a powerful capability that enables HSE to optimize storage and
 access for all KV pairs in a KVDB without compromise.</p>
 <h3 id="operation-support">Operation Support</h3>
@@ -962,7 +1125,7 @@ key prefix length for that KVS.  Used this way, cursors provide efficient
 iteration over sets of related KV pairs.</p>
 <p>Prefix deletes are used to atomically remove all KV pairs in a KVS
 with keys whose initial bytes match a specified filter.
-The length of the filter must be <em>equal to</em> the <code>pfx_len</code> parameter
+The length of the filter must be <em>equal to</em> the <code>prefix.length</code> parameter
 of the KVS.
 The primary use for prefix deletes is with a KVS storing segmented keys.
 This is a powerful capability that enables sets of related KV pairs to
@@ -1021,7 +1184,7 @@ complete keys may be represented as tuples using segment names.
 For example, <code>(sysId)</code>, <code>(sysID, ts)</code>, or <code>(sysID, ts, typeID)</code>.</p>
 <p>We define the key prefix to be <code>(sysID)</code>, yielding a key prefix length
 of 8 bytes.  Hence, we would create a KVS for storing these KV pairs
-with a key prefix length parameter (<code>pfx_len</code>) of 8 bytes.</p>
+with a key prefix length parameter (<code>prefix.length</code>) of 8 bytes.</p>
 <p>With this data model and KVS configuration, a cursor with the filter
 <code>(sysID)</code> can be used to efficiently iterate over the log records
 associated with the system <code>sysID</code>.  Furthermore, the cursor can be
@@ -1081,7 +1244,7 @@ and values which are individual log records.</p>
 </table>
 <p>We define the key prefix to be <code>(sysID, epochID)</code>, yielding a key prefix
 length of 16 bytes.  Hence, we would create a KVS for storing these KV pairs
-with a key prefix length parameter (<code>pfx_len</code>) of 16 bytes.</p>
+with a key prefix length parameter (<code>prefix.length</code>) of 16 bytes.</p>
 <p>With this data model and KVS configuration, a cursor with the filter
 <code>(sysID, epochID)</code> can be used to efficiently iterate over the log records
 associated with the system <code>sysID</code> within the epoch <code>epochID</code>.
@@ -1141,7 +1304,7 @@ and values which are individual log records.</p>
 </table>
 <p>We define the key prefix to be <code>(epochID)</code>, yielding a key prefix
 length of 8 bytes.  Hence we would create a KVS for storing these KV pairs
-with a key prefix length parameter (<code>pfx_len</code>) of 8 bytes.</p>
+with a key prefix length parameter (<code>prefix.length</code>) of 8 bytes.</p>
 <p>With this data model and KVS configuration, a cursor with the filter
 <code>(epochID)</code> can be used to efficiently iterate over the log records for
 all systems within the epoch <code>epochID</code> in timestamp order.
@@ -1186,7 +1349,7 @@ syntax, segment names, and segment lengths adopted in prior examples.</p>
 <th align="left">Key Type</th>
 <th align="left">Key</th>
 <th align="left">Key Prefix</th>
-<th align="left">KVS pfx_len</th>
+<th align="left">KVS prefix.length</th>
 <th align="left">Value</th>
 </tr>
 </thead>
@@ -1213,11 +1376,11 @@ syntax, segment names, and segment lengths adopted in prior examples.</p>
 uniquely identified by the segmented key <code>(epochID, ts, sysID, typeID)</code> with
 key prefix <code>(epochID)</code>.
 Hence we would create KVS <code>logRec</code> with a key prefix length parameter
-(<code>pfx_len</code>) of 8 bytes.</p>
+(<code>prefix.length</code>) of 8 bytes.</p>
 <p>The KVS <code>sysIdx</code> is an index for the log records stored in KVS <code>logRec</code>,
 with a key pefix of <code>(sysID, epochID)</code>.
 Hence we would create KVS <code>sysIdx</code> with a key prefix length parameter
-(<code>pfx_len</code>) of 16 bytes.</p>
+(<code>prefix.length</code>) of 16 bytes.</p>
 <p>Using KVS <code>logRec</code>, a cursor with the filter <code>(epochID)</code> can be used to
 efficiently iterate over the log records for all systems within the
 epoch <code>epochID</code> in timestamp order.
@@ -1273,7 +1436,7 @@ as a unit of work that is atomic, consistent, isolated, and durable
 (<a href="https://en.wikipedia.org/wiki/ACID">ACID</a>).
 A transaction may operate on KV pairs in one or more KVSs in a KVDB.</p>
 <p>When a KVS is opened, the
-<a href="../../gs/params/#kvs-runtime-parameters"><code>transactions_enable</code></a>
+<a href="../../gs/params/#kvs-runtime-parameters"><code>transactions.enabled</code></a>
 parameter specifies whether or not that KVS
 supports transactions.  This is not a persistent setting in that
 the KVS may be closed and later reopened in a different mode.
@@ -1375,14 +1538,15 @@ to stable storage, either synchronously or asynchronously.
 All cached updates are flushed, whether from non-transaction operations
 or committed transactions.
 In the normal case where journaling is enabled
-(<a href="../../gs/params/#kvdb-runtime-parameters"><code>dur_enable</code></a>), cached updates are
+(<a href="../../gs/params/#kvdb-runtime-parameters"><code>durability.enabled</code></a>),
+cached updates are
 written to the journal on stable storage.  Otherwise, cached updates are
 written directly to a KVDB <a href="../../gs/storage/#media-classes">media class</a>
 on stable storage.</p>
 <p>HSE also supports automatically flushing cached KVDB updates to the
 journal on stable storage.  The frequency for automatically flushing
 cached updates is controlled by the durability interval
-(<a href="../../gs/params/#kvdb-runtime-parameters"><code>dur_intvl_ms</code></a>) configured
+(<a href="../../gs/params/#kvdb-runtime-parameters"><code>durability.interval_ms</code></a>) configured
 for a KVDB.</p>
 <h2 id="multithreading">Multithreading</h2>
 <p>HSE supports highly-concurrent multithreaded applications, and most functions
@@ -1466,10 +1630,10 @@ capacity is not freed immediately.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>
