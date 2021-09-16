@@ -41,7 +41,7 @@ is natively integrated with Material for MkDocs.
 
 All of these tools are Python packages and can be installed, along with all
 dependencies, as follows. This also installs any dependency required to build
-hse to capture api doxygen files.
+hse to capture API doxygen files.
 
 ```shell
 poetry install
@@ -60,9 +60,9 @@ directories in this repo.
 
 ## Building HSE API doxygen documents
 
-Building the Api documentaion from the header files of hse is enabled using doxygen.
-Doxygen xml is converted using [doxybook2](https://github.com/matusnovak/doxybook2),
-into markdown files. Generate the Api docs as follows.
+Building the API documentaion from the header files of hse is enabled using doxygen.
+Doxygen XML is converted using [doxybook2](https://github.com/matusnovak/doxybook2),
+into markdown files. Generate the API docs as follows.
 
 ```shell
 ./generate-api.sh

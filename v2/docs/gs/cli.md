@@ -93,6 +93,20 @@ These storage space metrics include:
 allocated space
 
 
+## Profile KVDB Storage
+
+Profile the capacity media class storage for a KVDB to determine the
+appropriate [`throttling.init_policy`](params.md#initial-throttle-setting)
+parameter value for that KVDB.
+
+```shell
+hse storage profile /var/bulk
+```
+
+Here we specify `/var/bulk` as the storage path to profile because it is the
+file system storing the capacity media class for all KVDBs in these examples.
+
+
 ## Add a KVDB Media Class
 
 Add a staging media class to an existing KVDB.
