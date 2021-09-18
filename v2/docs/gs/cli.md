@@ -30,13 +30,18 @@ Next, create a KVDB specifying
 for both the required capacity and optional staging media class directories.
 
 ```shell
-mkdir /var/bulk/kvdb2 && mkdir /var/bulk/capacity2 && mkdir /var/fast/staging2
-hse kvdb create /var/bulk/kvdb2 storage.capacity.path=/var/bulk/capacity2 storage.staging.path=/var/fast/staging2
+mkdir /var/bulk/kvdb2
+mkdir /var/bulk/capacity2
+mkdir /var/fast/staging2
+hse kvdb create /var/bulk/kvdb2 storage.capacity.path=../capacity2 storage.staging.path=/var/fast/staging2
 ```
 
 The KVDB home directory is `/var/bulk/kvdb2`, the capacity media class
 directory is `/var/bulk/capacity2`, and the staging media class directory
 is `/var/fast/staging2`.
+Media class directory paths can be relative to the KVDB home directory
+or absolute, as in this example for the capacity and staging media
+class directories, respectively.
 
 
 ## Create a KVS

@@ -42,10 +42,32 @@ components
 * [`hse-project.github.io`](https://github.com/hse-project/hse-project.github.io)
 contains the source for this documentation
 
-Instructions for building and installing repo contents are in their
-local `README.md` files (or `README_HSE.md` for forked repos).
+Instructions for building, installing, and contributing to repo contents are
+in their local `README.md` and `CONTRIBUTING.md` files.
+Forked repos, such as `hse-mongo` and `hse-ycsb`, contain this information
+in `README.md` and `CONTRIBUTING.md` files in the `hse` directory within
+those repos.  To make these easy to locate, there are symlinks to them named
+`README_HSE.md` and `CONTRIBUTING_HSE.md` in the repo root directory.
 
-After building and installing the `hse` repo you can develop HSE
-applications by including the
+
+## Using HSE
+
+After building and installing the `hse` repo, you can develop HSE
+applications in C/C++ by including the
 [`hse.h`](https://github.com/hse-project/hse/blob/master/include/hse/hse.h)
 header file and linking with `libhse-2`.
+Information on using an alternate HSE language binding is included
+in its associated repo.
+
+
+## Releases
+
+See the release section of each HSE project repo for specific
+releases and associated release notes.
+For example, `hse` releases can be found
+[here](https://github.com/hse-project/hse/releases).
+
+Releases of the HSE library and associated language bindings use
+[semantic versioning](https://semver.org).
+Releases of forked repos use a versioning scheme that is documented
+in their associated `README.md`.

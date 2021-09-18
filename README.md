@@ -26,27 +26,8 @@ and `CONTRIBUTING_HSE.md` in the repo root directory.
 
 > For HSE 1.x releases, information on building and installing for all
 > repos is in the HSE project documentation rather than per-repo
-> `README.md` or `README_HSE.md` files.
+> `README.md` files.
 > HSE 1.x and its project documentation are no longer actively maintained.
-
-
-## Site Generation Tools
-
-The HSE project documentation is based on
-[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/),
-which is a theme for the [MkDocs](https://www.mkdocs.org/)
-static site generator.
-For versioning we use [Mike](https://github.com/jimporter/mike) which
-is natively integrated with Material for MkDocs.
-
-All of these tools are Python packages and can be installed, along with all
-dependencies, as follows. This also installs any dependency required to build
-hse to capture API doxygen files.
-
-```shell
-poetry install
-poetry shell
-```
 
 
 ## Version Directories
@@ -58,26 +39,56 @@ directories in this repo.
 * `v1` contains the HSE 1.x project documentation
 
 
-## Building HSE API doxygen documents
+## Site Generation Tools
 
-Building the API documentaion from the header files of hse is enabled using doxygen.
-Doxygen XML is converted using [doxybook2](https://github.com/matusnovak/doxybook2),
-into markdown files. Generate the API docs as follows.
+The HSE project documentation is based on
+[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/),
+which is a theme for the [MkDocs](https://www.mkdocs.org/)
+static site generator.
+For versioning we use [Mike](https://github.com/jimporter/mike) which
+is natively integrated with Material for MkDocs.
+These tools are Python packages.
 
-```shell
-./generate-api.sh
-```
+The HSE documentation includes an API reference that is built from
+header files in the `hse` repo.  This process uses
+[doxygen](https://www.doxygen.nl/index.html) to generate XML that is converted
+to markdown using [doxybook2](https://github.com/matusnovak/doxybook2).
+
+To avoid having to install `doxygen`, `doxybook2`, and related dependencies,
+proxy API files are provided.  These enable the HSE project documentation
+to be edited and tested, including links to the API reference pages, without
+having to build the actual API documentation.
+
 
 ## Building and Viewing
 
-Build the latest version of the complete documentation as follows.
+We use [Poetry](https://python-poetry.org/) to manage Python dependencies.
+Install Poetry as per the [docs](https://python-poetry.org/docs/#installation).
+
+Build the latest version of the complete HSE documentation as follows.
+In this example we are using the proxy API files.
+
+Clone the repo and install the site generation tools.
 
 ```shell
 git clone https://github.com/hse-project/hse-project.github.io.git
 cd hse-project.github.io
 poetry install
+```
+
+Copy the proxy API files to the required location.
+We do this because `.gitignore` includes `v2/docs/api` so as to ignore
+these files when built from the `hse` repo headers.
+
+```shell
+mkdir v2/docs/api
+cp -r v2/api-proxy/* v2/docs/api
+```
+
+Generate the site documentation.
+
+```shell
 poetry shell
-./generate-api.sh
 mike deploy -F v1/mkdocs.yml 1.x
 mike deploy -F v2/mkdocs.yml 2.x
 mike set-default -F v2/mkdocs.yml 2.x
@@ -93,8 +104,8 @@ mike serve -F v2/mkdocs.yml
 Point a web browser at the URL output from the above command.
 
 > Note: To build the released (tagged) version of the project documentation,
-> execute `git checkout v2deploy` before building with `mike` in the
-> steps above.
+> execute `git checkout v2deploy` before installing the proxy API files
+> and building with `mike` in the steps above.
 
 
 ## Editing
@@ -115,6 +126,19 @@ Point a web browser at the URL output from the above command.
 
 Keep in mind that only the version of the documentation you are editing
 will appear in the browser and that there will not be a version selector.
+
+
+## Building the HSE API Reference
+
+You can build the actual API reference documentation, rather than using the
+proxy API files, as follows.
+
+```shell
+./generate-api.sh
+```
+
+This script will clone the `hse` repo, use `doxygen` and `doxybook2` to
+generate the API markdown files, and install them in `v2/docs/api`.
 
 
 ## Deploying to GitHub

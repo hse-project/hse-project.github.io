@@ -454,7 +454,7 @@ for a KVDB.
 
 HSE supports highly-concurrent multithreaded applications, and most functions
 in the HSE API are thread-safe.  However, there are a few exceptions, as
-documented in the [API reference](apis.md).
+documented in the [API reference](../api/index.md).
 
 
 ## Delete Semantics
