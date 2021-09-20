@@ -26,6 +26,7 @@ distributions.  We have run HSE on the following.
 
 * Red Hat&reg; Enterprise Linux&reg; 8 (RHEL 8)
 * Ubuntu&reg; 18.04
+* Fedora&reg; 34
 
 
 ## File System
