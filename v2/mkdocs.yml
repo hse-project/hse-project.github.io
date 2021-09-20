@@ -81,7 +81,6 @@ nav:
   - Resources:
     - Community: res/community.md
     - Benchmarking Tips: res/benchmarking.md
-    - Releases: res/relnotes.md
   - API Reference:
     - Overview: api/index.md
     - HSE Return Codes: api/Modules/group__ERROR__HANDLING.md

@@ -6,6 +6,12 @@ which apply when an application creates a KVDB or KVS,
 or *runtime* parameters, which apply each time an application
 initializes the HSE library or opens a KVDB or KVS.
 
+In addition to the detailed descriptions below, you can find parameter
+usage examples in the [API reference](../api/Pages/examples.md),
+[CLI reference](cli.md), and HSE
+[sample programs](https://github.com/hse-project/hse/tree/master/samples).
+
+
 ## Global Parameters
 
 Global parameters are runtime parameters that apply at the application level.
@@ -114,18 +120,18 @@ or internal indexing structures to become unbalanced for a period of time.
 For example, this may occur if `throttling.init_policy` is set to `light`
 with relatively slow KVDB storage.
 
-The `kvdb_profile` tool is provided to determine an appropriate
+The CLI provides a command to determine the appropriate
 `throttling.init_policy` setting for your KVDB storage.
 You can run it as follows.
 
 ```shell
-kvdb_profile /path/to/capacity/storage/for/the/kvdb
+hse storage profile /path/to/capacity/storage/for/the/kvdb
 ```
 
-The path specified in `kvdb_profile` should be a directory in the file
+The path specified in `hse storage profile` should be a directory in the file
 system hosting the capacity media class for the KVDB of interest.
-Use the output of `kvdb_profile` to specify the `throttling.init_policy` value
-for that KVDB.
+Use the output of `hse storage profile` to specify the `throttling.init_policy`
+value for that KVDB.
 
 ## KVS Parameters
 
