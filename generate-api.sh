@@ -2,7 +2,7 @@
 
 set -e
 
-hse_branch="master"
+hse_branch="v2.0"
 doc_ver="v2"
 
 doxybook_bin="doxybin"
