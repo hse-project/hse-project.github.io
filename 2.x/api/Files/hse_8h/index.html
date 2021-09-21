@@ -529,18 +529,6 @@
   
 
           
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../res/relnotes/" class="md-nav__link">
-        Releases
-      </a>
-    </li>
-  
-
-          
         </ul>
       </nav>
     </li>
@@ -986,13 +974,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#function-hse_kvdb_storage_info_get" class="md-nav__link">
-    function hse_kvdb_storage_info_get
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#function-hse_kvdb_storage_add" class="md-nav__link">
     function hse_kvdb_storage_add
   </a>
@@ -1131,7 +1112,7 @@
 </tr>
 <tr>
 <td>HSE_EXPORT <a href="/2.x/api/Modules/group__ERROR__HANDLING/#typedef-hse_err_t">hse_err_t</a></td>
-<td><strong><a href="/2.x/api/Modules/group__CRUD/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete</a></strong>(struct <a href="/2.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs, unsigned int flags, struct <a href="/2.x/api/Structs/structhse__kvdb__txn/">hse_kvdb_txn</a> * txn, const void * filter, size_t filter_len, size_t * kvs_pfx_len)<br>Delete all key-value pairs matching the key prefix from a KVS storing segmented keys.</td>
+<td><strong><a href="/2.x/api/Modules/group__CRUD/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete</a></strong>(struct <a href="/2.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs, unsigned int flags, struct <a href="/2.x/api/Structs/structhse__kvdb__txn/">hse_kvdb_txn</a> * txn, const void * pfx, size_t pfx_len)<br>Delete all key-value pairs matching the key prefix from a KVS storing segmented keys.</td>
 </tr>
 <tr>
 <td>HSE_EXPORT struct <a href="/2.x/api/Structs/structhse__kvdb__txn/">hse_kvdb_txn</a> *</td>
@@ -1184,10 +1165,6 @@
 <tr>
 <td>HSE_EXPORT <a href="/2.x/api/Modules/group__ERROR__HANDLING/#typedef-hse_err_t">hse_err_t</a></td>
 <td><strong><a href="/2.x/api/Modules/group__DSTATE/#function-hse_kvdb_sync">hse_kvdb_sync</a></strong>(struct <a href="/2.x/api/Structs/structhse__kvdb/">hse_kvdb</a> * kvdb, unsigned int flags)<br>Sync data in all of the referenced KVDB's KVSs to stable media and return.</td>
-</tr>
-<tr>
-<td>HSE_EXPORT <a href="/2.x/api/Modules/group__ERROR__HANDLING/#typedef-hse_err_t">hse_err_t</a></td>
-<td><strong><a href="/2.x/api/Files/hse_8h/#function-hse_kvdb_storage_info_get">hse_kvdb_storage_info_get</a></strong>(struct <a href="/2.x/api/Structs/structhse__kvdb/">hse_kvdb</a> * kvdb, struct <a href="/2.x/api/Structs/structhse__kvdb__storage__info/">hse_kvdb_storage_info</a> * info)</td>
 </tr>
 <tr>
 <td>HSE_EXPORT <a href="/2.x/api/Modules/group__ERROR__HANDLING/#typedef-hse_err_t">hse_err_t</a></td>
@@ -1521,9 +1498,8 @@
 <span class="w">    </span><span class="k">struct</span> <span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="k">struct</span> <span class="nc">hse_kvdb_txn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">txn</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">filter</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">filter_len</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs_pfx_len</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pfx</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">pfx_len</span><span class="w"></span>
 <span class="p">)</span><span class="w"></span>
 </code></pre></div>
 <p>Delete all key-value pairs matching the key prefix from a KVS storing segmented keys. </p>
@@ -1532,9 +1508,8 @@
 <li><strong>kvs</strong> KVS handle from <a href="/2.x/api/Modules/group__LIFECYCLE/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open()</a>. </li>
 <li><strong>flags</strong> Flags for operation specialization. </li>
 <li><strong>txn</strong> Transaction context (optional). </li>
-<li><strong>filter</strong> Filter for keys to delete. </li>
-<li><strong>filter_len</strong> Filter length. </li>
-<li><strong>kvs_pfx_len</strong> If specified, this will be set to the KVS's prefix length.</li>
+<li><strong>pfx</strong> Prefix of keys to delete. </li>
+<li><strong>pfx_len</strong> Prefix length.</li>
 </ul>
 <p><strong>Return</strong>: Error status </p>
 <p>This interface is used to delete an entire range of segmented keys. To do this the caller passes a filter with a length equal to the KVS's key prefix length. It is not an error if no keys exist matching the filter. If there is a filtered iteration in progress, then that iteration can fail if <a href="/2.x/api/Modules/group__CRUD/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete()</a> is called with a filter matching the iteration. This function is thread safe.</p>
@@ -1795,20 +1770,6 @@
 <ul>
 <li>HSE_KVDB_SYNC_ASYNC - Return immediately after initiating operation instead of waiting for completion.</li>
 </ul>
-<h3 id="function-hse_kvdb_storage_info_get">function hse_kvdb_storage_info_get</h3>
-<div class="highlight"><pre><span></span><code><span class="n">HSE_EXPORT</span><span class="w"> </span><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvdb_storage_info_get</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="k">struct</span> <span class="nc">hse_kvdb</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvdb</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">struct</span> <span class="nc">hse_kvdb_storage_info</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">info</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
-</code></pre></div>
-<p><strong>Parameters</strong>: </p>
-<ul>
-<li><strong>kvdb</strong> KVDB handle from <a href="/2.x/api/Modules/group__LIFECYCLE/#function-hse_kvdb_open">hse_kvdb_open()</a></li>
-<li><strong>info</strong> KVDB storage config and stats </li>
-</ul>
-<p><strong>Return</strong>: The function's error status </p>
-<p>Get storage config and stats</p>
-<p>Obtain the space usage statistics for a specified kvdb. This function is thread safe.</p>
 <h3 id="function-hse_kvdb_storage_add">function hse_kvdb_storage_add</h3>
 <div class="highlight"><pre><span></span><code><span class="n">HSE_EXPORT</span><span class="w"> </span><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvdb_storage_add</span><span class="p">(</span><span class="w"></span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvdb_home</span><span class="p">,</span><span class="w"></span>
@@ -1973,9 +1934,8 @@
 <span class="w">    </span><span class="k">struct</span> <span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w">     </span><span class="n">kvs</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w">         </span><span class="n">flags</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="k">struct</span> <span class="nc">hse_kvdb_txn</span><span class="w"> </span><span class="o">*</span><span class="n">txn</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w">         </span><span class="n">filter</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="kt">size_t</span><span class="w">               </span><span class="n">filter_len</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="w">             </span><span class="n">kvs_pfx_len</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w">         </span><span class="n">pfx</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w">               </span><span class="n">pfx_len</span><span class="p">);</span><span class="w"></span>
 
 <span class="cp">#ifdef HSE_EXPERIMENTAL</span>
 <span class="n">HSE_EXPORT_EXPERIMENTAL</span><span class="w"> </span><span class="n">hse_err_t</span><span class="w"></span>
@@ -2081,10 +2041,10 @@
 
 <span class="n">HSE_EXPORT_EXPERIMENTAL</span><span class="w"> </span><span class="n">hse_err_t</span><span class="w"></span>
 <span class="n">hse_kvdb_compact_status_get</span><span class="p">(</span><span class="k">struct</span> <span class="nc">hse_kvdb</span><span class="w"> </span><span class="o">*</span><span class="n">kvdb</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span> <span class="nc">hse_kvdb_compact_status</span><span class="w"> </span><span class="o">*</span><span class="n">status</span><span class="p">);</span><span class="w"></span>
-<span class="cp">#endif</span>
 
-<span class="n">HSE_EXPORT</span><span class="w"> </span><span class="n">hse_err_t</span><span class="w"></span>
+<span class="n">HSE_EXPORT_EXPERIMENTAL</span><span class="w"> </span><span class="n">hse_err_t</span><span class="w"></span>
 <span class="n">hse_kvdb_storage_info_get</span><span class="p">(</span><span class="k">struct</span> <span class="nc">hse_kvdb</span><span class="w"> </span><span class="o">*</span><span class="n">kvdb</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span> <span class="nc">hse_kvdb_storage_info</span><span class="w"> </span><span class="o">*</span><span class="n">info</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#endif</span>
 
 <span class="n">HSE_EXPORT</span><span class="w"> </span><span class="n">hse_err_t</span><span class="w"></span>
 <span class="n">hse_kvdb_storage_add</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">kvdb_home</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">paramc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="n">paramv</span><span class="p">);</span><span class="w"></span>
@@ -2111,7 +2071,7 @@
 <span class="cp">#endif</span>
 </code></pre></div>
 <hr />
-<p>Updated on 14 September 2021 at 14:39:52 CDT</p>
+<p>Updated on 21 September 2021 at 11:59:01 CDT</p>
                 
                   
                 

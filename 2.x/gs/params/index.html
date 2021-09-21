@@ -701,18 +701,6 @@
   
 
           
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../res/relnotes/" class="md-nav__link">
-        Releases
-      </a>
-    </li>
-  
-
-          
         </ul>
       </nav>
     </li>
@@ -1072,6 +1060,10 @@ below.  These are classified as either <em>create-time</em> parameters,
 which apply when an application creates a KVDB or KVS,
 or <em>runtime</em> parameters, which apply each time an application
 initializes the HSE library or opens a KVDB or KVS.</p>
+<p>In addition to the detailed descriptions below, you can find parameter
+usage examples in the <a href="../../api/Pages/examples/">API reference</a>,
+<a href="../cli/">CLI reference</a>, and HSE
+<a href="https://github.com/hse-project/hse/tree/master/samples">sample programs</a>.</p>
 <h2 id="global-parameters">Global Parameters</h2>
 <p>Global parameters are runtime parameters that apply at the application level.
 These parameters may be specified in the <code>hse_init()</code> API call or in the
@@ -1233,15 +1225,15 @@ storage can cause the durability interval (<code>durability.interval_ms</code>) 
 or internal indexing structures to become unbalanced for a period of time.
 For example, this may occur if <code>throttling.init_policy</code> is set to <code>light</code>
 with relatively slow KVDB storage.</p>
-<p>The <code>kvdb_profile</code> tool is provided to determine an appropriate
+<p>The CLI provides a command to determine the appropriate
 <code>throttling.init_policy</code> setting for your KVDB storage.
 You can run it as follows.</p>
-<div class="highlight"><pre><span></span><code>kvdb_profile /path/to/capacity/storage/for/the/kvdb
+<div class="highlight"><pre><span></span><code>hse storage profile /path/to/capacity/storage/for/the/kvdb
 </code></pre></div>
-<p>The path specified in <code>kvdb_profile</code> should be a directory in the file
+<p>The path specified in <code>hse storage profile</code> should be a directory in the file
 system hosting the capacity media class for the KVDB of interest.
-Use the output of <code>kvdb_profile</code> to specify the <code>throttling.init_policy</code> value
-for that KVDB.</p>
+Use the output of <code>hse storage profile</code> to specify the <code>throttling.init_policy</code>
+value for that KVDB.</p>
 <h2 id="kvs-parameters">KVS Parameters</h2>
 <p>KVS parameters apply when a KVS is created or opened.</p>
 <h3 id="kvs-create-time-parameters">KVS Create-time Parameters</h3>

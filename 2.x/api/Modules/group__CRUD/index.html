@@ -531,18 +531,6 @@
   
 
           
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../res/relnotes/" class="md-nav__link">
-        Releases
-      </a>
-    </li>
-  
-
-          
         </ul>
       </nav>
     </li>
@@ -916,7 +904,7 @@
 </tr>
 <tr>
 <td>HSE_EXPORT <a href="/2.x/api/Modules/group__ERROR__HANDLING/#typedef-hse_err_t">hse_err_t</a></td>
-<td><strong><a href="/2.x/api/Modules/group__CRUD/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete</a></strong>(struct <a href="/2.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs, unsigned int flags, struct <a href="/2.x/api/Structs/structhse__kvdb__txn/">hse_kvdb_txn</a> * txn, const void * filter, size_t filter_len, size_t * kvs_pfx_len)<br>Delete all key-value pairs matching the key prefix from a KVS storing segmented keys.</td>
+<td><strong><a href="/2.x/api/Modules/group__CRUD/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete</a></strong>(struct <a href="/2.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs, unsigned int flags, struct <a href="/2.x/api/Structs/structhse__kvdb__txn/">hse_kvdb_txn</a> * txn, const void * pfx, size_t pfx_len)<br>Delete all key-value pairs matching the key prefix from a KVS storing segmented keys.</td>
 </tr>
 </tbody>
 </table>
@@ -1013,9 +1001,8 @@
 <span class="w">    </span><span class="k">struct</span> <span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="k">struct</span> <span class="nc">hse_kvdb_txn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">txn</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">filter</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">filter_len</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs_pfx_len</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pfx</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">pfx_len</span><span class="w"></span>
 <span class="p">)</span><span class="w"></span>
 </code></pre></div>
 <p>Delete all key-value pairs matching the key prefix from a KVS storing segmented keys. </p>
@@ -1024,9 +1011,8 @@
 <li><strong>kvs</strong> KVS handle from <a href="/2.x/api/Modules/group__LIFECYCLE/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open()</a>. </li>
 <li><strong>flags</strong> Flags for operation specialization. </li>
 <li><strong>txn</strong> Transaction context (optional). </li>
-<li><strong>filter</strong> Filter for keys to delete. </li>
-<li><strong>filter_len</strong> Filter length. </li>
-<li><strong>kvs_pfx_len</strong> If specified, this will be set to the KVS's prefix length.</li>
+<li><strong>pfx</strong> Prefix of keys to delete. </li>
+<li><strong>pfx_len</strong> Prefix length.</li>
 </ul>
 <p><strong>Return</strong>: Error status </p>
 <p>This interface is used to delete an entire range of segmented keys. To do this the caller passes a filter with a length equal to the KVS's key prefix length. It is not an error if no keys exist matching the filter. If there is a filtered iteration in progress, then that iteration can fail if <a href="/2.x/api/Modules/group__CRUD/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete()</a> is called with a filter matching the iteration. This function is thread safe.</p>
@@ -1036,7 +1022,7 @@
 <li>0 - reserved for future use</li>
 </ul>
 <hr />
-<p>Updated on 14 September 2021 at 14:39:52 CDT</p>
+<p>Updated on 21 September 2021 at 11:59:00 CDT</p>
                 
                   
                 

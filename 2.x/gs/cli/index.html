@@ -455,6 +455,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#profile-kvdb-storage" class="md-nav__link">
+    Profile KVDB Storage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#add-a-kvdb-media-class" class="md-nav__link">
     Add a KVDB Media Class
   </a>
@@ -617,18 +624,6 @@
     <li class="md-nav__item">
       <a href="../../res/benchmarking/" class="md-nav__link">
         Benchmarking Tips
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../res/relnotes/" class="md-nav__link">
-        Releases
       </a>
     </li>
   
@@ -868,6 +863,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#profile-kvdb-storage" class="md-nav__link">
+    Profile KVDB Storage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#add-a-kvdb-media-class" class="md-nav__link">
     Add a KVDB Media Class
   </a>
@@ -929,12 +931,17 @@ capacity media class directory defaults to <code>/var/bulk/kvdb1/capacity</code>
 <p>Next, create a KVDB specifying
 <a href="../params/#kvdb-parameters">parameters</a>
 for both the required capacity and optional staging media class directories.</p>
-<div class="highlight"><pre><span></span><code>mkdir /var/bulk/kvdb2 <span class="o">&amp;&amp;</span> mkdir /var/bulk/capacity2 <span class="o">&amp;&amp;</span> mkdir /var/fast/staging2
-hse kvdb create /var/bulk/kvdb2 storage.capacity.path<span class="o">=</span>/var/bulk/capacity2 storage.staging.path<span class="o">=</span>/var/fast/staging2
+<div class="highlight"><pre><span></span><code>mkdir /var/bulk/kvdb2
+mkdir /var/bulk/capacity2
+mkdir /var/fast/staging2
+hse kvdb create /var/bulk/kvdb2 storage.capacity.path<span class="o">=</span>../capacity2 storage.staging.path<span class="o">=</span>/var/fast/staging2
 </code></pre></div>
 <p>The KVDB home directory is <code>/var/bulk/kvdb2</code>, the capacity media class
 directory is <code>/var/bulk/capacity2</code>, and the staging media class directory
-is <code>/var/fast/staging2</code>.</p>
+is <code>/var/fast/staging2</code>.
+Media class directory paths can be relative to the KVDB home directory
+or absolute, as in this example for the capacity and staging media
+class directories, respectively.</p>
 <h2 id="create-a-kvs">Create a KVS</h2>
 <p>Create a KVS in a KVDB taking all the defaults.</p>
 <div class="highlight"><pre><span></span><code>hse kvs create /var/bulk/kvdb1 kvs1
@@ -967,6 +974,14 @@ home directory <code>/var/bulk/kvdb1</code>, including storage space metrics.</p
 <li>Space <strong>used</strong> by the KVDB, which is always less than or equal to the
 allocated space</li>
 </ul>
+<h2 id="profile-kvdb-storage">Profile KVDB Storage</h2>
+<p>Profile the capacity media class storage for a KVDB to determine the
+appropriate <a href="../params/#initial-throttle-setting"><code>throttling.init_policy</code></a>
+parameter value for that KVDB.</p>
+<div class="highlight"><pre><span></span><code>hse storage profile /var/bulk
+</code></pre></div>
+<p>Here we specify <code>/var/bulk</code> as the storage path to profile because it is the
+file system storing the capacity media class for all KVDBs in these examples.</p>
 <h2 id="add-a-kvdb-media-class">Add a KVDB Media Class</h2>
 <p>Add a staging media class to an existing KVDB.</p>
 <div class="highlight"><pre><span></span><code>mkdir /var/fast/staging1
