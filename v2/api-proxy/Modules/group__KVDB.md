@@ -1,4 +1,4 @@
-# Data State Management Functions
+# Key-Value Database (KVDB)
 
 !!! info
     This is a placeholder file that is overwritten by the `generate-api.sh`

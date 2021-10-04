@@ -83,14 +83,12 @@ nav:
     - Benchmarking Tips: res/benchmarking.md
   - API Reference:
     - Overview: api/index.md
-    - HSE Return Codes: api/Modules/group__ERROR__HANDLING.md
-    - Type Declarations, Shared Structures and Macros:  api/Modules/group__TYPES.md
-    - Initialization Routines: api/Modules/group__INIT.md
-    - Primary Lifecycle Functions: api/Modules/group__LIFECYCLE.md
-    - Create, Read, Update and Delete (CRUD) Functions: api/Modules/group__CRUD.md
-    - Transaction Functions: api/Modules/group__TXN.md
-    - Cursor Functions: api/Modules/group__CURSOR.md
-    - Data State Management Functions: api/Modules/group__DSTATE.md
-    - Limits: api/Modules/group__LIMITS.md
+    - Version Information: api/Modules/group__VERSION.md
+    - Errors: api/Modules/group__ERRORS.md
+    - Subsystem:  api/Modules/group__SUBSYS.md
+    - Key-Value Database (KVDB): api/Modules/group__KVDB.md
+    - Key-Value Store (KVS): api/Modules/group__KVS.md
+    - Transactions: api/Modules/group__TRANSACTIONS.md
+    - Cursors: api/Modules/group__CURSORS.md
     - Examples: api/Pages/examples.md
     - Files: api/Files/index.md
