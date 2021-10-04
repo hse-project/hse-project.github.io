@@ -1,4 +1,4 @@
-# Cursor Functions
+# Cursors
 
 !!! info
     This is a placeholder file that is overwritten by the `generate-api.sh`

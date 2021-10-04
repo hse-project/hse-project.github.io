@@ -1,4 +1,4 @@
-# Limits
+# Key-Value Store (KVS)
 
 !!! info
     This is a placeholder file that is overwritten by the `generate-api.sh`
