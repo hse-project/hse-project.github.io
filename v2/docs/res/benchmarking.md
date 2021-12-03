@@ -20,12 +20,15 @@ following parameters.
 
 KVDB [parameters](../gs/params.md#kvdb-parameters):
 
-* `throttling.init_policy` with a value determined by `hse storage profile`
-* `durability.interval_ms` with a value appropriate for the application
-* `durability.mclass=staging` if a
-[staging media class](../gs/storage.md#media-classes) is configured for the KVDB
+* `throttling.init_policy` as determined by `hse storage profile`
+in the common case where the KVDB is configured with a capacity media class
+* `durability.interval_ms` as appropriate for the application
+* `durability.mclass` representing the fastest tier of storage configured
+for the KVDB
 
 KVS [parameters](../gs/params.md#kvs-parameters):
 
+* `mclass.policy` maximizing the use of faster tiers of storage for all
+KVSs when multiple media classes are configured for a KVDB
 * `compression.value.algorithm=lz4` for all KVSs, *unless* the application
 performs its own value compression or values are known to not compress

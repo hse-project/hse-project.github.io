@@ -8,7 +8,7 @@ application, directly or via alternate language bindings.
 ## Overview
 
 HSE provides functions to create and access a key-value database (KVDB).
-A KVDB comprises one or more named key-value stores (KVS), each of which
+A KVDB comprises one or more named key-value stores (KVSs), each of which
 is an independent collection of key-value pairs.  A KVS is analogous to
 a table in a relational database.
 The HSE data model enables each KVS in a KVDB to be optimized for how the
