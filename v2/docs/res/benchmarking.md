@@ -20,7 +20,8 @@ following parameters.
 
 KVDB [parameters](../gs/params.md#kvdb-parameters):
 
-* `throttling.init_policy` as determined by `hse storage profile`
+* `throttling.init_policy` as determined by
+[`hse storage profile`](../gs/cli.md#profile-kvdb-storage)
 in the common case where the KVDB is configured with a capacity media class
 * `durability.interval_ms` as appropriate for the application
 * `durability.mclass` representing the fastest tier of storage configured

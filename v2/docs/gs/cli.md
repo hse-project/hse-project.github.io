@@ -145,10 +145,12 @@ staging media class will be used for KVS storage as determined by the
 [`mclass.policy`](params.md#kvs-runtime-parameters)
 parameter for each KVS.
 
-!!!warning
-    This command will fail if attempting to create an
-    [invalid storage configuration](storage.md#valid-configurations), or
-    if an application has the KVDB open.
+!!! info
+    This command will fail if an application has the KVDB open, or if
+    adding the media class would result in an invalid
+    [storage configuration](storage.md#valid-configurations), for example
+    attempting to add a staging media class to a KVDB configured with only
+    a pmem media class.
     
 
 ## Compact a KVDB

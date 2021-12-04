@@ -53,8 +53,9 @@ performance and to reduce wear for the capacity media class in terms of
 total bytes written (TBW).
 For example, a KVDB might be configured with:
 
-* a capacity directory in a file system created on cost-optimized QLC SSDs
-* a staging directory in a file system created on performance-optimized TLC SSDs
+* a capacity media class in a file system created on cost-optimized QLC SSDs
+* a staging media class in a file system created on performance-optimized
+TLC SSDs
 
 In this example, the [media class usage policy](params.md#media-class-usage)
 (`mclass.policy`) for KVSs in the KVDB could be set to `staging_max_capacity`
@@ -62,7 +63,7 @@ to pin all key data to the staging media class and tier all value data from
 the staging to the capacity media class.
 In addition, the [durability setting](params.md#durability-settings)
 for the KVDB controlling journal placement (`durability.mclass`) would be set
-to store the journal in the staging media class.
+to `staging` to store journal files in the staging media class.
 
 This KVDB configuration would increase overall performance, versus using
 the capacity media class only, while also greatly reducing the TBW to the
@@ -75,9 +76,8 @@ A KVDB home directory may also contain an optional
 [`kvdb.conf`](params.md#kvdbconf-json-file) file with
 user-defined KVDB and KVS parameter settings.
 
-When a KVDB is created with a home directory in a file system
-on block storage, by default a capacity media class directory is
-created within the home directory.
+When a KVDB is created with a home directory in a file system on block
+storage, by default a capacity media class is created within the home directory.
 Similarly, when a KVDB is created with a home directory in a DAX-enabled
 file system on persistent memory, by default a pmem media class is created
 within the home directory.

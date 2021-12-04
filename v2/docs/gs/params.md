@@ -105,11 +105,11 @@ The parameter `durability.mclass` specifies the media class for storing journal
 files.  In general, best performance is achieved by storing the journal files
 on the fastest media class configured for a KVDB.
 
-If `durability.mclass` is set to `auto`, HSE currently selects (applies)
-`pmem`, or `staging`, or `capacity`, in that order, depending on which
-is the highest media class configured for the KVDB.
-The specific `durability.mclass` that HSE selects when `auto` is specified
-may change in future releases.
+If `durability.mclass` is set to `auto`, HSE selects (applies) the value
+`pmem`, or `staging`, or `capacity`, in that order, depending on the media
+classes configured for the KVDB.
+The media class value that HSE selects when `auto` is specified may change
+in future releases.
 
 See the discussion on HSE
 [durability controls](../dev/concepts.md#durability-controls)
@@ -131,15 +131,16 @@ The `throttling.init_policy` parameter can be used to achieve the maximum
 ingest rate in far less time.  It specifies a relative initial throttling
 value of `light` (minimum), `medium`, or `heavy` (maximum) throttling.
 
-If `throttling.init_policy` is set to `auto`, HSE currently selects (applies)
-`heavy` if the KVDB is configured with a capacity media class, and `light`
-if the KVDB is configured with only a pmem media class.
-The specific `throttling.init_policy` that HSE selects when `auto` is
-specified may change in future releases.
+If `throttling.init_policy` is set to `auto`, HSE selects (applies) the
+value `heavy` if the KVDB is configured with a capacity media class,
+or `light` if the KVDB is configured with only a pmem media class.
+The initial throttling value that HSE selects when `auto` is specified may
+change in future releases.
 
 Setting the `throttling.init_policy` parameter improperly for the underlying
-storage can cause the durability interval (`durability.interval_ms`) to be violated
-or internal indexing structures to become unbalanced for a period of time.
+storage can cause the durability interval (`durability.interval_ms`) to be
+violated or internal indexing structures to become unbalanced for a period
+of time.
 For example, this may occur if `throttling.init_policy` is set to `light`
 with relatively slow KVDB storage.
 
@@ -234,7 +235,7 @@ the capacity media class
 value data from pmem to capacity
 
 Below is a visualization of these `mclass.policy` settings in terms of
-which media classes may contain key and value data.
+the media classes that may contain key and value data for a KVS.
 
 | mclass.policy | pmem | staging | capacity |
 | :-- | :-- | :-- | :-- |
@@ -245,17 +246,12 @@ which media classes may contain key and value data.
 | `staging_min_capacity` | | keys, values | keys, values |
 | `pmem_max_capacity` | keys, values | | values |
 
-!!! info
-    Specifying an `mclass.policy` that references a media class
-    not configured for the KVDB will result in an error from the
-    `hse_kvdb_kvs_open()` API call.
-
-If `mclass.policy` is set to `auto`, HSE currently selects (applies)
-the following values based on the media classes configured for the KVDB.
-The specific `mclass.policy` that HSE selects when `auto` is specified
+If `mclass.policy` is set to `auto`, HSE selects (applies) the value for
+the media class usage policy per the table below.
+The usage policy value that HSE selects when `auto` is specified
 may change in future releases.
 
-| Media classes configured | mclass.policy selected |
+| Media classes configured for the KVDB | mclass.policy value selected |
 | --: | :-- |
 | capacity | `capacity_only` |
 | staging, capacity | `staging_max_capacity` |
