@@ -6,28 +6,32 @@ tasks.  The CLI is itself an HSE application.
 
 Below are several usage examples which assume the following.
 
-* `/var/bulk` is a file system on storage suitable for a capacity media class
-* `/var/fast` is a file system on storage suitable for a staging media class
+* `/var/bulk` is a file system created on block storage suitable for a
+capacity media class
+* `/var/fast` is a file system created on block storage suitable for a
+staging media class
+* `/var/pmem` is a DAX-enabled file system created on persistent memory
 
 See the discussion on [KVDB storage](storage.md) for more details on
-media classes.
+media classes and home directories.
 
 
 ## Create a KVDB
 
-Create a KVDB taking all the defaults.
+Create a KVDB with its home directory in `/var/bulk` taking all the defaults.
 
 ```shell
 mkdir /var/bulk/kvdb1
 hse kvdb create /var/bulk/kvdb1
 ```
 
-The KVDB home directory is `/var/bulk/kvdb1`, and the required
-capacity media class directory defaults to `/var/bulk/kvdb1/capacity`.
+The KVDB home directory is `/var/bulk/kvdb1` and, because it resides on block
+storage, by default a capacity media class is created at
+`/var/bulk/kvdb1/capacity`.
 
-Next, create a KVDB specifying
-[parameters](params.md#kvdb-parameters)
-for both the required capacity and optional staging media class directories.
+Next, create a KVDB with its home directory in `/var/bulk` specifying
+[parameters](params.md#kvdb-create-time-parameters)
+for both capacity and staging media class directories.
 
 ```shell
 mkdir /var/bulk/kvdb2
@@ -36,12 +40,24 @@ mkdir /var/fast/staging2
 hse kvdb create /var/bulk/kvdb2 storage.capacity.path=../capacity2 storage.staging.path=/var/fast/staging2
 ```
 
-The KVDB home directory is `/var/bulk/kvdb2`, the capacity media class
-directory is `/var/bulk/capacity2`, and the staging media class directory
-is `/var/fast/staging2`.
+The KVDB home directory is `/var/bulk/kvdb2` and the capacity and staging
+media classes are created at `/var/bulk/capacity2` and `/var/fast/staging2`,
+respectively.
 Media class directory paths can be relative to the KVDB home directory
 or absolute, as in this example for the capacity and staging media
 class directories, respectively.
+
+Finally, create a KVDB with its home directory in `/var/pmem` taking all
+the defaults.
+
+```shell
+mkdir /var/pmem/kvdb3
+hse kvdb create /var/pmem/kvdb3
+```
+
+The KVDB home directory is `/var/pmem/kvdb3` and, because it resides on
+persistent memory, by default a pmem media class is created at
+`/var/pmem/kvdb3/pmem`.
 
 
 ## Create a KVS
@@ -100,7 +116,8 @@ allocated space
 
 ## Profile KVDB Storage
 
-Profile the capacity media class storage for a KVDB to determine the
+For a KVDB configured with a capacity media class, profile the capacity storage
+to determine the
 appropriate [`throttling.init_policy`](params.md#initial-throttle-setting)
 parameter value for that KVDB.
 
@@ -114,7 +131,7 @@ file system storing the capacity media class for all KVDBs in these examples.
 
 ## Add a KVDB Media Class
 
-Add a staging media class to an existing KVDB.
+Add a media class to an existing KVDB.
 
 ```shell
 mkdir /var/fast/staging1
@@ -123,16 +140,18 @@ hse storage add /var/bulk/kvdb1 storage.staging.path=/var/fast/staging1
 
 The staging media class directory `/var/fast/staging1` is configured for
 the KVDB home directory `/var/bulk/kvdb1`.
-
-This command can only be used to add a staging media class to a KVDB.
-The command will fail if either the KVDB already has a staging media class
-or if an application has the KVDB open.
-
 The next time an application opens the KVDB, the newly added
 staging media class will be used for KVS storage as determined by the
 [`mclass.policy`](params.md#kvs-runtime-parameters)
 parameter for each KVS.
 
+!!! info
+    This command will fail if an application has the KVDB open, or if
+    adding the media class would result in an invalid
+    [storage configuration](storage.md#valid-configurations), for example
+    attempting to add a staging media class to a KVDB configured with only
+    a pmem media class.
+    
 
 ## Compact a KVDB
 
@@ -182,7 +201,8 @@ Drop (delete) a KVDB and all of its KVSs.
 ```shell
 hse kvdb drop /var/bulk/kvdb1
 hse kvdb drop /var/bulk/kvdb2
+hse kvdb drop /var/pmem/kvdb3
 ```
 
-The KVDBs with home directories `/var/bulk/kvdb1` and `/var/bulk/kvdb2`
-are dropped.
+The KVDBs with home directories `/var/bulk/kvdb1`, `/var/bulk/kvdb2`, and
+`/var/pmem/kvdb3` are dropped.

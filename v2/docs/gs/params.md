@@ -51,13 +51,19 @@ The following KVDB create-time parameters are part of the stable API.
 | :-- | :-- | :-- |
 | `storage.capacity.path` | `<KVDB home>/capacity` | Capacity media class directory |
 | `storage.staging.path` | `null` | Staging media class directory |
+| `storage.pmem.path` | `<KVDB home>/pmem` | Pmem media class directory |
+
+!!! info
+    Defaults for `storage.capacity.path` and `storage.pmem.path` are applied
+    only when applicable based on the
+    KVDB [home directory storage](storage.md#home-directory).
 
 
 ### KVDB Runtime Parameters
 
 KVDB runtime parameters may be specified in the `hse_kvdb_open()` API call
 or in the optional [`kvdb.conf`](#kvdbconf-json-file) JSON file in the
-[KVDB home](storage.md#kvdb-and-runtime-homes) directory,
+[KVDB home](storage.md#home-directory) directory,
 which is also specified in `hse_kvdb_open()`.
 
 For `hse_kvdb_open()` API calls, specify KVDB runtime parameters in the form
@@ -70,8 +76,13 @@ The following KVDB runtime parameters are part of the stable API.
 | `read_only` | `false` | Access mode (false==read/write, true==read-only) |
 | `durability.enabled` | `true` | Journaling mode (false==disabled, true==enabled) |
 | `durability.interval_ms` | `100` | Max time data is cached (in milliseconds) when durability.enabled==true |
-| `durability.mclass` | `capacity` | Media class for journal (capacity, staging) |
-| `throttling.init_policy` | `default` | Ingest throttle at startup (light, medium, default) |
+| `durability.mclass` | `auto` | Media class for journal (capacity, staging, pmem, auto) |
+| `throttling.init_policy` | `auto` | Ingest throttle at startup (light, medium, heavy, auto) |
+
+!!! info
+    The `throttling.init_policy` may also be set to `default`, which is an
+    alias for `heavy`.  This is to maintain backward compatibility with
+    earlier releases of HSE.
 
 
 #### Durability Settings
@@ -94,6 +105,12 @@ The parameter `durability.mclass` specifies the media class for storing journal
 files.  In general, best performance is achieved by storing the journal files
 on the fastest media class configured for a KVDB.
 
+If `durability.mclass` is set to `auto`, HSE selects (applies) the value
+`pmem`, or `staging`, or `capacity`, in that order, depending on the media
+classes configured for the KVDB.
+The media class value that HSE selects when `auto` is specified may change
+in future releases.
+
 See the discussion on HSE
 [durability controls](../dev/concepts.md#durability-controls)
 for additional details.
@@ -107,21 +124,28 @@ the KVDB until it reaches the maximum sustainable value for the underlying
 storage.  This ramp-up process can take up to **200 seconds**.
 
 For benchmarks, this initial throttling can *greatly* distort results.
-In general operation, this initial throttling may impact the time
+In normal use, this initial throttling may impact the time
 before a service is fully operational.
 
 The `throttling.init_policy` parameter can be used to achieve the maximum
 ingest rate in far less time.  It specifies a relative initial throttling
-value of `light` (minimum), `medium`, or `default` (maximum) throttling.
+value of `light` (minimum), `medium`, or `heavy` (maximum) throttling.
+
+If `throttling.init_policy` is set to `auto`, HSE selects (applies) the
+value `heavy` if the KVDB is configured with a capacity media class,
+or `light` if the KVDB is configured with only a pmem media class.
+The initial throttling value that HSE selects when `auto` is specified may
+change in future releases.
 
 Setting the `throttling.init_policy` parameter improperly for the underlying
-storage can cause the durability interval (`durability.interval_ms`) to be violated
-or internal indexing structures to become unbalanced for a period of time.
+storage can cause the durability interval (`durability.interval_ms`) to be
+violated or internal indexing structures to become unbalanced for a period
+of time.
 For example, this may occur if `throttling.init_policy` is set to `light`
 with relatively slow KVDB storage.
 
-The CLI provides a command to determine the appropriate
-`throttling.init_policy` setting for your KVDB storage.
+For a KVDB configured with a capacity media class, the CLI provides a command
+to determine the appropriate `throttling.init_policy` setting.
 You can run it as follows.
 
 ```shell
@@ -132,6 +156,10 @@ The path specified in `hse storage profile` should be a directory in the file
 system hosting the capacity media class for the KVDB of interest.
 Use the output of `hse storage profile` to specify the `throttling.init_policy`
 value for that KVDB.
+
+For a KVDB configured with only a pmem media class, specify a
+`throttling.init_policy` value of `light` or `auto`.
+
 
 ## KVS Parameters
 
@@ -150,7 +178,7 @@ The following KVS create-time parameters are part of the stable API.
 | :-- | :-- | :-- |
 | `prefix.length` | `0` | Key prefix length (bytes) |
 
-!!! tip
+!!! info
     The KVS name `default` is reserved and may not be used in
     `hse_kvdb_kvs_create()` API calls or with the CLI.
 
@@ -158,7 +186,7 @@ The following KVS create-time parameters are part of the stable API.
 
 KVS runtime parameters may be specified in the `hse_kvdb_kvs_open()` API call
 or in the optional [`kvdb.conf`](#kvdbconf-json-file) configuration file in the
-[KVDB home](storage.md#kvdb-and-runtime-homes) directory,
+[KVDB home](storage.md#home-directory) directory,
 which is also specified in `hse_kvdb_open()`.
 
 For `hse_kvdb_kvs_open()` API calls, specify KVS runtime parameters in the
@@ -169,7 +197,7 @@ The following KVS runtime parameters are part of the stable API.
 | Parameter | Default | Description |
 | :-- | :-- | :-- |
 | `transactions.enabled` | `false` | Transaction mode (false==disabled, true==enabled) |
-| `mclass.policy` | `capacity_only` | See discussion below for values |
+| `mclass.policy` | `auto` | Media class usage (see discussion below for value strings) |
 | `compression.value.algorithm` | `none` | Value compression method (none, lz4) |
 | `compression.value.min_length` | `12` | Value length above which compression is attempted (bytes) |
 
@@ -186,27 +214,50 @@ for additional details.
 #### Media Class Usage
 
 The media class usage policy for a KVS defines how the key-value data in
-that KVS is stored and managed in a KVDB configured with a staging media class.
+that KVS is stored and managed in a KVDB.
+Key and value data in a KVS can either be *pinned* to a particular media class,
+or *tiered* from one media class to another as it ages.
+This behavior is determined by the `mclass.policy` setting for the KVS.
 
-Key-value data in a KVS can either be *pinned* to a particular media class,
-or *tiered* from the staging media class to the capacity media class as it
-ages, as determined by the `mclass.policy` value for the KVS:
+The following `mclass.policy` settings pin key and value data:
 
-* `capacity_only` pins all key-value data to the capacity media class
-* `staging_only` pins all key-value data to the staging media class
-* `staging_min_capacity` tiers all key-value data
+* `capacity_only` pins all key and value data to the capacity media class
+* `staging_only` pins all key and value data to the staging media class
+* `pmem_only` pins all key and value data to the pmem media class
+
+The following `mclass.policy` settings tier key and value data:
+
 * `staging_max_capacity` pins all key data to the staging media class and
-tiers all value data
+tiers all value data from staging to capacity
+* `staging_min_capacity` tiers all key and value data from the staging to
+the capacity media class
+* `pmem_max_capacity` pins all key data to the pmem media class and tiers all
+value data from pmem to capacity
 
-Of the two tiering options, `staging_max_capacity` will generally yield the
-highest throughput, lowest latency, and least write-amplification in the
-capacity media class.  The trade-off is more storage required in the
-staging media class.
+Below is a visualization of these `mclass.policy` settings in terms of
+the media classes that may contain key and value data for a KVS.
 
-!!! info
-    If no staging media class is present, and an `mclass.policy` value other
-    than `capacity_only` is specified, a warning is logged and `capacity_only`
-    is applied.
+| mclass.policy | pmem | staging | capacity |
+| :-- | :-- | :-- | :-- |
+| `capacity_only` | | | keys, values |
+| `staging_only` | | keys, values | |
+| `pmem_only` | keys, values | | |
+| `staging_max_capacity` | | keys, values | values |
+| `staging_min_capacity` | | keys, values | keys, values |
+| `pmem_max_capacity` | keys, values | | values |
+
+If `mclass.policy` is set to `auto`, HSE selects (applies) the value for
+the media class usage policy per the table below.
+The usage policy value that HSE selects when `auto` is specified
+may change in future releases.
+
+| Media classes configured for the KVDB | mclass.policy value selected |
+| --: | :-- |
+| capacity | `capacity_only` |
+| staging, capacity | `staging_max_capacity` |
+| pmem, staging, capacity | `pmem_max_capacity` |
+| pmem, capacity | `pmem_max_capacity` |
+| pmem | `pmem_only` |
 
 
 ## Configuration Files
@@ -247,10 +298,10 @@ legal values, and defaults.
   "durability": {
     "enabled": boolean,
     "interval": integer,
-    "mclass": "capacity | staging"
+    "mclass": "capacity | staging | pmem | auto"
   },
   "throttling": {
-    "init_policy": "light | medium | default"
+    "init_policy": "light | medium | heavy | auto"
   },
   "kvs": {
     "<kvs name>": {
