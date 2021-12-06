@@ -32,11 +32,10 @@ fi
 
 rm -rf hse-clone
 git clone https://github.com/hse-project/hse.git hse-clone
-poetry install
 pushd hse-clone
     git checkout ${hse_branch}
-    poetry run meson build -Ddocs=true
-    poetry run meson compile -C build doxygen
+    meson build -Ddocs=true
+    meson compile -C build doxygen
 popd
 rm -rf ${doc_ver}/docs/api
 mkdir ${doc_ver}/docs/api

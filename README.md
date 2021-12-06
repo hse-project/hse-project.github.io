@@ -62,9 +62,6 @@ having to build the actual API documentation.
 
 ## Building and Viewing
 
-We use [Poetry](https://python-poetry.org/) to manage Python dependencies.
-Install Poetry as per the [docs](https://python-poetry.org/docs/#installation).
-
 Build the latest version of the complete HSE documentation as follows.
 In this example we are using the proxy API files.
 
@@ -73,7 +70,9 @@ Clone the repo and install the site generation tools.
 ```shell
 git clone https://github.com/hse-project/hse-project.github.io.git
 cd hse-project.github.io
-poetry install
+python3 -m venv venv
+source venv/bin/activate
+python3 -m pip install -r requirements.txt
 ```
 
 Copy the proxy API files to the required location.
@@ -88,7 +87,6 @@ cp -r v2/api-proxy/* v2/docs/api
 Generate the site documentation.
 
 ```shell
-poetry shell
 mike deploy -F v1/mkdocs.yml 1.x
 mike deploy -F v2/mkdocs.yml 2.x
 mike set-default -F v2/mkdocs.yml 2.x
