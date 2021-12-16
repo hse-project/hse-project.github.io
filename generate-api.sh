@@ -2,7 +2,7 @@
 
 set -e
 
-hse_branch="v2.0"
+hse_branch="v2.1"
 doc_ver="v2"
 
 doxybook_bin="doxybin"
@@ -34,7 +34,7 @@ rm -rf hse-clone
 git clone https://github.com/hse-project/hse.git hse-clone
 pushd hse-clone
     git checkout ${hse_branch}
-    meson build -Ddocs=true
+    meson build -Ddocs=enabled
     meson compile -C build doxygen
 popd
 rm -rf ${doc_ver}/docs/api
