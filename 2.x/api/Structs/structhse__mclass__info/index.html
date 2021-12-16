@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="https://github.com/hse-project/2.x/api/Structs/structhse__kvdb/">
+        <link rel="canonical" href="https://github.com/hse-project/2.x/api/Structs/structhse__mclass__info/">
       
       <link rel="icon" href="../../../img/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
     
     
       
-        <title>hse_kvdb - HSE Project</title>
+        <title>hse_mclass_info - HSE Project</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hse_kvdb" class="md-skip">
+        <a href="#hse_mclass_info" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              hse_kvdb
+              hse_mclass_info
             
           </span>
         </div>
@@ -767,6 +767,62 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#public-attributes" class="md-nav__link">
+    Public Attributes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-attributes-documentation" class="md-nav__link">
+    Public Attributes Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Attributes Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variable-mi_allocated_bytes" class="md-nav__link">
+    variable mi_allocated_bytes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-mi_used_bytes" class="md-nav__link">
+    variable mi_used_bytes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-mi_reserved" class="md-nav__link">
+    variable mi_reserved
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-mi_path" class="md-nav__link">
+    variable mi_path
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -778,10 +834,54 @@
               
                 
 
-<h1 id="hse_kvdb">hse_kvdb</h1>
+<h1 id="hse_mclass_info">hse_mclass_info</h1>
 <p><strong>Module:</strong> <strong><a href="/2.x/api/Modules/group__KVDB/">Key-Value Database (KVDB)</a></strong></p>
-<p>Opaque structure, a pointer to which is a handle to an HSE key-value database (KVDB). </p>
+<p>Media class information. </p>
 <p><code>#include &lt;types.h&gt;</code></p>
+<h2 id="public-attributes">Public Attributes</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint64_t</td>
+<td><strong><a href="/2.x/api/Structs/structhse__mclass__info/#variable-mi_allocated_bytes">mi_allocated_bytes</a></strong></td>
+</tr>
+<tr>
+<td>uint64_t</td>
+<td><strong><a href="/2.x/api/Structs/structhse__mclass__info/#variable-mi_used_bytes">mi_used_bytes</a></strong></td>
+</tr>
+<tr>
+<td>uint64_t</td>
+<td><strong><a href="/2.x/api/Structs/structhse__mclass__info/#variable-mi_reserved">mi_reserved</a></strong></td>
+</tr>
+<tr>
+<td>char</td>
+<td><strong><a href="/2.x/api/Structs/structhse__mclass__info/#variable-mi_path">mi_path</a></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
+<h3 id="variable-mi_allocated_bytes">variable mi_allocated_bytes</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint64_t</span><span class="w"> </span><span class="n">mi_allocated_bytes</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Allocated storage space for a media class. </p>
+<h3 id="variable-mi_used_bytes">variable mi_used_bytes</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint64_t</span><span class="w"> </span><span class="n">mi_used_bytes</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Used storage space for a media class. </p>
+<h3 id="variable-mi_reserved">variable mi_reserved</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint64_t</span><span class="w"> </span><span class="n">mi_reserved</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Reserved space for future expansion. </p>
+<h3 id="variable-mi_path">variable mi_path</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="n">mi_path</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Path to the media class. </p>
 <hr />
 <p>Updated on 16 December 2021 at 14:04:27 CST</p>
 
