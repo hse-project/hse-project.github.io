@@ -1,0 +1,9 @@
+[wrap-file]
+directory = hse-r2.1.1
+source_url = https://github.com/hse-project/hse/archive/refs/tags/r2.1.1.tar.gz
+source_filename = r2.1.1.tar.gz
+source_hash = 7cdc29214f4a4bde49be2fc6f4f6b910c29d4df5a931f975cb05c657414b2768
+
+[provide]
+dependency_names = hse-2
+program_names = hse2

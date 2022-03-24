@@ -1,6 +1,9 @@
 *~
+/*build*/
+/subprojects/*
+/*venv*/
+/.cache/clangd/
 site/
-v2/docs/api
-doxybin/
-doxybook2*.zip
-/*venv*
+!/subprojects/packagefiles/
+!/subprojects/doxybook2.wrap
+!/subprojects/hse-2.wrap

@@ -1,6 +1,6 @@
 # HSE project information
 site_name: HSE Project
-site_url: https://github.com/hse-project
+site_url: https://hse-project.github.io/2.x
 site_description: >-
   Fast embeddable key-value store designed for SSDs and persistent memory
 
@@ -13,7 +13,7 @@ edit_uri: ""
 
 
 # Documentation copyright notice
-copyright: Copyright &copy; 2020 - 2021 Micron Technology, Inc.
+copyright: Copyright &copy; 2020 - 2022 Micron Technology, Inc.
 
 
 # HSE colors set in docs/stylesheets/extra.css
@@ -86,13 +86,13 @@ nav:
     - Community: res/community.md
     - Benchmarking Tips: res/benchmarking.md
   - API Reference:
-    - Overview: api/index.md
-    - Version Information: api/Modules/group__VERSION.md
-    - Errors: api/Modules/group__ERRORS.md
-    - Subsystem:  api/Modules/group__SUBSYS.md
-    - Key-Value Database (KVDB): api/Modules/group__KVDB.md
-    - Key-Value Store (KVS): api/Modules/group__KVS.md
-    - Transactions: api/Modules/group__TRANSACTIONS.md
-    - Cursors: api/Modules/group__CURSORS.md
-    - Examples: api/Pages/examples.md
-    - Files: api/Files/index.md
+    - Overview: api/c/index.md
+    - Version Information: api/c/Modules/group__VERSION.md
+    - Errors: api/c/Modules/group__ERRORS.md
+    - Subsystem:  api/c/Modules/group__SUBSYS.md
+    - Key-Value Database (KVDB): api/c/Modules/group__KVDB.md
+    - Key-Value Store (KVS): api/c/Modules/group__KVS.md
+    - Transactions: api/c/Modules/group__TRANSACTIONS.md
+    - Cursors: api/c/Modules/group__CURSORS.md
+    - Examples: api/c/Pages/examples.md
+    - Files: api/c/Files/index.md

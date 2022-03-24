@@ -1,0 +1,2 @@
+option('apis', type: 'array', choices: ['all', 'none', 'auto', 'c'], value: ['auto'],
+    description: 'Build API docs')
