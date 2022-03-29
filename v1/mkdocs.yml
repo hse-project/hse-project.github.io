@@ -1,6 +1,6 @@
 # HSE project information
 site_name: HSE Project
-site_url: https://github.com/hse-project
+site_url: https://hse-project.github.io/1.x
 site_description: >-
   Fast embeddable key-value store designed for SSDs and persistent memory
 
@@ -91,4 +91,3 @@ nav:
     - Resources: help/resources.md
     - Benchmarking Tips: help/benchmarking.md
     - Release Notes: help/relnotes.md
-

@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Initialize
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential ninja-build
+          sudo python3 -m pip install meson
+
+      - name: Setup
+        run: |
+          meson builddir --fatal-meson-warnings -Dwerror=true
+
+      - name: Build
+        run: |
+          ninja -C builddir
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: ${{ github.job }}
+          path: builddir/meson-logs/

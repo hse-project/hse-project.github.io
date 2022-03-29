@@ -1,0 +1,11 @@
+[wrap-file]
+directory = inja-3.3.0
+
+source_url = https://github.com/pantor/inja/archive/refs/tags/v3.3.0.tar.gz
+source_filename = v3.3.0.tar.gz
+source_hash = e628d994762dcdaa9a97f63a9b8b73d9af51af0ffa5acea6bdbba0aceaf8ee25
+
+patch_directory = inja
+
+[provide]
+inja = inja_dep
