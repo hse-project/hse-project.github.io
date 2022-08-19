@@ -22,7 +22,7 @@ jobs:
 
       - name: Setup
         run: |
-          meson builddir --fatal-meson-warnings -Dwerror=true
+          meson setup builddir --fatal-meson-warnings -Dwerror=true
 
       - name: Build
         run: |
