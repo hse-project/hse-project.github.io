@@ -85,18 +85,16 @@ Cursors are used to iterate over keys in a KVS in forward or reverse
 lexicographic order.  Cursors support an optional *filter*, which is a byte
 string limiting a cursor's view to only those keys whose initial bytes match
 the filter.
-The primary use for cursors is with a KVS storing segmented keys,
-where the length of the specified filter is *equal to or greater than* the
-key prefix length for that KVS.  Used this way, cursors provide efficient
-iteration over sets of related KV pairs.
+For a KVS storing segmented keys, it is common to use a cursor with a filter
+whose length is *equal to or greater than* the key prefix length of the KVS
+to iterate over sets of related KV pairs.
 
 Prefix deletes are used to atomically remove all KV pairs in a KVS
 with keys whose initial bytes match a specified filter.
 The length of the filter must be *equal to* the `prefix.length` parameter
 of the KVS.
-The primary use for prefix deletes is with a KVS storing segmented keys.
-This is a powerful capability that enables sets of related KV pairs to
-be deleted from a KVS in a single operation without cursor iteration.
+For a KVS storing segmented keys, prefix deletes can be used to remove
+sets of related KV pairs in a single operation.
 
 Transactions are used to execute a sequence of KV operations atomically.
 Transactions support operating on KV pairs in one or more KVSs in a KVDB.
@@ -228,24 +226,10 @@ It should be clear that there is some loss of efficiency, versus the
 prior data model, to obtain all the log records associated with a specified
 `sysID` over an arbitrary time span, because records associated with systems
 other than `sysID` will be in the cursor's view and must be skipped.
-However, this is still a reasonably efficient query because it meets the
-criteria that the length of the cursor filter be *equal to or greater than* the
-key prefix length to achieve maximum performance.
-
-With this revised data model, pruning log records remains efficient because
+However, pruning log records remains efficient because
 we can still use a single prefix delete to remove all KV pairs with a
 specified key prefix of `(epochID)`.  In this case, the records for all
 systems in the epoch are pruned together.
-
-!!! tip
-    This particular data model provides the opportunity to point out another
-    [best practice](bp.md) that can result in **significantly**
-    greater performance.
-    For a KVS storing segmented keys, it is important that the key
-    prefix specified in put operations takes on a modest number of
-    different values over a consecutive sequence of puts.  For this example,
-    that means choosing an epoch that is relatively short versus what
-    one might select with the prior data model.
 
 Finally, we will examine an index-based data model for log storage.
 
@@ -379,18 +363,13 @@ Committed transactions are made durable via one of several
 
 Cursors are used to iterate over keys in a KVS snapshot.  A cursor
 can iterate over keys in forward or reverse lexicographic order.
-
 Cursors support an optional *filter*, which is a byte
 string limiting a cursor's view to only those keys in a KVS snapshot
 whose initial bytes match the filter.
 
 !!! tip
-    Cursors deliver **significantly** greater performance when used with a
-    KVS storing segmented keys, **and** where a filter is specified with a
-    length *equal to or greater than* the key prefix length for that KVS.
-    To the degree practical, you should structure applications to avoid
-    using cursors outside of this use case.  Furthermore, you should always use
-    get operations instead of cursor seeks when iteration is not required.
+    For best performance, you should always use get operations instead of
+    cursor seeks when iteration is not required.
 
 A cursor can be used to seek to the first key in the cursor's view that
 is lexicographically *equal to or greater than* a specified key.

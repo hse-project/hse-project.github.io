@@ -14,11 +14,6 @@ storing these KV pairs with a
 [`prefix.length`](../gs/params.md#kvs-create-time-parameters)
 equal to the key prefix length.
 
-Choose a key prefix for segmented keys that will take on a modest
-number of different values over a consecutive sequence of puts.
-For example, in a sequence of one million put operations, ideally
-no more than 5% of the keys will have the same key prefix value.
-
 Use a different KVS for each collection of KV pairs requiring its own
 segmented key structure.
 
@@ -35,12 +30,8 @@ KV pairs in a KVS, and always create the KVS storing these KV pairs with a
 Always use get operations when iteration is not required.  Gets are
 **significantly** faster than cursor seeks.
 
-Where iteration is required, use cursors with a KVS storing segmented keys,
-and with a filter whose length is *equal to or greater than* the key prefix
-length for that KVS.  Otherwise, cursor performance can be greatly reduced.
-
 Use non-transaction cursors for most applications.  Transaction cursors
-exist to support some specialized use cases.
+exist to support some specialized use cases and incur additional overhead.
 
 
 ## Transactions
