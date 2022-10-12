@@ -103,7 +103,7 @@ to optimize access, without giving up the ability to operate on any of
 those KV pairs within the context of a single transaction.
 
 
-### Modeling Examples
+## Modeling Examples
 
 Below we present examples of applying the HSE data model to the real-world
 problem of storing and analyzing machine-generated data.
@@ -115,7 +115,7 @@ We examine several ways this data might be modeled, depending on
 how it will be accessed and managed.
 
 
-#### Simple Log Storage
+### Simple Log Storage
 
 We start with a simple data model for storing log data in a KVDB.  This
 model uses a single KVS with segmented keys as defined below,
@@ -154,7 +154,7 @@ Next we will look at enhancing this data model to make log record maintenance
 more efficient.
 
 
-#### Per-System Epoch-based Log Storage
+### Per-System Epoch-based Log Storage
 
 We extend the simple data model from above to include an *epoch identifier*
 representing a well-defined time interval.
@@ -193,7 +193,7 @@ delete to remove all KV pairs with a specified key prefix of `(sysID, epochID)`.
 Next we examine a variation on this per-system epoch-based data model.
 
 
-#### All-Systems Epoch-based Log Storage
+### All-Systems Epoch-based Log Storage
 
 The previous data model makes it easy and efficient to iterate over the
 log records associated with a given `sysID` for a specified `epochID`.
@@ -234,7 +234,7 @@ systems in the epoch are pruned together.
 Finally, we will examine an index-based data model for log storage.
 
 
-#### Index-based Log Storage
+### Index-based Log Storage
 
 The prior data models for log storage have the benefit of simplicity
 in that the KVDB has only a single KVS.
@@ -409,6 +409,28 @@ with transactions enabled.  A transaction cursor's view cannot be
 explicitly updated.
 
 
+## Prefix Deletes
+
+Prefix deletes are used to atomically remove all KV pairs in a KVS
+with keys whose initial bytes match a specified filter.
+The length of the filter must be *equal to* the `prefix.length` parameter
+of the KVS.
+The [modeling examples](#modeling-examples) above demonstrate how prefix deletes
+can be used in combination with segmented keys to remove sets of related KV pairs
+in a single operation.
+
+Prefix deletes inside a transaction behave as if they were the first operations
+performed regardless of the actual operation sequence.
+For example, the following pseudo-code sequences are equivalent, where only keys
+are shown:
+
+* txn_begin(), put("aa"), prefix_delete("a"), put("ab"), txn_commit()
+* txn_begin(), prefix_delete("a"), put("aa"), put("ab"), txn_commit()
+
+Both sequences result in keys "aa" and "ab" residing in the KVS after the transaction
+commits, but no other keys remain that start with "a".
+
+
 ## Durability Controls
 
 HSE provides the `hse_kvdb_sync()` API call to flush cached KVDB updates
@@ -436,8 +458,15 @@ in the HSE API are thread-safe.  However, there are a few exceptions, as
 documented in the [API reference](../api/c/index.md).
 
 
-## Delete Semantics
+## Compaction
 
-Delete operations logically remove KV pairs from a KVS.
-However, HSE implements physical removal as a background operation, and hence
-capacity is not freed immediately.
+Delete operations (including prefix deletes) and put operations that update
+existing KV pairs result in obsolete KV pairs, referred to as garbage, that must be
+removed from a KVDB. This removal is done by a background process called
+compaction which runs automatically and attempts to keep the amount of garbage
+within a predefined range.
+
+The key points to keep in mind are:
+
+* Delete operations do not free storage capacity immediately.
+* Update operations temporarily consume storage capacity.
