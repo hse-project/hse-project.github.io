@@ -20,19 +20,23 @@ optional [`hse.conf`](#hseconf-json-file) JSON file, which is also specified in
 `hse_init()`.
 
 For `hse_init()` API calls, specify global parameters in the form
-`<param>=<value>`.  For example, `socket.enabled=false`.
+`<param>=<value>`.  For example, `rest.enabled=false`.
 
 The following global parameters are part of the stable API.
 
 | Parameter | Default | Description |
 | :-- | :-- | :-- |
 | `logging.enabled` | `true` | Logging mode (false==disabled, true==enabled) |
-| `logging.structured` | `false` | Logging style (false==basic, true==structured) |
 | `logging.destination` | `syslog` | Log destination (stdout, stderr, file, syslog) |
 | `logging.path` | `$PWD/hse.log` | Log file when logging.destination==file |
 | `logging.level` | `7` | Logging severity level (0==emergency; 7==debug) |
-| `socket.enabled` | `true` | REST interface mode (false==disabled, true==enabled) |
-| `socket.path` | `/tmp/hse-<pid>.sock` | UNIX domain socket file when socket.enabled==true |
+| `rest.enabled` | `true` | REST interface mode (false==disabled, true==enabled) |
+| `rest.socket_path` | `$XDG_RUNTIME_DIR/hse-<pid>.sock` | UNIX domain socket file when rest.enabled==true |
+
+!!! note
+    If `$XDG_RUNTIME_DIR` is not defined then the default value for `rest.socket_path`
+    is `/tmp/hse-<pid>.sock`.
+
 
 ## KVDB Parameters
 
@@ -73,7 +77,7 @@ The following KVDB runtime parameters are part of the stable API.
 
 | Parameter | Default | Description |
 | :-- | :-- | :-- |
-| `read_only` | `false` | Access mode (false==read/write, true==read-only) |
+| `mode` | `rdwr` | Open mode (rdwr, rdonly, rdonly_replay, diag) |
 | `durability.enabled` | `true` | Journaling mode (false==disabled, true==enabled) |
 | `durability.interval_ms` | `100` | Max time data is cached (in milliseconds) when durability.enabled==true |
 | `durability.mclass` | `auto` | Media class for journal (capacity, staging, pmem, auto) |
@@ -84,6 +88,22 @@ The following KVDB runtime parameters are part of the stable API.
     alias for `heavy`.  This is to maintain backward compatibility with
     earlier releases of HSE.
 
+
+#### Open Modes
+
+The KVDB `mode` parameter controls how a KVDB may be accessed after opening and whether updates
+are applied from HSE journals in the process of opening the KVDB.
+
+| mode | Description | Storage Access |
+| :-- | :-- | :-- |
+| `rdwr` | Journaled updates are applied.  KVDB may be queried or updated. | Read/Write |
+| `rdonly` | Open fails if there are journaled updates.  KVDB may be queried only. | Read only |
+| `rdonly_replay` | Journaled updates are applied.  KVDB may be queried only. | Read/Write |
+| `diag` | Journaled updates are ignored.  KVDB may be queried only, and may not be up to date. | Read only |
+
+To open a KVDB in either `rdwr` or `rdonly_replay` mode, the storage underlying all media classes
+configured for the KVDB must be writable.  A KVDB may be opened in either `rdonly` or `diag` mode
+when the storage underlying some or all media classes configured for the KVDB is read-only.
 
 #### Durability Settings
 
@@ -190,7 +210,7 @@ or in the optional [`kvdb.conf`](#kvdbconf-json-file) configuration file in the
 which is also specified in `hse_kvdb_open()`.
 
 For `hse_kvdb_kvs_open()` API calls, specify KVS runtime parameters in the
-form `<param>=<value>`.  For example, `compression.value.algorithm=lz4`.
+form `<param>=<value>`.  For example, `transactions.enabled=true`.
 
 The following KVS runtime parameters are part of the stable API.
 
@@ -198,9 +218,11 @@ The following KVS runtime parameters are part of the stable API.
 | :-- | :-- | :-- |
 | `transactions.enabled` | `false` | Transaction mode (false==disabled, true==enabled) |
 | `mclass.policy` | `auto` | Media class usage (see discussion below for value strings) |
-| `compression.value.algorithm` | `none` | Value compression method (none, lz4) |
-| `compression.value.min_length` | `12` | Value length above which compression is attempted (bytes) |
+| `value.compression.default` | `off` | Value compression default mode (off, on) |
 
+!!! tip
+    The `value.compression.default` setting in effect for the KVS can be overridden
+    by a flag in individual `hse_kvs_put()` API calls.
 
 #### Transaction Mode
 
@@ -274,14 +296,13 @@ legal values, and defaults.
 {
   "logging": {
     "enabled": boolean,
-    "structured": boolean,
     "destination": "stdout | stderr | file | syslog",
     "path": "/log/file/path",
     "level": integer
   },
-  "socket": {
+  "rest": {
     "enabled": boolean,
-    "path": "/UNIX/socket/file/path"
+    "socket_path": "/UNIX/socket/file/path"
   }
 }
 ```
@@ -294,7 +315,7 @@ legal values, and defaults.
 
 ```
 {
-  "read_only": boolean,
+  "mode": "rdwr | rdonly | rdonly_replay | diag",
   "durability": {
     "enabled": boolean,
     "interval": integer,
@@ -311,10 +332,9 @@ legal values, and defaults.
       "mclass": {
         "policy": "see KVS runtime parameter discussion for value strings"
       },
-      "compression": {
-        "value": {
-          "algorithm": "lz4 | none",
-          "min_length": integer
+      "value": {
+        "compression": {
+          "default": "off | on"
         }
       }
     }

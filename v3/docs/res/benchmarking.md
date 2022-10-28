@@ -31,5 +31,5 @@ KVS [parameters](../gs/params.md#kvs-parameters):
 
 * `mclass.policy` maximizing the use of faster tiers of storage for all
 KVSs when multiple media classes are configured for a KVDB
-* `compression.value.algorithm=lz4` for all KVSs, *unless* the application
+* `value.compression.default=on` for all KVSs, *unless* the application
 performs its own value compression or values are known to not compress
