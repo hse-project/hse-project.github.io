@@ -24,12 +24,11 @@ be helpful in creating and verifying a balanced configuration.
 ## Operating System
 
 HSE should work with most modern Linux&reg; 64-bit operating system
-distributions.  We have run HSE on the following.
+distributions.  We have run HSE on the following:
 
-* Red Hat&reg; Enterprise Linux&reg; 8 (RHEL 8)
-* Ubuntu&reg; 18.04 and 20.04
-* Fedora&reg; 34 and 35
-* AlmaLinux OS 8
+* Red Hat&reg; Enterprise Linux&reg; (RHEL) 8 and 9
+* Ubuntu&reg; 18.04, 20.04, and 22.04
+* Fedora&reg; 35 and 36
 
 
 ## File System

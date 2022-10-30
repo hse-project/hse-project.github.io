@@ -378,7 +378,7 @@ The interaction of cursor filters and seek is best described by example.
 Consider a KVS storing the following keys, which are listed in lexicographic
 order: "ab001", "af001", "af002", "ap001".
 
-If a cursor is created for the KVS with a filter of "af", then the
+If a forward cursor is created for the KVS with a filter of "af", then the
 cursor's view is limited to the keys: "af001", "af002".
 
 If that cursor is then used to seek to the key "ab", it will be positioned
@@ -402,11 +402,11 @@ A transaction cursor iterates over a KVS snapshot associated with
 an active transaction, *including* any updates made in that transaction.
 If the transaction commits or aborts before the cursor is destroyed,
 the cursor's view reverts to the KVS snapshot taken at the time the
-transaction first became active.  I.e., updates made in the transaction
+transaction first became active, and the cursor is positioned at the closest key equal to or
+greater than the last key read.  I.e., updates made in the transaction
 are no longer in the cursor's view.
-By definition a transaction cursor can only be created for a KVS opened
-with transactions enabled.  A transaction cursor's view cannot be
-explicitly updated.
+A transaction cursor's view cannot be explicitly updated, and by definition a transaction
+cursor can only be created for a KVS opened with transactions enabled.
 
 
 ## Prefix Deletes

@@ -31,7 +31,9 @@ The HSE project includes the following repos:
 * [`hse`](https://github.com/hse-project/hse)
 contains the HSE library source
 * [`hse-python`](https://github.com/hse-project/hse-python)
-contains HSE Python bindings
+contains Python bindings for the HSE API
+* [`hse-java`](https://github.com/hse-project/hse-java)
+contains Java bindings for the HSE API
 * [`hse-mongo`](https://github.com/hse-project/hse-mongo)
 is a fork that integrates HSE with MongoDB
 * [`hse-ycsb`](https://github.com/hse-project/hse-ycsb)
@@ -55,7 +57,7 @@ those repos.  To make these easy to locate, there are symlinks to them named
 After building and installing the `hse` repo, you can develop HSE
 applications in C/C++ by including the
 [`hse.h`](https://github.com/hse-project/hse/blob/master/include/hse/hse.h)
-header file and linking with `libhse-2`.
+header file and linking with `libhse-3`.
 Information on using an alternate HSE language binding is included
 in its associated repo.
 
@@ -71,3 +73,12 @@ Releases of the HSE library and associated language bindings use
 [semantic versioning](https://semver.org).
 Releases of forked repos use a versioning scheme that is documented
 in their associated `README.md`.
+
+The HSE storage format, API, CLI, configuration parameters, and REST interface may change between
+major releases.  However, we strive to minimize changes to the programming API so that existing
+HSE applications require little to no porting effort.
+If the HSE storage format changes, HSE application data must be dumped and reloaded using
+application-specific tools in order to use the new version of HSE.
+
+HSE 3.0 includes changes to the storage format, API, CLI, configuration parameters, and REST
+interface that are not backward compatible with previous versions.

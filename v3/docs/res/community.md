@@ -6,9 +6,11 @@ how we can improve HSE, or contribute to development.
 
 ## Report a Bug
 
-You can file an [issue](https://github.com/hse-project/hse/issues)
-to report an bug.  In doing so, please provide all the information
-requested in the issue template.
+Each repo in the HSE project has its own `Issues` section.  To report a bug, please file an
+issue in the associated repo and include all information requested in the issue template.
+
+For example, to report a bug in the HSE library you would file an issue
+[here](https://github.com/hse-project/hse/issues).
 
 
 ## Ask a Question
