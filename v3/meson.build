@@ -50,7 +50,7 @@ deploy_v3 = run_target(
             '"${HSE_DEPLOY_BRANCH:-gh-pages}"',
             '--config-file',
             v3_mkdocs_yml.full_path(),
-            '2.x',
+            '3.x',
         ]),
     ],
     depends: [

@@ -15,7 +15,3 @@ to any repo in the HSE project.
 The instructions in `README.md` specify how to clone the repo and
 view any updates you make to the HSE project documentation.  When submitting
 a PR, it is helpful if you can provide a URL where these updates may be viewed.
-
-> Note: HSE 1.x and its project documentation are no longer actively
-> maintained.  Please do not submit a PR that updates the HSE 1.x project
-> documentation.

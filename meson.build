@@ -44,16 +44,16 @@ if not doxybook2.found() and ('auto' in apis or 'c' in apis)
     doxybook2 = doxybook2_proj.get_variable('doxybook2')
 endif
 
-subdir('v1')
 subdir('v2')
+subdir('v3')
 
 alias_target(
     'deploy',
-    deploy_v1,
-    deploy_v2
+    deploy_v2,
+    deploy_v3
 )
 
-serve_config_file_path = v2_mkdocs_yml.full_path()
+serve_config_file_path = v3_mkdocs_yml.full_path()
 run_target(
     'serve',
     command: [
