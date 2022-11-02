@@ -23,18 +23,14 @@ building and contributing in `README.md` and `CONTRIBUTING.md` in the
 when cloning a forked repo, there are symlinks to them named `README_HSE.md`
 and `CONTRIBUTING_HSE.md` in the repo root directory.
 
-> For HSE 1.x releases, information on building and installing for all
-> repos is in the HSE project documentation rather than per-repo
-> `README.md` files.
-> HSE 1.x and its project documentation are no longer actively maintained.
-
 ## Version Directories
 
 Different versions of the HSE project documentation are stored in separate
 directories in this repo.
 
+* `v3` contains the HSE `3.x` project documentation
 * `v2` contains the HSE `2.x` project documentation
-* `v1` contains the HSE `1.x` project documentation
+* `v1` contains the HSE `1.x` project documentation which is deprecated and no longer built
 
 ## Site Generation Tools
 

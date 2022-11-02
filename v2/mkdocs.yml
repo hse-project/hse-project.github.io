@@ -24,6 +24,9 @@ extra_css:
 # Theme configuration
 theme:
   name: material
+  # custom_dir extends the material theme to add an announcement bar
+  # indicating that HSE 2.x is no longer actively maintained
+  custom_dir: overrides
   language: en
   favicon: img/favicon.png
   logo: img/logo.png
