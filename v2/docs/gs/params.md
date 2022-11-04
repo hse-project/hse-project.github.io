@@ -7,9 +7,8 @@ or *runtime* parameters, which apply each time an application
 initializes the HSE library or opens a KVDB or KVS.
 
 In addition to the detailed descriptions below, you can find parameter
-usage examples in the [API reference](../api/c/Pages/examples.md),
-[CLI reference](cli.md), and HSE
-[sample programs](https://github.com/hse-project/hse/tree/master/samples).
+usage in the [CLI reference](cli.md) and HSE
+[sample programs](https://github.com/hse-project/hse/tree/r2/samples).
 
 
 ## Global Parameters

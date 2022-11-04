@@ -1,5 +1,5 @@
-hse_2_proj = subproject(
-    'hse-2',
+hse_3_proj = subproject(
+    'hse-3',
     required: 'c' in apis,
     default_options: [
         'warning_level=0',
@@ -10,18 +10,14 @@ hse_2_proj = subproject(
         'tools=disabled',
         'samples=false',
         'bindings=none',
-        'db_bench=false',
     ]
 )
 
-if not hse_2_proj.found()
+if not hse_3_proj.found()
     subdir_done()
 endif
 
-# This is a bug in HSE 2.1, where the doxygen variable got overridden to the
-# generated docs. Unless HSE 2.1 has another release after 2.1.1, forget about
-# this.
-c_doxygen = hse_2_proj.get_variable('doxygen')
+c_docs = hse_3_proj.get_variable('docs')
 
 generated_docs += custom_target(
     'c-doxybook2',
@@ -31,7 +27,7 @@ generated_docs += custom_target(
         doxybook2,
         '--input',
         # This must be kept in sync with HSE. Note the version in the path.
-        meson.project_build_root() / 'subprojects/hse-r2.1.1/docs/doxygen/api/xml',
+        meson.project_build_root() / 'subprojects/hse-v3/docs/doxygen/output/xml',
         '--output',
         '@OUTPUT@',
         '--config',
@@ -40,6 +36,6 @@ generated_docs += custom_target(
         meson.current_source_dir() / '../.doxybook/templates'
     ],
     depends: [
-        c_doxygen,
+        c_docs,
     ]
 )

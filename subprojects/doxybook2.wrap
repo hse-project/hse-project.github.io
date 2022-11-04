@@ -1,8 +1,8 @@
 [wrap-file]
-directory = doxybook2-1.4.0
-source_url = https://github.com/matusnovak/doxybook2/archive/refs/tags/v1.4.0.tar.gz
-source_filename = v1.4.0.tar.gz
-source_hash = f38018caac17d6152bd58c4681e682922a8eeb3057df5f9929db552500bb4989
+directory = doxybook2-1.5.0
+source_url = https://github.com/matusnovak/doxybook2/archive/refs/tags/v1.5.0.tar.gz
+source_filename = v1.5.0.tar.gz
+source_hash = f54dbdb099393f1a3183981671fb121a8a0355fc4ea376850fd1cf6346237082
 
 patch_directory = doxybook2
 

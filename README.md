@@ -60,7 +60,7 @@ The website is built using [Meson](https://mesonbuild.com/).
 In order to build the documentation, run the following commands:
 
 ```shell
-meson build
+meson setup build
 ninja -C build
 ```
 
@@ -87,7 +87,7 @@ website.
 
 ## Deploying
 
-In order to deploy the website to the a branch, run the following:
+In order to deploy the website to a branch, run the following:
 
 ```shell
 ninja -C build deploy-vX # where X is the major version you want to deploy
