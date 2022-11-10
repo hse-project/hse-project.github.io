@@ -13,20 +13,6 @@ and the amount of data stored.  The following are general guidelines.
 * **Block Storage**: SSD volumes *only*; use NVMe for best performance
 * **Persistent Memory** (optional): must support a DAX-enabled file system
 
-If a file system storing a KVDB [media class](storage.md#media-classes) is configured on a
-logical block device comprising multiple physical block devices, such as when using XFS with LVM,
-performance can be **significantly** improved by balancing these physical devices across NUMA nodes.
-Tools like [`lstopo(1)`](https://linux.die.net/man/1/lstopo) can be helpful in creating and
-verifying a balanced configuration.
-
-For the single logical or physical block device configured with a file system for use with HSE,
-performance can also be **significantly** improved by setting the read-ahead to the greater
-of the device default or 128 KiB.  For example:
-
-```shell
-cat /sys/block/nvme0n1/queue/read_ahead_kb
-128
-```
 
 ## Operating System
 
@@ -54,6 +40,23 @@ For most HSE applications we recommend using XFS.
     File systems hosting pmem media classes should be mounted with the
     option `-o dax=always`.
 
+
+## Block Storage
+
+If a file system storing a KVDB [media class](storage.md#media-classes) is configured on a
+logical block device comprising multiple physical block devices, such as when using XFS with LVM,
+performance can be **significantly** improved by balancing these physical devices across NUMA nodes.
+Tools like [`lstopo(1)`](https://linux.die.net/man/1/lstopo) can be helpful in creating and
+verifying a balanced configuration.
+
+For the single logical or physical block device configured with a file system for use with HSE,
+performance can also be **significantly** improved by setting the read-ahead to the greater
+of the device default or 128 KiB.  For example:
+
+```shell
+cat /sys/block/nvme0n1/queue/read_ahead_kb
+128
+```
 
 ## Virtual Memory
 

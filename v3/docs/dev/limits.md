@@ -32,5 +32,4 @@ Feel free to push these limits in testing and
 | :-- | :-- | --: | --: |
 | Key size | Range of valid key sizes (bytes) | 1 &ndash; 1,334 | Yes |
 | Value size | Range of valid value sizes (bytes) | 0 &ndash; 1MiB | Yes |
-| Key count| Total keys in a KVS (billions) | 50 | No |
 | Capacity | Total storage capacity of a KVS (TB) | 4 | No |
