@@ -198,6 +198,10 @@ The following KVS create-time parameters are part of the stable API.
 | :-- | :-- | :-- |
 | `prefix.length` | `0` | Key prefix length (bytes) |
 
+!!! tip
+    For details on setting `prefix.length`, see the discussion on the
+    HSE [data model](../dev/concepts.md#data-model) and prefix deletes.
+
 !!! info
     The KVS name `default` is reserved and may not be used in
     `hse_kvdb_kvs_create()` API calls or with the CLI.
