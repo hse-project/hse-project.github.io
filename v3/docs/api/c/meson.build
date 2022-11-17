@@ -27,7 +27,7 @@ generated_docs += custom_target(
         doxybook2,
         '--input',
         # This must be kept in sync with HSE. Note the version in the path.
-        meson.project_build_root() / 'subprojects/hse-3/docs/doxygen/output/xml',
+        meson.project_build_root() / 'subprojects/hse-r3.0.0/docs/doxygen/output/xml',
         '--output',
         '@OUTPUT@',
         '--config',
