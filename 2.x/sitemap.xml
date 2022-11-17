@@ -1,193 +1,213 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://github.com/hse-project/2.x/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/dir_04700ab32882dd6f5919291731388d84/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/dir_040d7b3f41dc48944c14b3aceece62ea/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/dir_74519b06cb360fd5deb315947aad9941/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/dir_1fb2a4f7ea7c83842fe395904f1cb957/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/dir_8f2980731aba7ec7b9fcae5764f196e3/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/dir_7d6f9d296aa386b34d18f43938c952e3/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/dir_d44c64559bbebec7f509842c48db8b23/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/dir_8b8fdb11f81e60450b2905bde852ec54/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/flags_8h/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/dir_9250c88e99474a813d3d69d05590e2d9/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/hse_8h/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/dir_b4b72a795e5f59871b4ea75622d9c7f8/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/limits_8h/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/dir_f1681128133dad994979cb5d3db31650/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/types_8h/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/dir_f8b92b099185c2eecab759fa5fb24630/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Files/version_8h/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/flags_8h/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Modules/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/hse_8h/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Modules/group__CURSORS/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/limits_8h/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Modules/group__ERRORS/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/types_8h/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Modules/group__KVDB/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Files/version_8h/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Modules/group__KVS/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Modules/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Modules/group__SUBSYS/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Modules/group__CURSORS/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Modules/group__TRANSACTIONS/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Modules/group__ERRORS/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Modules/group__VERSION/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Modules/group__KVDB/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Pages/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Modules/group__KVS/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Pages/examples/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Modules/group__SUBSYS/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Structs/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Modules/group__TRANSACTIONS/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Structs/structhse__kvdb/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Modules/group__VERSION/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Structs/structhse__kvdb__txn/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Pages/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Structs/structhse__kvs/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Pages/examples/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Structs/structhse__kvs__cursor/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Structs/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/api/Structs/structhse__mclass__info/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Structs/structhse__kvdb/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/dev/bp/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Structs/structhse__kvdb__txn/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/dev/concepts/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Structs/structhse__kvs/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/dev/limits/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Structs/structhse__kvs__cursor/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/gs/about/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/api/c/Structs/structhse__mclass__info/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/gs/cli/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/dev/bp/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/gs/params/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/dev/concepts/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/gs/storage/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/dev/limits/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/gs/sysreqs/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/gs/about/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/res/benchmarking/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/gs/cli/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/hse-project/2.x/res/community/</loc>
-         <lastmod>2021-12-16</lastmod>
+         <loc>https://hse-project.github.io/2.x/2.x/gs/params/</loc>
+         <lastmod>2022-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hse-project.github.io/2.x/2.x/gs/storage/</loc>
+         <lastmod>2022-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hse-project.github.io/2.x/2.x/gs/sysreqs/</loc>
+         <lastmod>2022-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hse-project.github.io/2.x/2.x/res/benchmarking/</loc>
+         <lastmod>2022-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hse-project.github.io/2.x/2.x/res/community/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
