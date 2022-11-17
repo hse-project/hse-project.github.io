@@ -94,5 +94,3 @@ nav:
     - Key-Value Store (KVS): api/c/Modules/group__KVS.md
     - Transactions: api/c/Modules/group__TRANSACTIONS.md
     - Cursors: api/c/Modules/group__CURSORS.md
-    - Examples: api/c/Pages/examples.md
-    - Files: api/c/Files/index.md

@@ -33,13 +33,8 @@ if not doxybook2.found() and ('auto' in apis or 'c' in apis)
         required: 'c' in apis,
         default_options: [
             'cpp_std=c++17',
-            'tests=false',
         ]
     )
-
-    if not doxybook2_proj.found()
-        subdir_done()
-    endif
 
     doxybook2 = doxybook2_proj.get_variable('doxybook2')
 endif

@@ -1,5 +1,5 @@
 {
-  "baseUrl": "/2.x/api/",
+  "baseUrl": "/3.x/api/",
   "foldersToGenerate": [
     "modules",
     "classes",

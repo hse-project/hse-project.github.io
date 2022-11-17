@@ -14,6 +14,18 @@ v2_mkdocs_yml = custom_target(
     ]
 )
 
+links += custom_target(
+    'overrides',
+    output: 'overrides',
+    command: [
+        'ln',
+        '--symbolic',
+        '--force',
+        meson.current_source_dir() / 'overrides',
+        '@OUTPUT@',
+    ]
+)
+
 subdir('docs')
 
 custom_target(

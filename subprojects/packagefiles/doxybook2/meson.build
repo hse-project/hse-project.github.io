@@ -1,7 +1,7 @@
 project(
     'doxybook2',
     'cpp',
-    version: '1.4.0',
+    version: '1.5.0',
     license: 'MIT',
     default_options: [
         'cpp_std=c++17',
@@ -14,7 +14,7 @@ catch2_dep = dependency(
     'catch2',
     version: '>= 2.13.6',
     native: true,
-    required: get_option('tests')
+    required: false
 )
 fmt_dep = dependency(
     'fmt',
@@ -39,13 +39,11 @@ spdlog_dep = dependency(
     native: true,
     version: '>= 1.9.1'
 )
-if not cpp.has_header('cxxopts.hpp')
-    cxxopts_proj = subproject('cxxopts')
-
-    cxxopts_dep = cxxopts_proj.get_variable('cxxopts_dep')
-else
-    cxxopts_dep = dependency('', required: false)
-endif
+cxxopts_dep = dependency(
+    'cxxopts',
+    native: true,
+    version: '>= 2.2.1'
+)
 if cpp.get_id() == 'msvc'
     dirent_dep = dependency(
         'dirent',
@@ -53,7 +51,7 @@ if cpp.get_id() == 'msvc'
         version: '>= 1.23.2'
     )
 else
-    dirent_dep = dependency('', required: false)
+    dirent_dep = dependency('', required: false, native: true)
 endif
 
 subdir('include')
