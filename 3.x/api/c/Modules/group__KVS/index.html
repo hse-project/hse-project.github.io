@@ -1,0 +1,1586 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fast embeddable key-value store designed for SSDs and persistent memory">
+      
+      
+      
+        <link rel="canonical" href="https://hse-project.github.io/3.x/3.x/api/c/Modules/group__KVS/">
+      
+      <link rel="icon" href="../../../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.8">
+    
+    
+      
+        <title>Key-Value Store (KVS) - HSE Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.815d1a91.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#key-value-store-kvs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="HSE Project" class="md-header__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HSE Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Key-Value Store (KVS)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../gs/about/" class="md-tabs__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../dev/concepts/" class="md-tabs__link">
+        Developing HSE Apps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../res/community/" class="md-tabs__link">
+        Resources
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
+        API Reference
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="HSE Project" class="md-nav__button md-logo" aria-label="HSE Project" data-md-component="logo">
+      
+  <img src="../../../../img/logo.png" alt="logo">
+
+    </a>
+    HSE Project
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hse-project/hse" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hse-project/hse
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../gs/about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../gs/storage/" class="md-nav__link">
+        KVDB Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../gs/params/" class="md-nav__link">
+        Configuration Parameters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../gs/cli/" class="md-nav__link">
+        Command Line Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../gs/sysreqs/" class="md-nav__link">
+        System Requirements
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Developing HSE Apps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developing HSE Apps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developing HSE Apps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../dev/concepts/" class="md-nav__link">
+        Concepts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../dev/bp/" class="md-nav__link">
+        Best Practices
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../dev/limits/" class="md-nav__link">
+        Limits
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Resources
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Resources" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Resources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../res/community/" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../res/benchmarking/" class="md-nav__link">
+        Benchmarking Tips
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../group__VERSION/" class="md-nav__link">
+        Version Information
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../group__ERRORS/" class="md-nav__link">
+        Errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../group__SUBSYS/" class="md-nav__link">
+        Subsystem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../group__KVDB/" class="md-nav__link">
+        Key-Value Database (KVDB)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Key-Value Store (KVS)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Key-Value Store (KVS)
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-structures" class="md-nav__link">
+    Data Structures
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defines" class="md-nav__link">
+    Defines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-documentation" class="md-nav__link">
+    Functions Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvdb_kvs_close" class="md-nav__link">
+    function hse_kvdb_kvs_close
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvdb_kvs_create" class="md-nav__link">
+    function hse_kvdb_kvs_create
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvdb_kvs_drop" class="md-nav__link">
+    function hse_kvdb_kvs_drop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvdb_kvs_open" class="md-nav__link">
+    function hse_kvdb_kvs_open
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_delete" class="md-nav__link">
+    function hse_kvs_delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_get" class="md-nav__link">
+    function hse_kvs_get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_name_get" class="md-nav__link">
+    function hse_kvs_name_get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_param_get" class="md-nav__link">
+    function hse_kvs_param_get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_prefix_delete" class="md-nav__link">
+    function hse_kvs_prefix_delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_put" class="md-nav__link">
+    function hse_kvs_put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macros-documentation" class="md-nav__link">
+    Macros Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_count_max" class="md-nav__link">
+    define HSE_KVS_COUNT_MAX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_key_len_max" class="md-nav__link">
+    define HSE_KVS_KEY_LEN_MAX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_name_len_max" class="md-nav__link">
+    define HSE_KVS_NAME_LEN_MAX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_pfx_len_max" class="md-nav__link">
+    define HSE_KVS_PFX_LEN_MAX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_value_len_max" class="md-nav__link">
+    define HSE_KVS_VALUE_LEN_MAX
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../group__TRANSACTIONS/" class="md-nav__link">
+        Transactions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../group__CURSORS/" class="md-nav__link">
+        Cursors
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-structures" class="md-nav__link">
+    Data Structures
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defines" class="md-nav__link">
+    Defines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-documentation" class="md-nav__link">
+    Functions Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvdb_kvs_close" class="md-nav__link">
+    function hse_kvdb_kvs_close
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvdb_kvs_create" class="md-nav__link">
+    function hse_kvdb_kvs_create
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvdb_kvs_drop" class="md-nav__link">
+    function hse_kvdb_kvs_drop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvdb_kvs_open" class="md-nav__link">
+    function hse_kvdb_kvs_open
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_delete" class="md-nav__link">
+    function hse_kvs_delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_get" class="md-nav__link">
+    function hse_kvs_get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_name_get" class="md-nav__link">
+    function hse_kvs_name_get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_param_get" class="md-nav__link">
+    function hse_kvs_param_get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_prefix_delete" class="md-nav__link">
+    function hse_kvs_prefix_delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hse_kvs_put" class="md-nav__link">
+    function hse_kvs_put
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macros-documentation" class="md-nav__link">
+    Macros Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_count_max" class="md-nav__link">
+    define HSE_KVS_COUNT_MAX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_key_len_max" class="md-nav__link">
+    define HSE_KVS_KEY_LEN_MAX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_name_len_max" class="md-nav__link">
+    define HSE_KVS_NAME_LEN_MAX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_pfx_len_max" class="md-nav__link">
+    define HSE_KVS_PFX_LEN_MAX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hse_kvs_value_len_max" class="md-nav__link">
+    define HSE_KVS_VALUE_LEN_MAX
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="key-value-store-kvs">Key-Value Store (KVS)</h1>
+<h2 id="data-structures">Data Structures</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>struct</td>
+<td><strong><a href="/3.x/api/Structs/structhse__kvs/">hse_kvs</a></strong> <br>Opaque structure, a pointer to which is a handle to an HSE KVS within a KVDB.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="functions">Functions</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/3.x/api/Modules/group__ERRORS/#typedef-hse_err_t">hse_err_t</a></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_close">hse_kvdb_kvs_close</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs)<br>Close an open KVS.</td>
+</tr>
+<tr>
+<td><a href="/3.x/api/Modules/group__ERRORS/#typedef-hse_err_t">hse_err_t</a></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_create">hse_kvdb_kvs_create</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvdb/">hse_kvdb</a> * kvdb, const char * kvs_name, size_t paramc, const char *const * paramv)<br>Create a KVS within the referenced KVDB.</td>
+</tr>
+<tr>
+<td><a href="/3.x/api/Modules/group__ERRORS/#typedef-hse_err_t">hse_err_t</a></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_drop">hse_kvdb_kvs_drop</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvdb/">hse_kvdb</a> * kvdb, const char * kvs_name)<br>Drop a KVS from the referenced KVDB.</td>
+</tr>
+<tr>
+<td><a href="/3.x/api/Modules/group__ERRORS/#typedef-hse_err_t">hse_err_t</a></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvdb/">hse_kvdb</a> * kvdb, const char * kvs_name, const size_t paramc, const char <em>const * paramv, struct <a href="/3.x/api/Structs/structhse__kvs/">hse_kvs</a> </em>* kvs_out)<br>Open a KVS in a KVDB.</td>
+</tr>
+<tr>
+<td><a href="/3.x/api/Modules/group__ERRORS/#typedef-hse_err_t">hse_err_t</a></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_delete">hse_kvs_delete</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs, unsigned int flags, struct <a href="/3.x/api/Structs/structhse__kvdb__txn/">hse_kvdb_txn</a> * txn, const void * key, size_t key_len)<br>Delete the key and its associated value from the KVS.</td>
+</tr>
+<tr>
+<td><a href="/3.x/api/Modules/group__ERRORS/#typedef-hse_err_t">hse_err_t</a></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_get">hse_kvs_get</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs, unsigned int flags, struct <a href="/3.x/api/Structs/structhse__kvdb__txn/">hse_kvdb_txn</a> * txn, const void * key, size_t key_len, bool * found, void * valbuf, size_t valbuf_sz, size_t * val_len)<br>Retrieve the value for a given key from the KVS.</td>
+</tr>
+<tr>
+<td>const char *</td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_name_get">hse_kvs_name_get</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs)<br>Get the name of a KVS.</td>
+</tr>
+<tr>
+<td><a href="/3.x/api/Modules/group__ERRORS/#typedef-hse_err_t">hse_err_t</a></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_param_get">hse_kvs_param_get</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs, const char * param, char * buf, size_t buf_sz, size_t * needed_sz)<br>Get KVS parameter.</td>
+</tr>
+<tr>
+<td><a href="/3.x/api/Modules/group__ERRORS/#typedef-hse_err_t">hse_err_t</a></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs, unsigned int flags, struct <a href="/3.x/api/Structs/structhse__kvdb__txn/">hse_kvdb_txn</a> * txn, const void * pfx, size_t pfx_len)<br>Delete all key-value pairs matching the key prefix from a KVS storing segmented keys.</td>
+</tr>
+<tr>
+<td><a href="/3.x/api/Modules/group__ERRORS/#typedef-hse_err_t">hse_err_t</a></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_put">hse_kvs_put</a></strong>(struct <a href="/3.x/api/Structs/structhse__kvs/">hse_kvs</a> * kvs, unsigned int flags, struct <a href="/3.x/api/Structs/structhse__kvdb__txn/">hse_kvdb_txn</a> * txn, const void * key, size_t key_len, const void * val, size_t val_len)<br>Put a key-value pair into KVS.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="defines">Defines</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#define-hse_kvs_count_max">HSE_KVS_COUNT_MAX</a></strong> <br>Maximum number of KVSs contained within one KVDB.</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#define-hse_kvs_key_len_max">HSE_KVS_KEY_LEN_MAX</a></strong> <br>Maximum key length.</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#define-hse_kvs_name_len_max">HSE_KVS_NAME_LEN_MAX</a></strong> <br>Maximum length of a KVS name.</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#define-hse_kvs_pfx_len_max">HSE_KVS_PFX_LEN_MAX</a></strong> <br>Max key prefix length.</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/3.x/api/Modules/group__KVS/#define-hse_kvs_value_len_max">HSE_KVS_VALUE_LEN_MAX</a></strong> <br>Max value length is 1MiB.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="functions-documentation">Functions Documentation</h2>
+<h3 id="function-hse_kvdb_kvs_close">function hse_kvdb_kvs_close</h3>
+<div class="highlight"><pre><span></span><code><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvdb_kvs_close</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Close an open KVS. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvs</strong> KVS handle from <a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open()</a>.</li>
+</ul>
+<p><strong>Return</strong>: Error status. </p>
+<p><strong>Note</strong>: This function is not thread safe.</p>
+<p><strong>Warning</strong>: After invoking this function, calling any other KVS functions will result in undefined behavior unless the KVS is re-opened.</p>
+<h3 id="function-hse_kvdb_kvs_create">function hse_kvdb_kvs_create</h3>
+<div class="highlight"><pre><span></span><code><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvdb_kvs_create</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvdb</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvdb</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs_name</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">paramc</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">paramv</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Create a KVS within the referenced KVDB. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvdb</strong> KVDB handle from <a href="/3.x/api/Modules/group__KVDB/#function-hse_kvdb_open">hse_kvdb_open()</a>. </li>
+<li><strong>kvs_name</strong> KVS name. </li>
+<li><strong>paramc</strong> Number of configuration parameters in <code>paramv</code>. </li>
+<li><strong>paramv</strong> List of parameters in key=value format.</li>
+</ul>
+<p><strong>Return</strong>: Error status. </p>
+<p><strong>Remark</strong>: </p>
+<ul>
+<li><code>kvdb</code> must not be NULL. </li>
+<li><code>kvs_name</code> must be non-NULL. </li>
+<li><code>kvs_name</code> must be NULL-terminated. </li>
+<li>strlen(<code>kvs_name</code>) must be less than HSE_KVS_NAME_LEN_MAX. </li>
+<li><code>kvs_name</code> must match the following pattern: [-_A-Za-z0-9]+. </li>
+<li><code>kvs_name</code> cannot already exist.</li>
+</ul>
+<h3 id="function-hse_kvdb_kvs_drop">function hse_kvdb_kvs_drop</h3>
+<div class="highlight"><pre><span></span><code><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvdb_kvs_drop</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvdb</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvdb</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs_name</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Drop a KVS from the referenced KVDB. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvdb</strong> KVDB handle from <a href="/3.x/api/Modules/group__KVDB/#function-hse_kvdb_open">hse_kvdb_open()</a>. </li>
+<li><strong>kvs_name</strong> KVS name.</li>
+</ul>
+<p><strong>Return</strong>: Error status. </p>
+<p><strong>Warning</strong>: It is an error to call this function on a KVS that is open.</p>
+<p><strong>Remark</strong>: </p>
+<ul>
+<li><code>kvdb</code> must not be NULL. </li>
+<li><code>kvs_name</code> must not be NULL. </li>
+<li><code>kvs_name</code> must be NULL-terminated.</li>
+</ul>
+<h3 id="function-hse_kvdb_kvs_open">function hse_kvdb_kvs_open</h3>
+<div class="highlight"><pre><span></span><code><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvdb_kvs_open</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvdb</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvdb</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs_name</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">paramc</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">paramv</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvs</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">kvs_out</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Open a KVS in a KVDB. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvdb</strong> KVDB handle from <a href="/3.x/api/Modules/group__KVDB/#function-hse_kvdb_open">hse_kvdb_open()</a>. </li>
+<li><strong>kvs_name</strong> KVS name. </li>
+<li><strong>paramc</strong> Number of configuration parameters in <code>paramv</code>. </li>
+<li><strong>paramv</strong> List of parameters in key=value format. </li>
+<li><strong>kvs_out</strong> Handle to access the opened KVS.</li>
+</ul>
+<p><strong>Return</strong>: Error status. </p>
+<p><strong>Remark</strong>: </p>
+<ul>
+<li><code>kvdb</code> must not be NULL. </li>
+<li><code>kvs_name</code> must not be NULL. </li>
+<li><code>kvs_name</code> must be NULL-terminated. </li>
+<li><code>kvs_out</code> must not be NULL.</li>
+</ul>
+<h3 id="function-hse_kvs_delete">function hse_kvs_delete</h3>
+<div class="highlight"><pre><span></span><code><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvs_delete</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvdb_txn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">txn</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">key_len</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Delete the key and its associated value from the KVS. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvs</strong> KVS handle from <a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open()</a>. </li>
+<li><strong>flags</strong> Flags for operation specialization. </li>
+<li><strong>txn</strong> Transaction context (optional). </li>
+<li><strong>key</strong> Key to be deleted from <code>kvs</code>. </li>
+<li><strong>key_len</strong> Length of <code>key</code>.</li>
+</ul>
+<p><strong>Return</strong>: Error status. </p>
+<p><strong>Note</strong>: This function is thread safe.</p>
+<p><strong>Remark</strong>: </p>
+<ul>
+<li><code>kvs</code> must not be NULL. </li>
+<li><code>key</code> must not be NULL. </li>
+<li><code>key_len</code> must be within the range of [1, HSE_KVS_KEY_LEN_MAX].</li>
+</ul>
+<p>It is not an error if the key does not exist within the KVS. See <a href="/3.x/api/Modules/group__TRANSACTIONS/">Transactions</a> for information on how deletes within transactions are handled.</p>
+<p><strong>Flags:</strong></p>
+<ul>
+<li>0 - Reserved for future use.</li>
+</ul>
+<h3 id="function-hse_kvs_get">function hse_kvs_get</h3>
+<div class="highlight"><pre><span></span><code><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvs_get</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvdb_txn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">txn</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">key_len</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">found</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">valbuf</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">valbuf_sz</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">val_len</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Retrieve the value for a given key from the KVS. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvs</strong> KVS handle from <a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open()</a>. </li>
+<li><strong>flags</strong> Flags for operation specialization. </li>
+<li><strong>txn</strong> Transaction context (optional). </li>
+<li><strong>key</strong> Key to get from <code>kvs</code>. </li>
+<li><strong>key_len</strong> Length of <code>key</code>. </li>
+<li><strong>found</strong> Whether or not <code>key</code> was found. </li>
+<li><strong>valbuf</strong> Buffer into which the value associated with <code>key</code> will be copied (optional). </li>
+<li><strong>valbuf_sz</strong> Size of <code>valbuf</code>. </li>
+<li><strong>val_len</strong> Actual length of value if <code>key</code> was found.</li>
+</ul>
+<p><strong>Return</strong>: Error status. </p>
+<p><strong>Note</strong>: This function is thread safe.</p>
+<p><strong>Remark</strong>: </p>
+<ul>
+<li><code>kvs</code> must not be NULL. </li>
+<li><code>key</code> must not be NULL. </li>
+<li><code>key_len</code> must be within the range of [1, HSE_KVS_KEY_LEN_MAX]. </li>
+<li><code>found</code> must not be NULL. </li>
+<li><code>val_len</code> must not be NULL.</li>
+</ul>
+<p>If the key exists in the KVS, then the referent of <code>found</code> is set to true. If the caller's value buffer is large enough then the data will be returned. Regardless, the actual length of the value is placed in <code>val_len</code>. See <a href="/3.x/api/Modules/group__TRANSACTIONS/">Transactions</a> for information on how gets within transactions are handled.</p>
+<p><strong>Flags:</strong></p>
+<ul>
+<li>0 - Reserved for future use.</li>
+</ul>
+<h3 id="function-hse_kvs_name_get">function hse_kvs_name_get</h3>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">hse_kvs_name_get</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Get the name of a KVS. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvs</strong> KVS handle from <a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open()</a></li>
+</ul>
+<p><strong>Returns</strong>: </p>
+<ul>
+<li><strong>NULL</strong> if given an invalid KVS handle. </li>
+</ul>
+<p><strong>Return</strong>: KVS name. </p>
+<p><strong>Note</strong>: This function is thread safe.</p>
+<p><strong>Remark</strong>: <code>kvs</code> must not be NULL.</p>
+<h3 id="function-hse_kvs_param_get">function hse_kvs_param_get</h3>
+<div class="highlight"><pre><span></span><code><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvs_param_get</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">buf_sz</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">needed_sz</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Get KVS parameter. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvs</strong> KVS handle from <a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open()</a>. </li>
+<li><strong>param</strong> Parameter name. </li>
+<li><strong>buf</strong> Buffer for writing stringified value of parameter. </li>
+<li><strong>buf_sz</strong> Size of <code>buf</code>. </li>
+<li><strong>needed_sz</strong> Needed size of <code>buf</code>.</li>
+</ul>
+<p><strong>Return</strong>: Error status. </p>
+<p><strong>Note</strong>: This function is thread safe.</p>
+<p><strong>Remark</strong>: </p>
+<ul>
+<li><code>kvs</code> must not be NULL. </li>
+<li><code>param</code> must not be NULL. </li>
+<li><code>param</code> must be a valid parameter.</li>
+</ul>
+<p>Puts the stringified version of the parameter value into <code>buf</code>. If <code>buf_sz</code> is NULL, then <code>needed_sz</code> will still be populated.</p>
+<h3 id="function-hse_kvs_prefix_delete">function hse_kvs_prefix_delete</h3>
+<div class="highlight"><pre><span></span><code><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvs_prefix_delete</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvdb_txn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">txn</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pfx</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">pfx_len</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Delete all key-value pairs matching the key prefix from a KVS storing segmented keys. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvs</strong> KVS handle from <a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open()</a>. </li>
+<li><strong>flags</strong> Flags for operation specialization. </li>
+<li><strong>txn</strong> Transaction context (optional). </li>
+<li><strong>pfx</strong> Prefix of keys to delete. </li>
+<li><strong>pfx_len</strong> Length of <code>pfx</code>, must equal KVS prefix length.</li>
+</ul>
+<p><strong>Return</strong>: Error status. </p>
+<p><strong>Note</strong>: This function is thread safe.</p>
+<p><strong>Remark</strong>: <code>kvs</code> must not be NULL.</p>
+<p>This interface is used to delete an entire range of segmented keys. To do this the caller passes a filter with a length equal to the KVS's key prefix length. It is not an error if no keys exist matching the filter. If there is a filtered iteration in progress, then that iteration can fail if <a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete()</a> is called with a filter matching the iteration.</p>
+<p>If <a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete()</a> is called from a transaction context, it affects no key-value mutations that are part of the same transaction. Stated differently, for KVS commands issued within a transaction, all calls to <a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_prefix_delete">hse_kvs_prefix_delete()</a> are treated as though they were issued serially at the beginning of the transaction regardless of the actual order these commands appeared in.</p>
+<p><strong>Flags:</strong></p>
+<ul>
+<li>0 - Reserved for future use.</li>
+</ul>
+<h3 id="function-hse_kvs_put">function hse_kvs_put</h3>
+<div class="highlight"><pre><span></span><code><span class="n">hse_err_t</span><span class="w"> </span><span class="n">hse_kvs_put</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kvs</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">hse_kvdb_txn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">txn</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">key_len</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">val_len</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>Put a key-value pair into KVS. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>kvs</strong> KVS handle from <a href="/3.x/api/Modules/group__KVS/#function-hse_kvdb_kvs_open">hse_kvdb_kvs_open()</a>. </li>
+<li><strong>flags</strong> Flags for operation specialization. </li>
+<li><strong>txn</strong> Transaction context (optional). </li>
+<li><strong>key</strong> Key to put into <code>kvs</code>. </li>
+<li><strong>key_len</strong> Length of <code>key</code>. </li>
+<li><strong>val</strong> Value associated with <code>key</code> (optional). </li>
+<li><strong>val_len</strong> Length of <code>value</code>.</li>
+</ul>
+<p><strong>Return</strong>: Error status </p>
+<p><strong>Note</strong>: This function is thread safe.</p>
+<p><strong>Remark</strong>: </p>
+<ul>
+<li><code>kvs</code> must not be NULL. </li>
+<li><code>key</code> must not be NULL. </li>
+<li><code>key_len</code> must be within the range of [1, HSE_KVS_KEY_LEN_MAX]. </li>
+<li><code>val_len</code> must be within the range of [0, HSE_KVS_VALUE_LEN_MAX].</li>
+</ul>
+<p>If the key already exists in the KVS then the value is effectively overwritten. See <a href="/3.x/api/Modules/group__TRANSACTIONS/">Transactions</a> for information on how puts within transactions are handled.</p>
+<p>The HSE KVDB attempts to maintain reasonable QoS and for high-throughput clients this results in very short sleep's being inserted into the put path. For some kinds of data (e.g., control metadata) the client may wish to not experience that delay. For relatively low data rate uses, the caller can set the HSE_KVS_PUT_PRIO flag for an <a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_put">hse_kvs_put()</a>. Care should be taken when doing so to ensure that the system does not become overrun. As a rough approximation, doing 1M priority puts per second marked as PRIO is likely an issue. On the other hand, doing 1K small puts per second marked as PRIO is almost certainly fine.</p>
+<p>If compression is on by default for the given kvs, then <a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_put">hse_kvs_put()</a> will attempt to compress the value unless the HSE_KVS_PUT_VCOMP_OFF flag is given. Otherwise, the HSE_KVS_PUT_VCOMP_OFF flag is ignored.</p>
+<p>If compression is off by default for the given kvs, then <a href="/3.x/api/Modules/group__KVS/#function-hse_kvs_put">hse_kvs_put()</a> will not attempt to compress a value unless the HSE_KVS_PUT_VCOMP_ON flag is given. Otherwise, the HSE_KVS_PUT_VCOMP_ON flag is ignored.</p>
+<p><strong>Flags:</strong></p>
+<ul>
+<li>HSE_KVS_PUT_PRIO - Operation will not be throttled. </li>
+<li>HSE_KVS_PUT_VCOMP_OFF - Value will not be compressed. </li>
+<li>HSE_KVS_PUT_VCOMP_ON - Value may be compressed.</li>
+</ul>
+<h2 id="macros-documentation">Macros Documentation</h2>
+<h3 id="define-hse_kvs_count_max">define HSE_KVS_COUNT_MAX</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#define HSE_KVS_COUNT_MAX (256)</span>
+</code></pre></div>
+<p>Maximum number of KVSs contained within one KVDB. </p>
+<h3 id="define-hse_kvs_key_len_max">define HSE_KVS_KEY_LEN_MAX</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#define HSE_KVS_KEY_LEN_MAX 1344</span>
+</code></pre></div>
+<p>Maximum key length. </p>
+<p>A common requirement clients have for key length is 1024. Combined with a discriminant and (potentially) a chunk key, this pushes us to 1030 bytes keys. Looking at the packing for the on-media format for data, we can have at most 3 keys of such large size in a 4k page. Lopping off 64-bytes for other data, and we can have 3 keys of 1344 bytes.</p>
+<p>Keys need not be NULL-terminated. </p>
+<h3 id="define-hse_kvs_name_len_max">define HSE_KVS_NAME_LEN_MAX</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#define HSE_KVS_NAME_LEN_MAX 32</span>
+</code></pre></div>
+<p>Maximum length of a KVS name. </p>
+<p>KVS names are NULL-terminated strings. The string plus the NULL-terminator must fit into a <code>HSE_KVS_NAME_LEN_MAX</code> byte buffer. </p>
+<h3 id="define-hse_kvs_pfx_len_max">define HSE_KVS_PFX_LEN_MAX</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#define HSE_KVS_PFX_LEN_MAX 32</span>
+</code></pre></div>
+<p>Max key prefix length. </p>
+<h3 id="define-hse_kvs_value_len_max">define HSE_KVS_VALUE_LEN_MAX</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#define HSE_KVS_VALUE_LEN_MAX (1024 * 1024)</span>
+</code></pre></div>
+<p>Max value length is 1MiB. </p>
+<p>Values need not be NULL-terminated. </p>
+<hr />
+<p>Updated on 17 November 2022 at 15:11:02 CST</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../group__KVDB/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Key-Value Database (KVDB)" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Key-Value Database (KVDB)
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../group__TRANSACTIONS/" class="md-footer__link md-footer__link--next" aria-label="Next: Transactions" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Transactions
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 - 2022 Micron Technology, Inc.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.sections"], "search": "../../../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+    
+  </body>
+</html>
